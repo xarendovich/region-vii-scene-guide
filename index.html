@@ -523,6 +523,10 @@ body.protocol-open .back-to-cat-btn {
   margin-top: 4px;
 }
 
+.flowchart > .active-gate-banner {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
 .active-gate-banner {
   display: flex;
   align-items: center;
@@ -18036,6 +18040,16 @@ function renderCurrentProtocol() {
   if (root) root.innerHTML = renderedHtml;
   const flowInteractive = document.getElementById('flow-' + currentProtocolId + '-interactive');
   if (flowInteractive) flowInteractive.innerHTML = renderedHtml;
+
+  // Move the reset / back / protocol-chain banner below the PDF button
+  if (flowInteractive) {
+    const banner = flowInteractive.querySelector('.active-gate-banner');
+    const flowEl = document.getElementById('flow-' + currentProtocolId);
+    const pdfDetails = flowEl ? flowEl.querySelector('.smo-diagram-details') : null;
+    if (banner && pdfDetails && pdfDetails.parentNode) {
+      pdfDetails.parentNode.insertBefore(banner, pdfDetails.nextSibling);
+    }
+  }
 
   // Glow only the small bits of content that a decision-tree choice just opened
   if (window._justChose) {
