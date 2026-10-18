@@ -3764,8 +3764,8 @@ function resetZoom() {
                   lockedFallbackHtml: `
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; margin-bottom:10px;">
                       <strong>• If Open Airway:</strong> Support Ventilation as required ➔ <strong>TRANSPORT</strong>.<br>
-                      <strong>• If Still Obstructed:</strong> Attempt forced ventilation (BLS) and continue 30:2 CPR while awaiting EMT-I / Paramedic for right mainstem intubation or <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86 <span class="gray-diamond"></span></strong>:<br>
-                      <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                      <strong>• If Still Obstructed:</strong> Attempt forced ventilation (BLS) and continue 30:2 CPR while awaiting EMT-I / Paramedic for right mainstem intubation or refer to
+                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                         <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                       </button></div>
                     </div>
@@ -3825,8 +3825,8 @@ function resetZoom() {
                   stepTitle: 'Perform Needle Cricothyrotomy (Protocol #86)',
                   unlockedHtml: `
                     <div style="text-align:center; font-weight:800;">
-                      Perform <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86</strong> <span class="gray-diamond"></span><br>
-                      <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                      Perform, refer to
+                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                         <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                       </button></div>
                     </div>
@@ -5120,9 +5120,8 @@ function resetZoom() {
                       stepTitle: 'Perform Needle Cricothyrotomy (Protocol #86)',
                       unlockedHtml: `
                         <div style="text-align:center; font-weight:800;">
-                          Perform<br>
-                          <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86</strong> <span class="gray-diamond"></span><br>
-                          <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                          Perform, refer to
+                          <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                             <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                           </button></div>
                         </div>
@@ -5893,7 +5892,7 @@ function resetZoom() {
                     unlockedHtml: `
                       <div style="text-align:center;">
                         Consider intubation per <strong>MEDICATION ASSISTED INTUBATION PROTOCOL # 84 <span class="gray-diamond"></span></strong><br>
-                        or <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86 <span class="gray-diamond"></span></strong> as indicated
+                        or refer to
                         <div style="margin-top:8px;">
                           <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('84')">
                             <span class="gray-diamond"></span> Go to Protocol #84: Medication Assisted Intubation
@@ -8769,10 +8768,8 @@ function resetZoom() {
 
                 ${st.alsShockable === 'no' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-                    Follow<br>
-                    <strong>ADULT PEA/ASYSTOLE PROTOCOL #14</strong><br>
-                    as indicated <span class="gray-diamond"></span><br>
-                    <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('14')">
+                    Follow, refer to
+                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('14')">
                       <span class="gray-diamond"></span> Protocol #14: Adult PEA / Asystole
                     </button></div>
                   </div>
@@ -8781,10 +8778,8 @@ function resetZoom() {
 
                 ${st.alsShockable === 'yes' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-                    Follow<br>
-                    <strong>ADULT VF / PULSELESS VT PROTOCOL #11</strong><br>
-                    as indicated <span class="gray-diamond"></span><br>
-                    <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
+                    Follow, refer to
+                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
                       <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                     </button></div>
                   </div>
@@ -8845,23 +8840,21 @@ function resetZoom() {
           <div class="smo-two-col" style="display:grid; gap:12px; margin-bottom:14px;">
             <div style="border:3px solid #c00000; background:var(--box-bg); color:var(--box-text); padding:12px 14px; text-align:center;">
               <div style="font-weight:900; text-decoration:underline; margin-bottom:4px;">AT ANY TIME</div>
-              Return of Spontaneous Circulation<br>
-              Go to <strong>ADULT POST RESUSCITATION PROTOCOL #8 <span class="gray-diamond"></span></strong><br>
-              <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
+              Return of Spontaneous Circulation, refer to
+              <button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
                 <span class="gray-diamond"></span> Protocol #8: Adult Post Resuscitation
-              </button></div>
+              </button>
             </div>
             <div style="border:3px solid #c00000; background:var(--box-bg); color:var(--box-text); padding:12px 14px; text-align:center;">
               <div style="font-weight:900; text-decoration:underline; color:#c00000; margin-bottom:4px;">IF TIERED RESPONSE AVAILABLE</div>
-              Utilize this protocol with the appropriate<br>
-              <strong>ADULT CARDIAC ARREST PROTOCOL #6 OR PEDIATRIC CARDIAC ARREST PROTOCOL #62 <span class="gray-diamond"></span></strong><br>
+              Utilize this protocol with the appropriate arrest protocol, refer to
               <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-                <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('6')">
+                <button class="xref-btn" onclick="openXref('6')">
                   <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
-                </button></div>
-                <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('62')">
+                </button>
+                <button class="xref-btn" onclick="openXref('62')">
                   <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
-                </button></div>
+                </button>
               </div>
             </div>
           </div>
@@ -9765,8 +9758,8 @@ function resetZoom() {
               })}
               <div style="border:2px solid var(--box-border); padding:12px 16px; text-align:center; margin-top:-12px;">
                 <div style="font-weight:800;">Check Blood Glucose</div>
-                <div>If &lt; 60 treat as per <strong>ADULT DIABETIC / GLUCOSE EMERGENCIES PROTOCOL #41 <span class="gray-diamond"></span></strong></div>
-                <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('41')">
+                <div>If &lt; 60 treat as per, refer to
+                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('41')">
                   <span class="gray-diamond"></span> Protocol #41: Adult Diabetic / Glucose Emergencies
                 </button></div>
               </div>
@@ -9916,8 +9909,8 @@ function resetZoom() {
                 `,
                 lockedFallbackHtml: `
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; text-align:center;">
-                    <strong>If Shockable:</strong> Go to <strong>ADULT VENTRICULAR FIBRILLATION – PULSELESS VENTRICULAR TACHYCARDIA PROTOCOL #11 <span class="gray-diamond"></span></strong><br>
-                    <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:6px;" onclick="openXref('11')">
+                    <strong>If Shockable:</strong> refer to
+                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('11')">
                       <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                     </button></div>
                   </div>
@@ -9927,9 +9920,8 @@ function resetZoom() {
 
               ${st.rhythm === 'shockable' ? `
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-                  Go to<br>
-                  <strong>ADULT VENTRICULAR FIBRILLATION – PULSELESS VENTRICULAR TACHYCARDIA PROTOCOL #11 <span class="gray-diamond"></span></strong><br>
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
+                  refer to
+                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
                     <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                   </button></div>
                 </div>
@@ -9967,8 +9959,8 @@ function resetZoom() {
                   stepTitle: 'Consider TERMINATION OF RESUSCITATION PROTOCOL #9',
                   unlockedHtml: `
                     <div style="text-align:center; font-weight:800;">
-                      Consider <strong>TERMINATION OF RESUSCITATION PROTOCOL #9 <span class="gray-diamond"></span></strong><br>
-                      <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
+                      Consider, refer to
+                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
                         <span class="gray-diamond"></span> Protocol #9: Termination of Resuscitation
                       </button></div>
                     </div>
