@@ -2792,10 +2792,12 @@ function resetZoom() {
       return `
         <div>
           <div class="peds-top-redirect">
-            <span>👶 For a pediatric patient <button type="button" class="xref-btn" onclick="openXref('${targetProtoId}')">
+            <span>👶 For a pediatric patient, refer to</span>
+            <button type="button" class="xref-btn" onclick="openXref('${targetProtoId}')">
               <span class="gray-diamond" style="width:9px;height:9px;"></span> Go to Protocol #${targetProtoId}
             </button>
             ${secondProtoId ? `
+              <span>or refer to</span>
               <button type="button" class="xref-btn" onclick="openXref('${secondProtoId}')">
                 <span class="gray-diamond" style="width:9px;height:9px;"></span> ${secondTitle || ('Go to Protocol #' + secondProtoId)}
               </button>
@@ -3110,16 +3112,16 @@ function resetZoom() {
                   <button type="button" class="gate-btn" style="min-height:56px; margin:0; padding:0.85rem 1rem; font-size:1.05rem; text-align:center; font-weight:800;" onclick="goToGating()">Open Protocol Breakdown</button>
                 </div>
                 <div style="margin:8px 0 12px 18px;">
-                  <button class="xref-btn" onclick="selectProtocol('2')">
+                  Refer to <button class="xref-btn" onclick="selectProtocol('2')">
                     <span class="gray-diamond"></span> Go to Protocol #2: Radio Report
                   </button>
-                  <button class="xref-btn" onclick="selectProtocol('3')">
+                  Refer to <button class="xref-btn" onclick="selectProtocol('3')">
                     <span class="gray-diamond"></span> Go to Protocol #3: Adult Respiratory Distress
                   </button>
-                  <button class="xref-btn" onclick="selectProtocol('4')">
+                  Refer to <button class="xref-btn" onclick="selectProtocol('4')">
                     <span class="gray-diamond"></span> Go to Protocol #4: Airway Obstruction
                   </button>
-                  <button class="xref-btn" onclick="selectProtocol('5')">
+                  Refer to <button class="xref-btn" onclick="selectProtocol('5')">
                     <span class="gray-diamond"></span> Go to Protocol #5: Adult Pain Control
                   </button>
                 </div>
@@ -3142,18 +3144,18 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('2')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Radio Report (#2)</button>
-            <button type="button" class="xref-btn" onclick="openXref('19')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Field Triage (#19)</button>
-            <button type="button" class="xref-btn" onclick="openXref('21')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Routine Trauma Care (#21)</button>
-            <button type="button" class="xref-btn" onclick="openXref('60')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Peds Initial Assessment (#60)</button>
-            <button type="button" class="xref-btn" onclick="openXref('80')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Refusals of Care (#80)</button>
-            <button type="button" class="xref-btn" onclick="openXref('82')"><span class="gray-diamond" style="width:9px;height:9px;"></span> External Jugular (#82)</button>
-            <button type="button" class="xref-btn" onclick="openXref('88')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Concealed Carry / Firearm (#88)</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppA')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix A</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppB')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix B</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix C</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppD')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix D</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppE')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix E (MACC)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('2')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Radio Report (#2)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('19')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Field Triage (#19)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('21')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Routine Trauma Care (#21)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('60')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Peds Initial Assessment (#60)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('80')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Refusals of Care (#80)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('82')"><span class="gray-diamond" style="width:9px;height:9px;"></span> External Jugular (#82)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('88')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Concealed Carry / Firearm (#88)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppA')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix A</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppB')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix B</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix C</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppD')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix D</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppE')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Appendix E (MACC)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 1 (Page 7 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -3278,7 +3280,7 @@ function resetZoom() {
           <!-- DIAMOND CROSS-REFERENCE TO PROTOCOL #1 -->
           <div class="flow-step-card">
             <div class="flow-step-body">
-              <button class="xref-btn" onclick="selectProtocol('1')">
+              Refer to <button class="xref-btn" onclick="selectProtocol('1')">
                 <span class="gray-diamond"></span> Go to Protocol #1: Initial Medical Care &amp; General Patient Assessment
               </button>
             </div>
@@ -3286,7 +3288,7 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('1')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Initial Medical Care (#1)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('1')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Initial Medical Care (#1)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 2 (Page 8 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -3450,11 +3452,11 @@ function resetZoom() {
                   <div style="font-weight:900; font-size:1rem; border-bottom:1.5px solid #000; padding-bottom:6px; margin-bottom:10px; text-align:center;">
                     Treat Underlying Cause
                   </div>
-                  <button class="xref-btn" onclick="openXref('39')">
+                  Refer to <button class="xref-btn" onclick="openXref('39')">
                     <span class="gray-diamond"></span> Go to Protocol #39: Adult Acute Asthma / COPD Wheezing
                   </button>
 
-                  <button class="xref-btn" onclick="openXref('17')">
+                  Refer to <button class="xref-btn" onclick="openXref('17')">
                     <span class="gray-diamond"></span> Go to Protocol #17: Adult Pulmonary Edema Due to Heart Failure
                   </button>
                 </div>
@@ -3493,7 +3495,7 @@ function resetZoom() {
                         Endotracheal Intubation
                       </div>
                       <div style="text-align:center;">
-                        <button class="xref-btn" style="margin-top:8px;" onclick="openXref('84')">
+                        Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('84')">
                           <span class="gray-diamond"></span> Go to Protocol #84: Medication Assisted Intubation
                         </button>
                       </div>
@@ -3508,7 +3510,7 @@ function resetZoom() {
                 <!-- Remaining Steps in Red Border Format (Protocol #85 + TRANSPORT) -->
                 <div class="remaining-steps-red-box">
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; text-align:center; margin-bottom:12px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
                       <span class="gray-diamond"></span> Go to Protocol #85: Adult Airway
                     </button>
                   </div>
@@ -3743,7 +3745,7 @@ function resetZoom() {
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; margin-bottom:10px;">
                       <strong>• If Open Airway:</strong> Support Ventilation as required ➔ <strong>TRANSPORT</strong>.<br>
                       <strong>• If Still Obstructed:</strong> Attempt forced ventilation (BLS) and continue 30:2 CPR while awaiting EMT-I / Paramedic for right mainstem intubation or <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86 <span class="gray-diamond"></span></strong>:<br>
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                         <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                       </button>
                     </div>
@@ -3804,7 +3806,7 @@ function resetZoom() {
                   unlockedHtml: `
                     <div style="text-align:center; font-weight:800;">
                       Perform <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86</strong> <span class="gray-diamond"></span><br>
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                         <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                       </button>
                     </div>
@@ -3979,8 +3981,8 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('81')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Nitrous Oxide (#81)</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Fentanyl Dose Chart (App C)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('81')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Nitrous Oxide (#81)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Fentanyl Dose Chart (App C)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 5 (Page 11 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -4069,7 +4071,7 @@ function resetZoom() {
                 lockedFallbackHtml: `
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; margin-bottom:10px;">
                     <div style="margin-bottom:8px;">
-                      <strong>SBP &lt; 90mmHg:</strong> If wheezing: <strong>ALBUTEROL (Ventolin) 2.5mg / IPRATROPIUM (Atrovent) 0.5mg</strong> Nebulizer Treatment (May repeat X 1) ➔ <button class="xref-btn" style="margin-top:6px;" onclick="openXref('10')">
+                      <strong>SBP &lt; 90mmHg:</strong> If wheezing: <strong>ALBUTEROL (Ventolin) 2.5mg / IPRATROPIUM (Atrovent) 0.5mg</strong> Nebulizer Treatment (May repeat X 1) ➔ Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('10')">
                         <span class="gray-diamond"></span> Protocol #10: Adult Cardiogenic Shock
                       </button>
                     </div>
@@ -4096,7 +4098,7 @@ function resetZoom() {
                 </div>
 
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center;">
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
                     <span class="gray-diamond"></span> Protocol #10: Adult Cardiogenic Shock
                   </button>
                 </div>
@@ -4193,7 +4195,7 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('82')"><span class="gray-diamond" style="width:9px;height:9px;"></span> CPAP (#82)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('82')"><span class="gray-diamond" style="width:9px;height:9px;"></span> CPAP (#82)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 17 (Page 23 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -4471,8 +4473,8 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('81')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Nitrous Oxide (#81)</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Fentanyl Dose Chart (App C)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('81')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Nitrous Oxide (#81)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppC')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Fentanyl Dose Chart (App C)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 61 (Page 72 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -4672,7 +4674,7 @@ function resetZoom() {
                   lockedFallbackHtml: `
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; margin-bottom:10px;">
                       <strong>• If Obstruction Relieved:</strong> Support CABs, Observe, Keep warm, <strong>TRANSPORT</strong>.<br>
-                      <strong>• If Obstruction Unrelieved:</strong> <button class="xref-btn" style="margin-top:8px;" onclick="openXref('67')">
+                      <strong>• If Obstruction Unrelieved:</strong> Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('67')">
                         <span class="gray-diamond"></span> Go to Protocol #67: Pediatric Respiratory Arrest
                       </button>
                     </div>
@@ -4691,7 +4693,7 @@ function resetZoom() {
 
                 ${st.partialOutcome === 'unrelieved' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; margin-top:14px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('67')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('67')">
                       <span class="gray-diamond"></span> Go to Protocol #67: Pediatric Respiratory Arrest
                     </button>
                   </div>
@@ -4751,10 +4753,10 @@ function resetZoom() {
           <div style="border:2px solid var(--box-border); padding:10px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; background:var(--box-sub-bg); color:var(--box-text); margin-top:12px;">
             <span><strong></strong> </span>
             <div>
-              <button class="xref-btn" style="margin:0 6px 0 0;" onclick="openXref('66a')">
+              Refer to <button class="xref-btn" style="margin:0 6px 0 0;" onclick="openXref('66a')">
                 <span class="gray-diamond"></span> Go to Protocol #66a (Ventilator)
               </button>
-              <button class="xref-btn" style="margin:0;" onclick="openXref('66b')">
+              Refer to <button class="xref-btn" style="margin:0;" onclick="openXref('66b')">
                 <span class="gray-diamond"></span> Go to Protocol #66b (Tracheostomy)
               </button>
             </div>
@@ -4903,10 +4905,10 @@ function resetZoom() {
                     <ul style="list-style:none; padding-left:18px; margin:6px 0 0;">
                       <li>- Continue to assist ventilations with BVM</li>
                       <li style="margin:6px 0;">
-                        - <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
+                        - Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
                           <span class="gray-diamond"></span> Go to Protocol #85: Adult Airway
                         </button>
-                        <button class="xref-btn" style="margin-top:6px; margin-left:6px;" onclick="openXref('84a')">
+                        Refer to <button class="xref-btn" style="margin-top:6px; margin-left:6px;" onclick="openXref('84a')">
                           <span class="gray-diamond"></span> Go to Protocol #84a: Post Intubation Sedation
                         </button>
                       </li>
@@ -4918,10 +4920,10 @@ function resetZoom() {
               })}
               ${currentProviderLevel < 3 ? `
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('85')">
+                  Refer to <button class="xref-btn" onclick="openXref('85')">
                     <span class="gray-diamond"></span> Go to Protocol #85: Adult Airway
                   </button>
-                  <button class="xref-btn" onclick="openXref('84a')">
+                  Refer to <button class="xref-btn" onclick="openXref('84a')">
                     <span class="gray-diamond"></span> Go to Protocol #84a: Post Intubation Sedation
                   </button>
                 </div>
@@ -5100,7 +5102,7 @@ function resetZoom() {
                         <div style="text-align:center; font-weight:800;">
                           Perform<br>
                           <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86</strong> <span class="gray-diamond"></span><br>
-                          <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
+                          Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('86')">
                             <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                           </button>
                         </div>
@@ -5399,7 +5401,7 @@ function resetZoom() {
                 `,
                 lockedFallbackHtml: `
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:10px 14px; margin-bottom:10px;">
-                    <strong>If UNABLE TO VENTILATE:</strong> Suction tracheostomy tube. If still unable to ventilate, <button class="xref-btn" onclick="openXref('66b')">
+                    <strong>If UNABLE TO VENTILATE:</strong> Suction tracheostomy tube. If still unable to ventilate, Refer to <button class="xref-btn" onclick="openXref('66b')">
                         <span class="gray-diamond"></span> Go to Protocol #66b: Pediatric Tracheostomy Distress
                       </button>
                     </div>
@@ -5440,7 +5442,7 @@ function resetZoom() {
 
                 ${st.afterSuction === 'unable' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; margin-top:14px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('66b')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('66b')">
                       <span class="gray-diamond"></span> Go to Protocol #66b: Pediatric Tracheostomy Distress
                     </button>
                   </div>
@@ -5561,9 +5563,9 @@ function resetZoom() {
                       <li> or <strong>PEDIATRIC CARDIAC ARREST PROTOCOL <span class="gray-diamond"></span> #62</strong> or <strong>PEDIATRIC BRADYCARDIA PROTOCOL <span class="gray-diamond"></span> #63</strong> as indicated:</li>
                     </ul>
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('67')"><span class="gray-diamond"></span> Go to Protocol #67</button>
-                      <button class="xref-btn" onclick="openXref('62')"><span class="gray-diamond"></span> Go to Protocol #62</button>
-                      <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Go to Protocol #63</button>
+                      Refer to <button class="xref-btn" onclick="openXref('67')"><span class="gray-diamond"></span> Go to Protocol #67</button>
+                      Refer to <button class="xref-btn" onclick="openXref('62')"><span class="gray-diamond"></span> Go to Protocol #62</button>
+                      Refer to <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Go to Protocol #63</button>
                     </div>
                   </div>
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:10px 14px;">
@@ -5629,9 +5631,9 @@ function resetZoom() {
                         <li> or <strong>PEDIATRIC CARDIAC ARREST PROTOCOL <span class="gray-diamond"></span> #62</strong> or <strong>PEDIATRIC BRADYCARDIA PROTOCOL <span class="gray-diamond"></span> #63</strong> as indicated:</li>
                       </ul>
                       <div style="margin-top:8px;">
-                        <button class="xref-btn" onclick="openXref('67')"><span class="gray-diamond"></span> Go to Protocol #67</button>
-                        <button class="xref-btn" onclick="openXref('62')"><span class="gray-diamond"></span> Go to Protocol #62</button>
-                        <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Go to Protocol #63</button>
+                        Refer to <button class="xref-btn" onclick="openXref('67')"><span class="gray-diamond"></span> Go to Protocol #67</button>
+                        Refer to <button class="xref-btn" onclick="openXref('62')"><span class="gray-diamond"></span> Go to Protocol #62</button>
+                        Refer to <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Go to Protocol #63</button>
                       </div>
                     </div>
                     <div class="transport-banner">TRANSPORT</div>
@@ -5714,13 +5716,13 @@ function resetZoom() {
                 <div style="border:2px solid var(--box-border); padding:12px 16px; margin-top:-12px; margin-bottom:14px;">
                   •  or <strong>PEDIATRIC CARDIAC ARREST PROTOCOL <span class="gray-diamond"></span> #62</strong> or <strong>PEDIATRIC BRADYCARDIA PROTOCOL <span class="gray-diamond"></span> #63</strong> as indicated.
                   <div style="margin-top:8px;">
-                    <button class="xref-btn" onclick="openXref('67')">
+                    Refer to <button class="xref-btn" onclick="openXref('67')">
                       <span class="gray-diamond"></span> Go to Protocol #67: Pediatric Respiratory Arrest
                     </button>
-                    <button class="xref-btn" onclick="openXref('62')">
+                    Refer to <button class="xref-btn" onclick="openXref('62')">
                       <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                     </button>
-                    <button class="xref-btn" onclick="openXref('63')">
+                    Refer to <button class="xref-btn" onclick="openXref('63')">
                       <span class="gray-diamond"></span> Go to Protocol #63: Pediatric Bradycardia
                     </button>
                   </div>
@@ -5873,10 +5875,10 @@ function resetZoom() {
                         Consider intubation per <strong>MEDICATION ASSISTED INTUBATION PROTOCOL # 84 <span class="gray-diamond"></span></strong><br>
                         or <strong>NEEDLE CRICOTHYROTOMY PROTOCOL #86 <span class="gray-diamond"></span></strong> as indicated
                         <div style="margin-top:8px;">
-                          <button class="xref-btn" onclick="openXref('84')">
+                          Refer to <button class="xref-btn" onclick="openXref('84')">
                             <span class="gray-diamond"></span> Go to Protocol #84: Medication Assisted Intubation
                           </button>
-                          <button class="xref-btn" onclick="openXref('86')">
+                          Refer to <button class="xref-btn" onclick="openXref('86')">
                             <span class="gray-diamond"></span> Go to Protocol #86: Needle Cricothyrotomy
                           </button>
                         </div>
@@ -5965,10 +5967,10 @@ function resetZoom() {
                   `,
                   lockedFallbackHtml: `
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; text-align:center; margin-bottom:10px;">
-                      <strong>If Hypoperfusion**:</strong> <button class="xref-btn" onclick="openXref('68')">
+                      <strong>If Hypoperfusion**:</strong> Refer to <button class="xref-btn" onclick="openXref('68')">
                           <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                         </button>
-                        <button class="xref-btn" onclick="openXref('62')">
+                        Refer to <button class="xref-btn" onclick="openXref('62')">
                           <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                         </button>
                       </div>
@@ -5982,10 +5984,10 @@ function resetZoom() {
 
                 ${st.perfusion === 'hypo' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; margin-top:14px;">
-                    <button class="xref-btn" onclick="openXref('68')">
+                    Refer to <button class="xref-btn" onclick="openXref('68')">
                         <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                       </button>
-                      <button class="xref-btn" onclick="openXref('62')">
+                      Refer to <button class="xref-btn" onclick="openXref('62')">
                         <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                       </button>
                     </div>
@@ -6598,8 +6600,8 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('83')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pleural Decompression (#83)</button>
-            <button type="button" class="xref-btn" onclick="openXref('AppD')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Dextrose Dilution (App D)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('83')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pleural Decompression (#83)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppD')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Dextrose Dilution (App D)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 62 (Page 73 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -6787,7 +6789,7 @@ function resetZoom() {
                     <div style="display:grid; grid-template-columns:36px 1fr 36px; border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); margin-top:-12px;">
                       <div class="bg-p" style="display:flex; align-items:center; justify-content:center; font-weight:900; border-right:2px solid #000;">P</div>
                       <div style="padding:12px 16px; text-align:center;">
-                        <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
+                        Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
                           <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                         </button>
                       </div>
@@ -6806,13 +6808,13 @@ function resetZoom() {
                 <div style="font-weight:900; text-decoration:underline; margin-bottom:6px;">NOTE TO PREHOSPITAL PROVIDERS:</div>
                 <div>1. Hypoglycemia has been known to cause bradycardia in infants.</div>
                 <div>
-                  2. <button class="xref-btn" style="margin-left:6px;" onclick="openXref('71')">
+                  2. Refer to <button class="xref-btn" style="margin-left:6px;" onclick="openXref('71')">
                     <span class="gray-diamond"></span> Go to Protocol #71
                   </button>
                 </div>
                 <div>3. Special conditions may apply in the presence of severe hypothermia.</div>
                 <div>
-                  4. <button class="xref-btn" style="margin-left:6px;" onclick="openXref('74')">
+                  4. Refer to <button class="xref-btn" style="margin-left:6px;" onclick="openXref('74')">
                     <span class="gray-diamond"></span> Go to Protocol #74
                   </button>
                 </div>
@@ -6897,7 +6899,7 @@ function resetZoom() {
                   Initiate CPR and<br>
                   <br>
                   <div style="margin-top:6px;">BLS consider ILS/ALS mutual aid</div>
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
                     <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                   </button>
                 </div>
@@ -7609,7 +7611,7 @@ function resetZoom() {
                     unlockedHtml: `
                       <div>
                         •Administer fluid bolus at 20ml/kg<br>
-                        •If suspected allergic reaction, <button class="xref-btn" style="margin:6px 0;" onclick="openXref('69')">
+                        •If suspected allergic reaction, Refer to <button class="xref-btn" style="margin:6px 0;" onclick="openXref('69')">
                           <span class="gray-diamond"></span> Protocol #69: Pediatric Allergic Reaction / Anaphylaxis
                         </button><br>
                         •If no response to initial fluid bolus and history of fever/ infection, repeat fluid boluses of 20ml/kg as indicated to a max of 60ml/kg.<br>
@@ -7621,7 +7623,7 @@ function resetZoom() {
                 </div>
                 ${currentProviderLevel < 2 ? `
                   <div style="margin-top:8px;">
-                    <button class="xref-btn" onclick="openXref('69')">
+                    Refer to <button class="xref-btn" onclick="openXref('69')">
                       <span class="gray-diamond"></span> Protocol #69: Pediatric Allergic Reaction / Anaphylaxis
                     </button>
                   </div>
@@ -7646,13 +7648,13 @@ function resetZoom() {
                     unlockedHtml: `
                       <div>
                         •Administer fluid at 10ml/kg<br>
-                        •Identify any cardiac rhythm disturbance and <button class="xref-btn" onclick="openXref('63')">
+                        •Identify any cardiac rhythm disturbance and Refer to <button class="xref-btn" onclick="openXref('63')">
                             <span class="gray-diamond"></span> Protocol #63: Pediatric Bradycardia
                           </button>
-                          <button class="xref-btn" onclick="openXref('64')">
+                          Refer to <button class="xref-btn" onclick="openXref('64')">
                             <span class="gray-diamond"></span> Protocol #64: Pediatric Tachycardia (Poor Perfusion)
                           </button>
-                          <button class="xref-btn" onclick="openXref('65')">
+                          Refer to <button class="xref-btn" onclick="openXref('65')">
                             <span class="gray-diamond"></span> Protocol #65: Pediatric Tachycardia (Adequate Perfusion)
                           </button>
                         </div>
@@ -7664,9 +7666,9 @@ function resetZoom() {
                 </div>
                 ${currentProviderLevel < 2 ? `
                   <div style="margin-top:8px;">
-                    <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Protocol #63</button>
-                    <button class="xref-btn" onclick="openXref('64')"><span class="gray-diamond"></span> Protocol #64</button>
-                    <button class="xref-btn" onclick="openXref('65')"><span class="gray-diamond"></span> Protocol #65</button>
+                    Refer to <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> Protocol #63</button>
+                    Refer to <button class="xref-btn" onclick="openXref('64')"><span class="gray-diamond"></span> Protocol #64</button>
+                    Refer to <button class="xref-btn" onclick="openXref('65')"><span class="gray-diamond"></span> Protocol #65</button>
                   </div>
                 ` : ''}
               </div>
@@ -7735,7 +7737,7 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('AppB')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pediatric Fluid Chart (App B)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('AppB')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pediatric Fluid Chart (App B)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 68 (Page 81 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -7954,7 +7956,7 @@ function resetZoom() {
             <div class="flow-step-body">
               <div style="border:2px solid var(--box-border); border-bottom:none; padding:12px 18px;">
                 •Assess CABs<br>
-                •Immobilize (as indicated) <button class="xref-btn" style="margin-left:8px;" onclick="openXref('23')">
+                •Immobilize (as indicated) Refer to <button class="xref-btn" style="margin-left:8px;" onclick="openXref('23')">
                   <span class="gray-diamond"></span> Protocol #23: Spine Injury
                 </button><br>
                 •Administer <strong>100% OXYGEN</strong><br>
@@ -8315,7 +8317,7 @@ function resetZoom() {
                       AT DISCRETION OF <span style="color:#c00000;">MEDICAL CONTROL</span>:
                     </div>
                     <div style="border-bottom:1.5px solid #000; padding-bottom:8px; margin-bottom:8px;">
-                      <button class="xref-btn" style="margin:6px 0;" onclick="openXref('61')">
+                      Refer to <button class="xref-btn" style="margin:6px 0;" onclick="openXref('61')">
                         <span class="gray-diamond"></span> Protocol #61: Pediatric Pain Control
                       </button><br>
                       Consider <strong>FENTANYL at 1mcg/kg IV/IO/IM/IN. Max single dose 50mcg. Max total dose 150mcg.</strong><br>
@@ -8330,7 +8332,7 @@ function resetZoom() {
               })}
               ${(!medicalControlActive) ? `
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('61')">
+                  Refer to <button class="xref-btn" onclick="openXref('61')">
                     <span class="gray-diamond"></span> Protocol #61: Pediatric Pain Control
                   </button>
                 </div>
@@ -8352,7 +8354,7 @@ function resetZoom() {
                     <div>
                       <strong>DO NOT GIVE ANY DRUGS!</strong><br>
                       May attempt defibrillation ONE TIME at 2 Joules/kg if V-Fib or Pulseless V-Tach<br>
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('62')">
                         <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                       </button>
                     </div>
@@ -8362,7 +8364,7 @@ function resetZoom() {
               </div>
               ${currentProviderLevel < 2 ? `
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('62')">
+                  Refer to <button class="xref-btn" onclick="openXref('62')">
                     <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                   </button>
                 </div>
@@ -8586,7 +8588,7 @@ function resetZoom() {
             <div style="font-weight:900; text-decoration:underline; margin-bottom:4px;">AT ANY TIME</div>
             Return of Spontaneous Circulation<br>
             Go to <strong>ADULT POST RESUSCITATION PROTOCOL #8 <span class="gray-diamond"></span></strong><br>
-            <button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
+            Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
               <span class="gray-diamond"></span> Protocol #8: Adult Post Resuscitation
             </button>
           </div>
@@ -8618,7 +8620,7 @@ function resetZoom() {
               ${st.deathCriteria === 'yes' ? `
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
                   Do not begin resuscitation<br>
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('78')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('78')">
                     <span class="gray-diamond"></span> Protocol #78: Triple Zero / DNR / Criteria for Initiation of CPR
                   </button>
                 </div>
@@ -8683,7 +8685,7 @@ function resetZoom() {
                     Repeat and Reassess
                   </div>
                   <div style="border:2px solid var(--box-border); padding:12px 16px; text-align:center; margin-top:12px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
                       <span class="gray-diamond"></span> Protocol #85: Adult Airway
                     </button>
                   </div>
@@ -8700,7 +8702,7 @@ function resetZoom() {
                     Repeat and Reassess
                   </div>
                   <div style="border:2px solid var(--box-border); padding:12px 16px; text-align:center; margin-top:12px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
                       <span class="gray-diamond"></span> Protocol #85: Adult Airway
                     </button>
                   </div>
@@ -8738,7 +8740,7 @@ function resetZoom() {
                   lockedFallbackHtml: `
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; text-align:center;">
                       Continue CPR 2 Minutes, Repeat and Reassess<br>
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('85')">
                         <span class="gray-diamond"></span> Protocol #85: Adult Airway
                       </button>
                     </div>
@@ -8751,7 +8753,7 @@ function resetZoom() {
                     Follow<br>
                     <strong>ADULT PEA/ASYSTOLE PROTOCOL #14</strong><br>
                     as indicated <span class="gray-diamond"></span><br>
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('14')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('14')">
                       <span class="gray-diamond"></span> Protocol #14: Adult PEA / Asystole
                     </button>
                   </div>
@@ -8763,7 +8765,7 @@ function resetZoom() {
                     Follow<br>
                     <strong>ADULT VF / PULSELESS VT PROTOCOL #11</strong><br>
                     as indicated <span class="gray-diamond"></span><br>
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
                       <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                     </button>
                   </div>
@@ -8783,7 +8785,7 @@ function resetZoom() {
                 unlockedHtml: `
                   <div>
                     <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong>
-                    ILS/ALS providers may <button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
+                    ILS/ALS providers may Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
                       <span class="gray-diamond"></span> Protocol #9: Termination of Resuscitation
                     </button>
                   </div>
@@ -8826,7 +8828,7 @@ function resetZoom() {
               <div style="font-weight:900; text-decoration:underline; margin-bottom:4px;">AT ANY TIME</div>
               Return of Spontaneous Circulation<br>
               Go to <strong>ADULT POST RESUSCITATION PROTOCOL #8 <span class="gray-diamond"></span></strong><br>
-              <button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
+              Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('8')">
                 <span class="gray-diamond"></span> Protocol #8: Adult Post Resuscitation
               </button>
             </div>
@@ -8835,10 +8837,10 @@ function resetZoom() {
               Utilize this protocol with the appropriate<br>
               <strong>ADULT CARDIAC ARREST PROTOCOL #6 OR PEDIATRIC CARDIAC ARREST PROTOCOL #62 <span class="gray-diamond"></span></strong><br>
               <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-                <button class="xref-btn" onclick="openXref('6')">
+                Refer to <button class="xref-btn" onclick="openXref('6')">
                   <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                 </button>
-                <button class="xref-btn" onclick="openXref('62')">
+                Refer to <button class="xref-btn" onclick="openXref('62')">
                   <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                 </button>
               </div>
@@ -8871,7 +8873,7 @@ function resetZoom() {
               ${st.deathCriteria === 'yes' ? `
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
                   Do not begin resuscitation<br>
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('78')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('78')">
                     <span class="gray-diamond"></span> Protocol #78: Triple Zero / DNR / Criteria for Initiation of CPR
                   </button>
                 </div>
@@ -8940,10 +8942,10 @@ function resetZoom() {
                       Continue appropriate<br>
                       <strong>CARDIAC ARREST PROTOCOL.</strong><br>
                       <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-                        <button class="xref-btn" onclick="openXref('6')">
+                        Refer to <button class="xref-btn" onclick="openXref('6')">
                           <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                         </button>
-                        <button class="xref-btn" onclick="openXref('62')">
+                        Refer to <button class="xref-btn" onclick="openXref('62')">
                           <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                         </button>
                       </div>
@@ -8980,10 +8982,10 @@ function resetZoom() {
                       Continue appropriate<br>
                       <strong>CARDIAC ARREST PROTOCOL.</strong><br>
                       <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-                        <button class="xref-btn" onclick="openXref('6')">
+                        Refer to <button class="xref-btn" onclick="openXref('6')">
                           <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                         </button>
-                        <button class="xref-btn" onclick="openXref('62')">
+                        Refer to <button class="xref-btn" onclick="openXref('62')">
                           <span class="gray-diamond"></span> Protocol #62: Pediatric Cardiac Arrest
                         </button>
                       </div>
@@ -9134,22 +9136,22 @@ function resetZoom() {
                   lockedFallbackHtml: `
                     <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; margin-bottom:10px;">
                       <div style="margin-bottom:8px;">
-                        • <button class="xref-btn" style="margin-top:6px;" onclick="openXref('16')">
+                        • Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('16')">
                           <span class="gray-diamond"></span> Protocol #16: Adult Suspected Cardiac Patient
                         </button>
                       </div>
                       <div style="margin-bottom:8px;">
-                        • <button class="xref-btn" style="margin-top:6px;" onclick="openXref('15')">
+                        • Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('15')">
                           <span class="gray-diamond"></span> Protocol #15: Adult Bradycardia
                         </button>
                       </div>
                       <div>
                         • If Arrhythmia persists follow <strong>APPROPRIATE RHYTHM PROTOCOL <span class="gray-diamond"></span></strong><br>
                         <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;">
-                          <button class="xref-btn" onclick="openXref('11')"><span class="gray-diamond"></span> Protocol #11</button>
-                          <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> Protocol #12</button>
-                          <button class="xref-btn" onclick="openXref('14')"><span class="gray-diamond"></span> Protocol #14</button>
-                          <button class="xref-btn" onclick="openXref('15')"><span class="gray-diamond"></span> Protocol #15</button>
+                          Refer to <button class="xref-btn" onclick="openXref('11')"><span class="gray-diamond"></span> Protocol #11</button>
+                          Refer to <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> Protocol #12</button>
+                          Refer to <button class="xref-btn" onclick="openXref('14')"><span class="gray-diamond"></span> Protocol #14</button>
+                          Refer to <button class="xref-btn" onclick="openXref('15')"><span class="gray-diamond"></span> Protocol #15</button>
                         </div>
                       </div>
                     </div>
@@ -9159,7 +9161,7 @@ function resetZoom() {
 
                 ${st.stemi === 'yes' ? `
                   <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-                    <button class="xref-btn" style="margin-top:8px;" onclick="openXref('16')">
+                    Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('16')">
                       <span class="gray-diamond"></span> Protocol #16: Adult Suspected Cardiac Patient
                     </button>
                   </div>
@@ -9184,7 +9186,7 @@ function resetZoom() {
 
                   ${st.bradycardia === 'yes' ? `
                     <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('15')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('15')">
                         <span class="gray-diamond"></span> Protocol #15: Adult Bradycardia
                       </button>
                     </div>
@@ -9213,10 +9215,10 @@ function resetZoom() {
                         If Arrhythmia persists follow<br>
                         <strong>APPROPRIATE RHYTHM PROTOCOL <span class="gray-diamond"></span></strong>
                         <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-                          <button class="xref-btn" onclick="openXref('11')"><span class="gray-diamond"></span> Protocol #11: VF / Pulseless VT</button>
-                          <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> Protocol #12: Tachycardias (With Pulse)</button>
-                          <button class="xref-btn" onclick="openXref('14')"><span class="gray-diamond"></span> Protocol #14: PEA / Asystole</button>
-                          <button class="xref-btn" onclick="openXref('15')"><span class="gray-diamond"></span> Protocol #15: Adult Bradycardia</button>
+                          Refer to <button class="xref-btn" onclick="openXref('11')"><span class="gray-diamond"></span> Protocol #11: VF / Pulseless VT</button>
+                          Refer to <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> Protocol #12: Tachycardias (With Pulse)</button>
+                          Refer to <button class="xref-btn" onclick="openXref('14')"><span class="gray-diamond"></span> Protocol #14: PEA / Asystole</button>
+                          Refer to <button class="xref-btn" onclick="openXref('15')"><span class="gray-diamond"></span> Protocol #15: Adult Bradycardia</button>
                         </div>
                       </div>
                     ` : ''}
@@ -9240,7 +9242,7 @@ function resetZoom() {
                 unlockedHtml: `
                   <div>
                     <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong>
-                    If needed, <button class="xref-btn" style="margin-top:8px;" onclick="openXref('84a')">
+                    If needed, Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('84a')">
                       <span class="gray-diamond"></span> Protocol #84a: Post Intubation Sedation
                     </button>
                   </div>
@@ -9300,7 +9302,7 @@ function resetZoom() {
                   <div>b. Reversible causes of cardiac arrest have been considered and addressed.</div>
                   <div>c. No return of spontaneous circulation has been achieved after at least 20 minutes of ALS interventions per <strong>ADULT CARDIAC ARREST PROTOCOL #6 <span class="gray-diamond"></span></strong>.</div>
                   <div style="margin:6px 0;">
-                    <button class="xref-btn" onclick="openXref('6')">
+                    Refer to <button class="xref-btn" onclick="openXref('6')">
                       <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                     </button>
                   </div>
@@ -9388,7 +9390,7 @@ function resetZoom() {
                 <br>
                 <div style="font-weight:800;">CABs</div>
                 <div>Perform CPR until defibrillator attached</div>
-                <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
+                Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
                   <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                 </button>
               </div>
@@ -9410,7 +9412,7 @@ function resetZoom() {
               <div style="border:2px solid var(--box-border); border-bottom:none; padding:10px 16px; text-align:center; margin-top:12px;">
                 <div style="font-weight:800;">Continue CPR - Minimize any interruptions throughout resuscitation</div>
                 <div style="margin-top:4px;">
-                  <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
+                  Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
                     <span class="gray-diamond"></span> Protocol #85: Adult Airway
                   </button>
                 </div>
@@ -9748,7 +9750,7 @@ function resetZoom() {
               <div style="border:2px solid var(--box-border); padding:12px 16px; text-align:center; margin-top:-12px;">
                 <div style="font-weight:800;">Check Blood Glucose</div>
                 <div>If &lt; 60 treat as per <strong>ADULT DIABETIC / GLUCOSE EMERGENCIES PROTOCOL #41 <span class="gray-diamond"></span></strong></div>
-                <button class="xref-btn" style="margin-top:8px;" onclick="openXref('41')">
+                Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('41')">
                   <span class="gray-diamond"></span> Protocol #41: Adult Diabetic / Glucose Emergencies
                 </button>
               </div>
@@ -9832,7 +9834,7 @@ function resetZoom() {
                 <div style="font-weight:800;">CABs</div>
                 <div>Perform CPR and attach Cardiac Monitor</div>
                 <div style="font-weight:800;">PEA/Asystole present on monitor</div>
-                <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
+                Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
                   <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
                 </button>
               </div>
@@ -9840,7 +9842,7 @@ function resetZoom() {
               <div style="border:2px solid var(--box-border); border-bottom:none; padding:10px 16px; text-align:center;">
                 <div style="font-weight:800;">Continue CPR - Minimize any interruptions throughout resuscitation</div>
                 <div style="margin-top:4px;">
-                  <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
+                  Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
                     <span class="gray-diamond"></span> Protocol #85: Adult Airway
                   </button>
                 </div>
@@ -9899,7 +9901,7 @@ function resetZoom() {
                 lockedFallbackHtml: `
                   <div style="border:2px solid var(--box-border); background:var(--box-bg); color:var(--box-text); padding:12px 16px; text-align:center;">
                     <strong>If Shockable:</strong> Go to <strong>ADULT VENTRICULAR FIBRILLATION – PULSELESS VENTRICULAR TACHYCARDIA PROTOCOL #11 <span class="gray-diamond"></span></strong><br>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('11')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('11')">
                       <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                     </button>
                   </div>
@@ -9911,7 +9913,7 @@ function resetZoom() {
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
                   Go to<br>
                   <strong>ADULT VENTRICULAR FIBRILLATION – PULSELESS VENTRICULAR TACHYCARDIA PROTOCOL #11 <span class="gray-diamond"></span></strong><br>
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('11')">
                     <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
                   </button>
                 </div>
@@ -9950,7 +9952,7 @@ function resetZoom() {
                   unlockedHtml: `
                     <div style="text-align:center; font-weight:800;">
                       Consider <strong>TERMINATION OF RESUSCITATION PROTOCOL #9 <span class="gray-diamond"></span></strong><br>
-                      <button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
+                      Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('9')">
                         <span class="gray-diamond"></span> Protocol #9: Termination of Resuscitation
                       </button>
                     </div>
@@ -10007,7 +10009,7 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('83')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pleural Decompression (#83)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('83')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Pleural Decompression (#83)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 14 (Page 20 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -10159,7 +10161,7 @@ function resetZoom() {
 
           <div class="smo-footer">
                       <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
-            <button type="button" class="xref-btn" onclick="openXref('87')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Transcutaneous Pacemaker (#87)</button>
+            Refer to <button type="button" class="xref-btn" onclick="openXref('87')"><span class="gray-diamond" style="width:9px;height:9px;"></span> Transcutaneous Pacemaker (#87)</button>
           </div>
           <span>Region 7 Standing Medical Orders — Protocol 15 (Page 21 of PDF)</span>
             <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
@@ -10254,7 +10256,7 @@ function resetZoom() {
                   Max total dose 324mg
                 </div>
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center;">
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
                     <span class="gray-diamond"></span> Protocol #10: Adult Cardiogenic Shock
                   </button>
                 </div>
@@ -10386,10 +10388,10 @@ function resetZoom() {
             • Obtain 12 lead ECG<br>
             • <strong>TRANSPORT</strong>
             <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;">
-              <button class="xref-btn" onclick="openXref('12')">
+              Refer to <button class="xref-btn" onclick="openXref('12')">
                 <span class="gray-diamond"></span> Protocol #12: Adult Tachycardias
               </button>
-              <button class="xref-btn" onclick="openXref('15')">
+              Refer to <button class="xref-btn" onclick="openXref('15')">
                 <span class="gray-diamond"></span> Protocol #15: Adult Bradycardia
               </button>
             </div>
@@ -10400,7 +10402,7 @@ function resetZoom() {
 
       const renderArrestBox = () => `
         <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center; margin-top:14px;">
-          If patient unresponsive, perform chest compressions and <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
+          If patient unresponsive, perform chest compressions and Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('6')">
             <span class="gray-diamond"></span> Protocol #6: Adult Cardiac Arrest
           </button>
         </div>
@@ -10870,7 +10872,7 @@ function resetZoom() {
 
               <div class="transport-banner" style="margin-top:12px;">TRANSPORT</div>
               <div style="text-align:center;">
-                <button class="xref-btn" onclick="openXref('21')">
+                Refer to <button class="xref-btn" onclick="openXref('21')">
                   <span class="gray-diamond"></span> Go to Protocol #21: Routine Trauma Care
                 </button>
               </div>
@@ -10971,10 +10973,10 @@ function resetZoom() {
 
               <div class="transport-banner">TRANSPORT</div>
               <div style="text-align:center;">
-                <button class="xref-btn" onclick="openXref('19')">
+                Refer to <button class="xref-btn" onclick="openXref('19')">
                   <span class="gray-diamond"></span> Go to Protocol #19: Field Triage Protocols
                 </button>
-                <button class="xref-btn" onclick="openXref('21')">
+                Refer to <button class="xref-btn" onclick="openXref('21')">
                   <span class="gray-diamond"></span> Go to Protocol #21: Routine Trauma Care
                 </button>
               </div>
@@ -11032,10 +11034,10 @@ function resetZoom() {
                 <strong>3. CIRCULATION</strong> ()
               </div>
               <div style="padding-left:16px;">
-                <button class="xref-btn" onclick="openXref('22')">
+                Refer to <button class="xref-btn" onclick="openXref('22')">
                   <span class="gray-diamond"></span> Go to Protocol #22: Adult Hemorrhagic Shock
                 </button>
-                <button class="xref-btn" onclick="openXref('68')">
+                Refer to <button class="xref-btn" onclick="openXref('68')">
                   <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                 </button>
                 <div>• Life threatening hemorrhage - <strong>STOP THE BLEEDING.</strong></div>
@@ -11051,7 +11053,7 @@ function resetZoom() {
                 <div>• Tracheal deviation (<button class="xref-btn" onclick="openXref('25')">
                   <span class="gray-diamond"></span> Go to Protocol #25: Traumatic Cardiopulmonary Arrest
                 </button>
-                <button class="xref-btn" onclick="openXref('31')">
+                Refer to <button class="xref-btn" onclick="openXref('31')">
                   <span class="gray-diamond"></span> Go to Protocol #31: Chest Trauma
                 </button>
               </div>
@@ -11061,7 +11063,7 @@ function resetZoom() {
               </div>
               <div style="padding-left:16px;">
                 <div>• Open or secure as needed</div>
-                <button class="xref-btn" onclick="openXref('4')">
+                Refer to <button class="xref-btn" onclick="openXref('4')">
                   <span class="gray-diamond"></span> Go to Protocol #4: Airway Obstruction
                 </button>
               </div>
@@ -11070,13 +11072,13 @@ function resetZoom() {
                 <strong>6. BREATHING</strong> ( and either the <strong>ADULT RESPIRATORY DISTRESS PROTOCOL <span class="gray-diamond"></span> #3</strong> or the <strong>PEDIATRIC RESPIRATORY DISTRESS PROTOCOL <span class="gray-diamond"></span> # 66</strong>)
               </div>
               <div style="padding-left:16px;">
-                <button class="xref-btn" onclick="openXref('31')">
+                Refer to <button class="xref-btn" onclick="openXref('31')">
                   <span class="gray-diamond"></span> Go to Protocol #31: Chest Trauma
                 </button>
-                <button class="xref-btn" onclick="openXref('3')">
+                Refer to <button class="xref-btn" onclick="openXref('3')">
                   <span class="gray-diamond"></span> Go to Protocol #3: Adult Respiratory Distress
                 </button>
-                <button class="xref-btn" onclick="openXref('66')">
+                Refer to <button class="xref-btn" onclick="openXref('66')">
                   <span class="gray-diamond"></span> Go to Protocol #66: Pediatric Respiratory Distress
                 </button>
                 <div>• ASSIST VENTILATION AS REQUIRED</div>
@@ -11089,7 +11091,7 @@ function resetZoom() {
                 <strong>7. NEUROLOGIC DEFICIT</strong> ()
               </div>
               <div style="padding-left:16px;">
-                <button class="xref-btn" onclick="openXref('24')">
+                Refer to <button class="xref-btn" onclick="openXref('24')">
                   <span class="gray-diamond"></span> Go to Protocol #24: Head Trauma / Unconscious Patient
                 </button>
                 <div>• AVPU</div>
@@ -11116,7 +11118,7 @@ function resetZoom() {
               <div>10. All patients, who, in the judgment of prehospital personnel, would benefit from care derived from a Trauma Center, should be transported accordingly ().</div>
               <div style="padding-left:16px;">
                 If unable to ventilate, transport to nearest hospital.<br>
-                <button class="xref-btn" onclick="openXref('19')">
+                Refer to <button class="xref-btn" onclick="openXref('19')">
                   <span class="gray-diamond"></span> Go to Protocol #19: Field Triage Protocols
                 </button>
               </div>
@@ -11242,7 +11244,7 @@ function resetZoom() {
 
               <div class="transport-banner">ACCELERATED TRANSPORT</div>
               <div style="text-align:center; margin-bottom:12px;">
-                <button class="xref-btn" onclick="openXref('26')">
+                Refer to <button class="xref-btn" onclick="openXref('26')">
                   <span class="gray-diamond"></span> Go to Protocol #26: Accelerated Transport
                 </button>
               </div>
@@ -11253,7 +11255,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
                   <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                 </button>
               </div>
@@ -11329,7 +11331,7 @@ function resetZoom() {
                     BLS and ILS consider ALS Mutual Aid
                   </div>
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
                       <span class="gray-diamond"></span> Go to Protocol #85: Adult Airway
                     </button>
                   </div>
@@ -11350,7 +11352,7 @@ function resetZoom() {
                     stepTitle: 'Medication Assisted Intubation Protocol #84',
                     unlockedHtml: `
                       <div style="text-align:center;">
-                        <button class="xref-btn" style="margin-top:6px;" onclick="openXref('84')">
+                        Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('84')">
                           <span class="gray-diamond"></span> Go to Protocol #84: Medication Assisted Intubation
                         </button>
                       </div>
@@ -11384,7 +11386,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35a')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35a')">
                   <span class="gray-diamond"></span> Go to Protocol #35a: Pediatric Head Trauma Addendum
                 </button>
               </div>
@@ -11436,7 +11438,7 @@ function resetZoom() {
               ${st.arrest === 'no' ? `
                 <div style="border:2px solid var(--box-border); padding:12px; text-align:center; font-weight:700; margin-top:14px;">
                   Routine Trauma Care<br>
-                  <button class="xref-btn" style="margin-top:8px;" onclick="openXref('21')">
+                  Refer to <button class="xref-btn" style="margin-top:8px;" onclick="openXref('21')">
                     <span class="gray-diamond"></span> Go to Protocol #21: Routine Trauma Care
                   </button>
                 </div>
@@ -11451,7 +11453,7 @@ function resetZoom() {
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">Ventilate with<br>100% <strong>OXYGEN</strong></div>
                   <div class="transport-banner">ACCELERATED<br>TRANSPORT</div>
                   <div style="text-align:center; margin-bottom:10px;">
-                    <button class="xref-btn" onclick="openXref('26')">
+                    Refer to <button class="xref-btn" onclick="openXref('26')">
                       <span class="gray-diamond"></span> Go to Protocol #26: Accelerated Transport
                     </button>
                   </div>
@@ -11530,7 +11532,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
                   <span class="gray-diamond"></span> Go to Protocol #5: Adult Pain Control
                 </button>
               </div>
@@ -11562,7 +11564,7 @@ function resetZoom() {
                     <strong>AND/OR</strong><br>
                     <strong>NITROUS OXIDE</strong> (if available)
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('81')">
+                      Refer to <button class="xref-btn" onclick="openXref('81')">
                         <span class="gray-diamond"></span> Go to Protocol #81: Nitrous Oxide Administration
                       </button>
                     </div>
@@ -11650,7 +11652,7 @@ function resetZoom() {
                     <strong>MORPHINE SULFATE</strong> (if available) in <strong>5mg increments IV/IO/IM</strong><br>
                     May repeat every 5 minutes as needed until improvement. Max total dose 10mg<br>
                     As needed for pain<br>
-                    (May <button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
+                    (May Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
                       <span class="gray-diamond"></span> Go to Protocol #5: Adult Pain Control
                     </button>
                   </div>
@@ -11738,7 +11740,7 @@ function resetZoom() {
                     <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong><br>
                     Consider hypoglycemia and need for <strong>50% DEXTROSE IV/IO</strong>.
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('AppD')">
+                      Refer to <button class="xref-btn" onclick="openXref('AppD')">
                         <span class="gray-diamond"></span> Go to Appendix D: Adult and Pediatric Dextrose Charts
                       </button>
                     </div>
@@ -11893,7 +11895,7 @@ function resetZoom() {
                     <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong><br>
                     Consider hypoglycemia and need for <strong>50% DEXTROSE IV/IO</strong>.
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('AppD')">
+                      Refer to <button class="xref-btn" onclick="openXref('AppD')">
                         <span class="gray-diamond"></span> Go to Appendix D: Adult and Pediatric Dextrose Charts
                       </button>
                     </div>
@@ -11973,7 +11975,7 @@ function resetZoom() {
                   <div style="border:2px solid var(--box-border); padding:10px 14px; text-align:center; margin-bottom:10px;">
                     <strong>OXYGEN</strong> 100% Use humidified Oxygen, (if available).<br>
                     Note presence of hoarseness, wheezing, stridor or productive cough and document.<br>
-                    If present, <button class="xref-btn" style="margin-top:6px;" onclick="openXref('26')">
+                    If present, Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('26')">
                       <span class="gray-diamond"></span> Go to Protocol #26: Accelerated Transport
                     </button>
                   </div>
@@ -12008,7 +12010,7 @@ function resetZoom() {
                   </div>
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                     Irrigate or flush with copious amounts of water or saline unless contraindicated.<br>
-                    For eye exposures <button class="xref-btn" style="margin-top:6px;" onclick="openXref('49')">
+                    For eye exposures Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('49')">
                       <span class="gray-diamond"></span> Go to Protocol #49: Hazardous Materials - Eye
                     </button>
                   </div>
@@ -12038,7 +12040,7 @@ function resetZoom() {
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                     Immobilization (as indicated) <br>
                     Apply monitor and treat dysrhythmias per appropriate protocol.<br>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
                       <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                     </button>
                   </div>
@@ -12067,7 +12069,7 @@ function resetZoom() {
                       Do not administer until shock has been controlled.<br>
                       <strong>AND/OR NITROUS OXIDE</strong> Inhalation (if available)
                       <div style="margin-top:6px;">
-                        <button class="xref-btn" onclick="openXref('81')">
+                        Refer to <button class="xref-btn" onclick="openXref('81')">
                           <span class="gray-diamond"></span> Go to Protocol #81: Nitrous Oxide Administration
                         </button>
                       </div>
@@ -12083,7 +12085,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('38')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('38')">
                   <span class="gray-diamond"></span> Go to Protocol #38: Pediatric Burns
                 </button>
               </div>
@@ -12174,7 +12176,7 @@ function resetZoom() {
                     unlockedHtml: `
                       <div style="text-align:center;">
                         Perform Needle<br>Decompression<br>
-                        <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
+                        Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
                           <span class="gray-diamond"></span> Go to Protocol #83: Decompression of Tension Pneumothorax
                         </button>
                       </div>
@@ -12190,7 +12192,7 @@ function resetZoom() {
                 <div style="margin-top:14px;">
                   <div class="transport-banner">ACCELERATED<br>TRANSPORT</div>
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('22')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('22')">
                       <span class="gray-diamond"></span> Go to Protocol #22: Adult Hemorrhagic Shock
                     </button>
                   </div>
@@ -12201,7 +12203,7 @@ function resetZoom() {
               ${st.injury === 'tamponade' ? `
                 <div style="margin-top:14px;">
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('22')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('22')">
                       <span class="gray-diamond"></span> Go to Protocol #22: Adult Hemorrhagic Shock
                     </button>
                   </div>
@@ -12266,7 +12268,7 @@ function resetZoom() {
                 If associated trauma, assess for other injury and<br>
                 immobilize (as indicated) per<br>
                 <strong>SPINE INJURY PROTOCOL <span class="gray-diamond"></span> #23</strong><br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
                   <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                 </button>
               </div>
@@ -12331,16 +12333,16 @@ function resetZoom() {
                 <div>Treat Head Injury per <strong>HEAD TRAUMA/UNCONSCIOUS PATIENT PROTOCOL <span class="gray-diamond"></span> #24</strong></div>
                 <div>Treat Hazardous Material Exposures per <strong>HAZARDOUS MATERIALS-GENERAL PROTOCOL <span class="gray-diamond"></span> #48</strong></div>
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('30')">
+                  Refer to <button class="xref-btn" onclick="openXref('30')">
                     <span class="gray-diamond"></span> Go to Protocol #30: Adult Burns
                   </button>
-                  <button class="xref-btn" onclick="openXref('28')">
+                  Refer to <button class="xref-btn" onclick="openXref('28')">
                     <span class="gray-diamond"></span> Go to Protocol #28: Adult Crush Injury
                   </button>
-                  <button class="xref-btn" onclick="openXref('24')">
+                  Refer to <button class="xref-btn" onclick="openXref('24')">
                     <span class="gray-diamond"></span> Go to Protocol #24: Head Trauma / Unconscious Patient
                   </button>
-                  <button class="xref-btn" onclick="openXref('48')">
+                  Refer to <button class="xref-btn" onclick="openXref('48')">
                     <span class="gray-diamond"></span> Go to Protocol #48: Hazardous Materials - General
                   </button>
                 </div>
@@ -12354,7 +12356,7 @@ function resetZoom() {
                 unlockedHtml: `
                   <div>
                     If signs or symptoms of tension pneumothorax Needle Decompression per <strong>DECOMPRESSION OF TENSION PNEUMOTHORAX PROTOCOL <span class="gray-diamond"></span> #83</strong><br>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
                       <span class="gray-diamond"></span> Go to Protocol #83: Decompression of Tension Pneumothorax
                     </button>
                   </div>
@@ -12406,7 +12408,7 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; font-weight:700; margin-bottom:10px;">
                 Routine Trauma Care<br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('21')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('21')">
                   <span class="gray-diamond"></span> Go to Protocol #21: Routine Trauma Care
                 </button>
               </div>
@@ -12491,10 +12493,10 @@ function resetZoom() {
                 <div>•Complete initial assessment, including *Pediatric Trauma Score</div>
                 <div>•Keep warm</div>
                 <div style="margin-top:6px;">
-                  <button class="xref-btn" onclick="openXref('23')">
+                  Refer to <button class="xref-btn" onclick="openXref('23')">
                     <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                   </button>
-                  <button class="xref-btn" onclick="openXref('37')">
+                  Refer to <button class="xref-btn" onclick="openXref('37')">
                     <span class="gray-diamond"></span> Go to Protocol #37: Pediatric Assessment and Trauma Score
                   </button>
                 </div>
@@ -12510,7 +12512,7 @@ function resetZoom() {
               })}
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:12px;">
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35a')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35a')">
                   <span class="gray-diamond"></span> Go to Protocol #35a: Pediatric Head Trauma Addendum
                 </button>
               </div>
@@ -12555,7 +12557,7 @@ function resetZoom() {
                         has begun as long as it does not delay<br>
                         transportation to the nearest Trauma Center .
                         <div style="margin-top:6px;">
-                          <button class="xref-btn" onclick="openXref('AppB')">
+                          Refer to <button class="xref-btn" onclick="openXref('AppB')">
                             <span class="gray-diamond"></span> Go to Appendix B: Pediatric Fluid Weight Based Chart
                           </button>
                         </div>
@@ -12610,10 +12612,10 @@ function resetZoom() {
 
                   ${st.perfusion === 'hypo' ? `
                     <div style="border:2px solid var(--box-border); padding:12px; text-align:center; margin-top:12px;">
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
                         <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                       </button>
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('62')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('62')">
                         <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                       </button>
                     </div>
@@ -12623,7 +12625,7 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px 14px; margin-top:14px;">
                 <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong><br>
-                * <button class="xref-btn" style="margin-top:6px;" onclick="openXref('37')">
+                * Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('37')">
                   <span class="gray-diamond"></span> Go to Protocol #37: Pediatric Assessment and Trauma Score
                 </button>
               </div>
@@ -12674,7 +12676,7 @@ function resetZoom() {
                 <div>•Monitor via pulse oximetry and capnography (if available)</div>
                 <div>•Contact <strong style="color:#c00000;">Medical Control</strong></div>
                 <div style="margin-top:6px;">
-                  <button class="xref-btn" onclick="openXref('23')">
+                  Refer to <button class="xref-btn" onclick="openXref('23')">
                     <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                   </button>
                 </div>
@@ -12739,7 +12741,7 @@ function resetZoom() {
                     <div>•Observe</div>
                     <div>• as indicated</div>
                     <div>•<strong>TRANSPORT</strong></div>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                       <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                     </button>
                   </div>
@@ -12812,7 +12814,7 @@ function resetZoom() {
                     </div>
                     <div>3. Shock resuscitation NS bolus at 20ml/kg until BP appropriate for age. May repeat up to a max of 60ml/kg or 1000ml NS.</div>
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('AppB')">
+                      Refer to <button class="xref-btn" onclick="openXref('AppB')">
                         <span class="gray-diamond"></span> Go to Appendix B: Pediatric Fluid Weight Based Chart
                       </button>
                     </div>
@@ -12911,7 +12913,7 @@ function resetZoom() {
                   <div>•</div>
                   <div>•Assess percentage/depth of burn</div>
                   <div>•Remove constricting jewelry and clothes.</div>
-                  <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35')">
+                  Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('35')">
                     <span class="gray-diamond"></span> Go to Protocol #35: Initial Management of Pediatric Trauma Patient
                   </button>
                 </div>
@@ -12965,7 +12967,7 @@ function resetZoom() {
                   <div>•Secure airway as appropriate</div>
                   <div>•</div>
                   <div>•<strong>ACCELERATED TRANSPORT</strong></div>
-                  <button class="xref-btn" style="margin-top:6px;" onclick="openXref('66')">
+                  Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('66')">
                     <span class="gray-diamond"></span> Go to Protocol #66: Pediatric Respiratory Distress
                   </button>
                 </div>
@@ -13030,7 +13032,7 @@ function resetZoom() {
                     <div style="margin-top:12px;">
                       <div style="border:2px solid var(--box-border); padding:10px 14px; margin-bottom:10px;">
                         <div><strong>ELECTRICAL BURNS</strong></div>
-                        <div>•Immobilize (as indicated) <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
+                        <div>•Immobilize (as indicated) Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
                           <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                         </button>
                       </div>
@@ -13072,7 +13074,7 @@ function resetZoom() {
                         <div>•Rapid visual acuity</div>
                         <div>•If eye involvement, irrigate with saline or sterile water continuously. <strong>DO NOT CONTAMINATE THE UNINJURED EYE WITH IRRIGATION.</strong></div>
                         <div>•Irrigate area with copious amounts of sterile water or saline ASAP and during transport</div>
-                        <button class="xref-btn" style="margin-top:6px;" onclick="openXref('72')">
+                        Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('72')">
                           <span class="gray-diamond"></span> Go to Protocol #72: Pediatric Toxic Exposures / Ingestions
                         </button>
                       </div>
@@ -13111,10 +13113,10 @@ function resetZoom() {
                       <div>•Consider Pain Medication per <strong>PEDIATRIC PAIN CONTROL PROTOCOL <span class="gray-diamond"></span> #61</strong> or as directed by <strong style="color:#c00000;">Medical Control</strong>.</div>
                       <div>•Consider <strong>NITROUS OXIDE</strong>. </div>
                       <div style="margin-top:6px;">
-                        <button class="xref-btn" onclick="openXref('61')">
+                        Refer to <button class="xref-btn" onclick="openXref('61')">
                           <span class="gray-diamond"></span> Go to Protocol #61: Pediatric Pain Control
                         </button>
-                        <button class="xref-btn" onclick="openXref('81')">
+                        Refer to <button class="xref-btn" onclick="openXref('81')">
                           <span class="gray-diamond"></span> Go to Protocol #81: Nitrous Oxide Administration
                         </button>
                       </div>
@@ -13296,7 +13298,7 @@ function resetZoom() {
               })}
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('69')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('69')">
                   <span class="gray-diamond"></span> Go to Protocol #69: Pediatric Allergic Reaction / Anaphylaxis
                 </button>
               </div>
@@ -13397,7 +13399,7 @@ function resetZoom() {
                     <strong>GLUCAGON 1mg IM/IN</strong><br>
                     (If IV not able to be established)
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('AppD')">
+                      Refer to <button class="xref-btn" onclick="openXref('AppD')">
                         <span class="gray-diamond"></span> Go to Appendix D: Adult and Pediatric Dextrose Charts
                       </button>
                     </div>
@@ -13409,7 +13411,7 @@ function resetZoom() {
               <div class="transport-banner">TRANSPORT</div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('71')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('71')">
                   <span class="gray-diamond"></span> Go to Protocol #71: Pediatric Altered Level of Consciousness / BRUE
                 </button>
               </div>
@@ -13476,7 +13478,7 @@ function resetZoom() {
                     <strong>GLUCAGON 1mg IM/IN</strong><br>
                     (If IV not able to be established)
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('AppD')">
+                      Refer to <button class="xref-btn" onclick="openXref('AppD')">
                         <span class="gray-diamond"></span> Go to Appendix D: Adult and Pediatric Dextrose Charts
                       </button>
                     </div>
@@ -13514,7 +13516,7 @@ function resetZoom() {
               <div class="transport-banner">TRANSPORT</div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('71')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('71')">
                   <span class="gray-diamond"></span> Go to Protocol #71: Pediatric Altered Level of Consciousness / BRUE
                 </button>
               </div>
@@ -13627,7 +13629,7 @@ function resetZoom() {
               })}
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                   <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                 </button>
               </div>
@@ -13827,7 +13829,7 @@ function resetZoom() {
               ` : ''}
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('73')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('73')">
                   <span class="gray-diamond"></span> Go to Protocol #73: Pediatric Heat Emergencies
                 </button>
               </div>
@@ -13988,10 +13990,10 @@ function resetZoom() {
                     Do not administer until shock has been controlled.<br>
                     <strong>AND/OR NITROUS OXIDE</strong> Inhalation (if available)
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('5')">
+                      Refer to <button class="xref-btn" onclick="openXref('5')">
                         <span class="gray-diamond"></span> Go to Protocol #5: Adult Pain Control
                       </button>
-                      <button class="xref-btn" onclick="openXref('81')">
+                      Refer to <button class="xref-btn" onclick="openXref('81')">
                         <span class="gray-diamond"></span> Go to Protocol #81: Nitrous Oxide Administration
                       </button>
                     </div>
@@ -14023,7 +14025,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('74')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('74')">
                   <span class="gray-diamond"></span> Go to Protocol #74: Pediatric Cold Emergencies
                 </button>
               </div>
@@ -14078,7 +14080,7 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                 <div><strong>Blood Glucose</strong> &nbsp; &lt; 60 or &gt; 400</div>
-                <div style="margin-top:4px;"><button class="xref-btn" style="margin-top:6px;" onclick="openXref('41')">
+                <div style="margin-top:4px;">Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('41')">
                   <span class="gray-diamond"></span> Go to Protocol #41: Adult Diabetic / Glucose Emergencies
                 </button>
               </div>
@@ -14093,10 +14095,10 @@ function resetZoom() {
               })}
 
               <div style="border:2px solid var(--box-border); padding:12px; text-align:center; margin-bottom:12px;">
-                <div><button class="xref-btn" onclick="openXref('43')">
+                <div>Refer to <button class="xref-btn" onclick="openXref('43')">
                     <span class="gray-diamond"></span> Go to Protocol #43: Adult Coma of Unknown Origin
                   </button>
-                  <button class="xref-btn" onclick="openXref('44')">
+                  Refer to <button class="xref-btn" onclick="openXref('44')">
                     <span class="gray-diamond"></span> Go to Protocol #44: Adult Seizures / Status Epilepticus
                   </button>
                 </div>
@@ -14312,19 +14314,19 @@ function resetZoom() {
                   FROSTBITE
                 </div>
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('10')"><span class="gray-diamond"></span> #10 Shock</button>
-                  <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> #12 Dysrhythmias</button>
-                  <button class="xref-btn" onclick="openXref('17')"><span class="gray-diamond"></span> #17 Pulmonary Edema</button>
-                  <button class="xref-btn" onclick="openXref('44')"><span class="gray-diamond"></span> #44 Seizures</button>
-                  <button class="xref-btn" onclick="openXref('30')"><span class="gray-diamond"></span> #30 Burns</button>
-                  <button class="xref-btn" onclick="openXref('43')"><span class="gray-diamond"></span> #43 Unconsciousness</button>
-                  <button class="xref-btn" onclick="openXref('39')"><span class="gray-diamond"></span> #39 Asthma/COPD</button>
-                  <button class="xref-btn" onclick="openXref('46')"><span class="gray-diamond"></span> #46 Frostbite</button>
+                  Refer to <button class="xref-btn" onclick="openXref('10')"><span class="gray-diamond"></span> #10 Shock</button>
+                  Refer to <button class="xref-btn" onclick="openXref('12')"><span class="gray-diamond"></span> #12 Dysrhythmias</button>
+                  Refer to <button class="xref-btn" onclick="openXref('17')"><span class="gray-diamond"></span> #17 Pulmonary Edema</button>
+                  Refer to <button class="xref-btn" onclick="openXref('44')"><span class="gray-diamond"></span> #44 Seizures</button>
+                  Refer to <button class="xref-btn" onclick="openXref('30')"><span class="gray-diamond"></span> #30 Burns</button>
+                  Refer to <button class="xref-btn" onclick="openXref('43')"><span class="gray-diamond"></span> #43 Unconsciousness</button>
+                  Refer to <button class="xref-btn" onclick="openXref('39')"><span class="gray-diamond"></span> #39 Asthma/COPD</button>
+                  Refer to <button class="xref-btn" onclick="openXref('46')"><span class="gray-diamond"></span> #46 Frostbite</button>
                 </div>
               </div>
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('49')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('49')">
                   <span class="gray-diamond"></span> Go to Protocol #49: Hazardous Materials - Eye
                 </button>
               </div>
@@ -14536,10 +14538,10 @@ function resetZoom() {
 
                   ${st.seizing === 'yes' ? `
                     <div style="border:2px solid var(--box-border); padding:12px; text-align:center; margin-top:12px;">
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('44')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('44')">
                         <span class="gray-diamond"></span> Go to Protocol #44: Adult Seizures
                       </button>
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                         <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                       </button>
                     </div>
@@ -14849,7 +14851,7 @@ function resetZoom() {
               ${st.positive === 'no' ? `
                 <div style="border:2px solid var(--box-border); padding:12px; text-align:center; margin-top:12px;">
                   Exit to appropriate protocol<br>as indicated<br>
-                  <button class="xref-btn" style="margin-top:6px;" onclick="openXref('1')">
+                  Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('1')">
                     <span class="gray-diamond"></span> Go to Protocol #1: Initial Medical Care
                   </button>
                 </div>
@@ -14879,7 +14881,7 @@ function resetZoom() {
                   })}
 
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                    For hypotensive pediatric patient, <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
+                    For hypotensive pediatric patient, Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('68')">
                       <span class="gray-diamond"></span> Go to Protocol #68: Pediatric Shock
                     </button>
                   </div>
@@ -14929,7 +14931,7 @@ function resetZoom() {
                 <strong>ROUTINE TRAUMA CARE</strong><br>
                 Immobilize (as indicated) per <strong>SPINE INJURY PROTOCOL <span class="gray-diamond"></span> #23</strong><br>
                 Begin CPR if indicated<br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
                   <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                 </button>
               </div>
@@ -14980,7 +14982,7 @@ function resetZoom() {
                   ${st.temp === 'hypo' ? `
                     <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-top:12px;">
                       Treat dysrhythmias<br>
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('46')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('46')">
                         <span class="gray-diamond"></span> Go to Protocol #46: Adult Cold Emergencies
                       </button>
                     </div>
@@ -14996,7 +14998,7 @@ function resetZoom() {
               </div>
 
               <div style="border:2px solid #9333ea; background:var(--box-purple-bg); color:var(--box-purple-text); padding:10px 14px; margin-top:12px; text-align:center;">
-                <strong>For a pediatric patient <button class="xref-btn" style="margin-top:6px;" onclick="openXref('75')">
+                <strong>For a pediatric patient Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('75')">
                   <span class="gray-diamond"></span> Go to Protocol #75: Pediatric Drowning
                 </button>
               </div>
@@ -15081,7 +15083,7 @@ function resetZoom() {
                   </button>
                 </div>
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('57')">
+                  Refer to <button class="xref-btn" onclick="openXref('57')">
                     <span class="gray-diamond"></span> Go to Protocol #57: Abnormal Deliveries (Prolapsed Cord / Breech Birth)
                   </button>
                 </div>
@@ -15105,7 +15107,7 @@ function resetZoom() {
                     <div>• As shoulders emerge, guide head and neck downward to deliver anterior shoulder.</div>
                     <div>• Support and lift head and neck slightly to deliver posterior shoulder. Remainder of infant’s delivery should occur with passive participation.</div>
                     <div>• Maintain a firm hold on the baby.</div>
-                    <div>• <button class="xref-btn" style="margin-top:6px;" onclick="openXref('58')">
+                    <div>• Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('58')">
                       <span class="gray-diamond"></span> Go to Protocol #58: Resuscitation and Care of the Newborn
                     </button>
                   </div>
@@ -15115,7 +15117,7 @@ function resetZoom() {
                   </div>
 
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
-                    Administer post-partum care - <button class="xref-btn" style="margin-top:6px;" onclick="openXref('59')">
+                    Administer post-partum care - Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('59')">
                       <span class="gray-diamond"></span> Go to Protocol #59: Maternal Care
                     </button>
                   </div>
@@ -15160,7 +15162,7 @@ function resetZoom() {
               <div style="border:2px solid #ec4899; padding:10px; text-align:center; font-weight:800; margin-bottom:10px;">
                 THIRD TRIMESTER BLEEDING - 6-9 MONTHS<br>
                 (Placenta Previa, Abruptio Placenta, Trauma)<br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('34')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('34')">
                   <span class="gray-diamond"></span> Go to Protocol #34: Trauma in Pregnancy
                 </button>
               </div>
@@ -15215,7 +15217,7 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                 If seizures occur: Increase <strong>OXYGEN</strong> to 100% and<br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('44')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('44')">
                   <span class="gray-diamond"></span> Go to Protocol #44: Adult Seizures / Status Epilepticus
                 </button>
               </div>
@@ -15310,7 +15312,7 @@ function resetZoom() {
               </div>
 
               <div style="margin-top:10px; text-align:center;">
-                <button class="xref-btn" onclick="openXref('58')">
+                Refer to <button class="xref-btn" onclick="openXref('58')">
                   <span class="gray-diamond"></span> Go to Protocol #58: Resuscitation and Care of the Newborn
                 </button>
               </div>
@@ -15740,10 +15742,10 @@ function resetZoom() {
                 <div>• Determine weight - Use length/weight tape to determine kilos for medication administration.</div>
                 <div>• A length/weight based tape will be utilized to determine medication dosing.</div>
                 <div style="margin-top:6px;">
-                  <button class="xref-btn" onclick="openXref('AppA')">
+                  Refer to <button class="xref-btn" onclick="openXref('AppA')">
                     <span class="gray-diamond"></span> Go to Appendix A: Weight Conversion Table
                   </button>
-                  <button class="xref-btn" onclick="openXref('AppB')">
+                  Refer to <button class="xref-btn" onclick="openXref('AppB')">
                     <span class="gray-diamond"></span> Go to Appendix B: Pediatric Fluid Weight Based Chart
                   </button>
                 </div>
@@ -15957,7 +15959,7 @@ function resetZoom() {
                         <strong>D12.5% at 4ml/kg IV/IO</strong> infants &lt; 2 months*<br>
                         OR <strong>GLUCAGON at 0.03mg/kg IM/IN</strong> Max total dose 1mg
                         <div style="margin-top:6px;">
-                          <button class="xref-btn" onclick="openXref('AppD')">
+                          Refer to <button class="xref-btn" onclick="openXref('AppD')">
                             <span class="gray-diamond"></span> Go to Appendix D: Adult and Pediatric Dextrose Charts
                           </button>
                         </div>
@@ -16022,7 +16024,7 @@ function resetZoom() {
                 <div>Anticipate respiratory depression if <strong>MIDAZOLAM HYDROCHLORIDE (VERSED)</strong> is administered.</div>
                 <div> as indicated.</div>
                 <div><strong>NALOXONE (Narcan)</strong> should be used only for suspected ACUTE narcotic exposure.</div>
-                <button class="xref-btn" style="margin:6px 0;" onclick="openXref('67')">
+                Refer to <button class="xref-btn" style="margin:6px 0;" onclick="openXref('67')">
                   <span class="gray-diamond"></span> Go to Protocol #67: Pediatric Respiratory Arrest
                 </button>
                 ${renderGatedBlock({
@@ -16092,11 +16094,11 @@ function resetZoom() {
                 <div>•Pulse oximetry</div>
                 <div>•Complete initial assessment</div>
                 <div style="margin-top:6px;">
-                  <button class="xref-btn" onclick="openXref('48')"><span class="gray-diamond"></span> #48 HazMat General</button>
-                  <button class="xref-btn" onclick="openXref('49')"><span class="gray-diamond"></span> #49 HazMat Eye</button>
-                  <button class="xref-btn" onclick="openXref('50')"><span class="gray-diamond"></span> #50 Pesticide/Nerve</button>
-                  <button class="xref-btn" onclick="openXref('51')"><span class="gray-diamond"></span> #51 Radiation</button>
-                  <button class="xref-btn" onclick="openXref('52')"><span class="gray-diamond"></span> #52 Cyanide</button>
+                  Refer to <button class="xref-btn" onclick="openXref('48')"><span class="gray-diamond"></span> #48 HazMat General</button>
+                  Refer to <button class="xref-btn" onclick="openXref('49')"><span class="gray-diamond"></span> #49 HazMat Eye</button>
+                  Refer to <button class="xref-btn" onclick="openXref('50')"><span class="gray-diamond"></span> #50 Pesticide/Nerve</button>
+                  Refer to <button class="xref-btn" onclick="openXref('51')"><span class="gray-diamond"></span> #51 Radiation</button>
+                  Refer to <button class="xref-btn" onclick="openXref('52')"><span class="gray-diamond"></span> #52 Cyanide</button>
                 </div>
               </div>
 
@@ -16141,7 +16143,7 @@ function resetZoom() {
                     <div>•If seizures occur,  as indicated</div>
                     <div>•<strong>GLUCOSE</strong></div>
                     <div>•<strong>DO NOT INDUCE VOMITING.</strong></div>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                       <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                     </button>
                   </div>
@@ -16308,7 +16310,7 @@ function resetZoom() {
                       })}
                       <div style="border:2px solid var(--box-border); padding:10px 14px; margin-bottom:10px;">
                         <div>**Initiate cooling</div>
-                        <div><button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                        <div>Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                           <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                         </button>
                       </div>
@@ -16360,7 +16362,7 @@ function resetZoom() {
                       })}
                       <div style="border:2px solid var(--box-border); padding:10px 14px; margin-bottom:10px;">
                         <div>**Initiate cooling</div>
-                        <div><button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
+                        <div>Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('70')">
                           <span class="gray-diamond"></span> Go to Protocol #70: Pediatric Seizures
                         </button>
                       </div>
@@ -16423,7 +16425,7 @@ function resetZoom() {
               <div style="border:2px solid var(--box-border); padding:12px 16px; margin-bottom:12px;">
                 <div>•Assess airway, ventilation, and respiratory effort</div>
                 <div>•Assess for hypothermia:</div>
-                <div><button class="xref-btn" style="margin-top:6px;" onclick="openXref('74')">
+                <div>Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('74')">
                   <span class="gray-diamond"></span> Go to Protocol #74: Pediatric Cold Emergencies
                 </button>
               </div>
@@ -16466,10 +16468,10 @@ function resetZoom() {
 
                   ${st.patency === 'obstructed' ? `
                     <div style="border:2px solid var(--box-border); padding:12px; text-align:center; margin-top:12px;">
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('67')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('67')">
                         <span class="gray-diamond"></span> Go to Protocol #67: Pediatric Respiratory Arrest
                       </button>
-                      <button class="xref-btn" style="margin-top:6px;" onclick="openXref('62')">
+                      Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('62')">
                         <span class="gray-diamond"></span> Go to Protocol #62: Pediatric Cardiac Arrest
                       </button>
                     </div>
@@ -16482,7 +16484,7 @@ function resetZoom() {
                   ${st.effort === 'adequate' ? `
                     <div style="border:2px solid var(--box-border); padding:12px 16px; margin-bottom:10px;">
                       <div>•Administer 100% <strong>OXYGEN</strong></div>
-                      <div>•Immobilize (as indicated) <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
+                      <div>•Immobilize (as indicated) Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('23')">
                         <span class="gray-diamond"></span> Go to Protocol #23: Spine Injury
                       </button>
                     </div>
@@ -16516,10 +16518,10 @@ function resetZoom() {
                     <br>
                     <strong>OR APPROPRIATE PEDIATRIC<br>DYSRHYTHMIA PROTOCOLS <span class="gray-diamond"></span> #63-65</strong><br>
                     <div style="margin-top:6px;">
-                      <button class="xref-btn" onclick="openXref('70')"><span class="gray-diamond"></span> #70 Peds Seizures</button>
-                      <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> #63 Peds Bradycardia</button>
-                      <button class="xref-btn" onclick="openXref('64')"><span class="gray-diamond"></span> #64 Peds Tachy (Poor Perf.)</button>
-                      <button class="xref-btn" onclick="openXref('65')"><span class="gray-diamond"></span> #65 Peds Tachy (Adeq. Perf.)</button>
+                      Refer to <button class="xref-btn" onclick="openXref('70')"><span class="gray-diamond"></span> #70 Peds Seizures</button>
+                      Refer to <button class="xref-btn" onclick="openXref('63')"><span class="gray-diamond"></span> #63 Peds Bradycardia</button>
+                      Refer to <button class="xref-btn" onclick="openXref('64')"><span class="gray-diamond"></span> #64 Peds Tachy (Poor Perf.)</button>
+                      Refer to <button class="xref-btn" onclick="openXref('65')"><span class="gray-diamond"></span> #65 Peds Tachy (Adeq. Perf.)</button>
                     </div>
                   </div>
 
@@ -16572,7 +16574,7 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                 Treat obvious injuries.<br>
-                <button class="xref-btn" style="margin-top:6px;" onclick="openXref('36')">
+                Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('36')">
                   <span class="gray-diamond"></span> Go to Protocol #36: Pediatric Trauma
                 </button>
               </div>
@@ -16775,10 +16777,10 @@ function resetZoom() {
               </div>
 
               <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
-                <button class="xref-btn" onclick="openXref('21')">
+                Refer to <button class="xref-btn" onclick="openXref('21')">
                   <span class="gray-diamond"></span> Go to Protocol #21: Routine Trauma Care
                 </button>
-                <button class="xref-btn" onclick="openXref('80')">
+                Refer to <button class="xref-btn" onclick="openXref('80')">
                   <span class="gray-diamond"></span> Go to Protocol #80: Refusals of Care
                 </button>
               </div>
@@ -16939,7 +16941,7 @@ function resetZoom() {
               ${st.deny === 'yes' ? `
                 <div style="border:2px solid var(--box-border); padding:14px; text-align:center; font-weight:800; margin-top:12px;">
                   DENY REFUSAL<br>
-                  <button class="xref-btn" onclick="openXref('79')"><span class="gray-diamond"></span> Go to Protocol #79: Adult Restraints &amp; Behavioral</button>
+                  Refer to <button class="xref-btn" onclick="openXref('79')"><span class="gray-diamond"></span> Go to Protocol #79: Adult Restraints &amp; Behavioral</button>
                   </div>
                 </div>
                 <div class="transport-banner">TRANSPORT</div>
@@ -16966,7 +16968,7 @@ function resetZoom() {
                   </div>
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; font-weight:700; margin-top:10px;">
                     Contact <strong style="color:#c00000;">Medical Control</strong> Physician with any questions.<br>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('1')"><span class="gray-diamond"></span> Go to Protocol #1: Initial Medical Care</button>
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('1')"><span class="gray-diamond"></span> Go to Protocol #1: Initial Medical Care</button>
                   </div>
                 </div>
               ` : ''}
@@ -17355,9 +17357,9 @@ function resetZoom() {
                 <div>• Treat hypothermia per <strong>ADULT COLD EMERGENCIES PROTOCOL <span class="gray-diamond"></span> #46</strong></div>
                 <div>• Treat head injury per <strong>HEAD TRAUMA/UNCONSCIOUS PATIENT PROTOCOL <span class="gray-diamond"></span> #24</strong></div>
                 <div style="margin-top:8px;">
-                  <button class="xref-btn" onclick="openXref('54')"><span class="gray-diamond"></span> Go to Protocol #54: Adult Drowning</button>
-                  <button class="xref-btn" onclick="openXref('46')"><span class="gray-diamond"></span> Go to Protocol #46: Adult Cold Emergencies</button>
-                  <button class="xref-btn" onclick="openXref('24')"><span class="gray-diamond"></span> Go to Protocol #24: Head Trauma / Unconscious Patient</button>
+                  Refer to <button class="xref-btn" onclick="openXref('54')"><span class="gray-diamond"></span> Go to Protocol #54: Adult Drowning</button>
+                  Refer to <button class="xref-btn" onclick="openXref('46')"><span class="gray-diamond"></span> Go to Protocol #46: Adult Cold Emergencies</button>
+                  Refer to <button class="xref-btn" onclick="openXref('24')"><span class="gray-diamond"></span> Go to Protocol #24: Head Trauma / Unconscious Patient</button>
                 </div>
               </div>
 
@@ -17388,7 +17390,7 @@ function resetZoom() {
                     <div>• Administer NS in 500 mL increments up to max 1000mL to maintain SBP &gt;90mmHg</div>
                     <div>• If signs or symptoms of tension pneumothorax, needle decompression per <strong>DECOMPRESSION OF TENSION PNEUMOTHORAX PROTOCOL <span class="gray-diamond"></span> #83</strong></div>
                     <div>• Contact <strong style="color:#c00000;">Medical Control</strong> to consider use of CPAP</div>
-                    <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
+                    Refer to <button class="xref-btn" style="margin-top:6px;" onclick="openXref('83')">
                       <span class="gray-diamond"></span> Go to Protocol #83: Decompression of Tension Pneumothorax
                     </button>
                   </div>
