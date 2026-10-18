@@ -2924,8 +2924,9 @@ function resetZoom() {
       const supportContent = (supportHtml && supportHtml.trim())
         ? supportHtml
         : `• Continue ongoing assessment and monitoring.<br>
-           • Prepare equipment and supplies the authorized provider may need.<br>
-           • Assist with positioning, oxygen, and patient comfort as trained.<br>
+           • Prepare and set out equipment and supplies the authorized provider may need (do not apply to the patient).<br>
+           • Do not touch or prepare any medications/drugs.<br>
+           • Assist with positioning and patient comfort as trained.<br>
            • Report any changes in condition immediately.`;
 
       return `
@@ -3093,9 +3094,9 @@ function resetZoom() {
                   </div>
                 `,
                 supportHtml: `
-                  • Attach cardiac monitor / 12-lead electrodes to patient if trained to assist.<br>
-                  • Spike Normal Saline bag / prepare IV start kit and saline lock for EMT-I or Paramedic.<br>
-                  • Prepare Zofran 4mg ODT if patient (&ge; 4 years old) is experiencing nausea.
+                  • Set out cardiac monitor / 12-lead electrodes for EMT-I or Paramedic (do not apply to patient).<br>
+                  • Set out IV start kit and saline lock for EMT-I or Paramedic (do not spike bags or handle fluids).<br>
+                  • Do not handle medications. Notify EMT-I / Paramedic if patient is experiencing nausea.
                 `
               })}
 
@@ -3507,8 +3508,8 @@ function resetZoom() {
                       </div>
                     `,
                     supportHtml: `
-                      • Maintain BVM ventilation at 10–12 breaths/min with 100% Oxygen.<br>
-                      • Insert Supraglottic Airway if within scope or prepare intubation / suction / capnography equipment for EMT-I / Paramedic.
+                      • Continue BVM ventilation only if already within your scope and initiated. Otherwise prepare BVM for authorized provider.<br>
+                      • Prepare intubation / suction / capnography equipment for EMT-I / Paramedic (do not insert advanced airways).
                     `
                   })}
                 </div>
@@ -3942,7 +3943,7 @@ function resetZoom() {
                     </div>
                   `,
                   supportHtml: `
-                    • Place patient on pulse oximeter and blood pressure cuff; obtain baseline vital signs.<br>
+                    • Obtain baseline vital signs if within scope. Set out pulse oximeter and BP cuff for authorized provider (do not apply if not within scope).<br>
                     • Prepare cardiac monitor leads and IV start kit for EMT-I or Paramedic.
                   `
                 })}
@@ -4610,7 +4611,7 @@ function resetZoom() {
                     rightBadge: 'P',
                     stepTitle: 'Cardiac Monitor',
                     unlockedHtml: `<div style="font-weight:800;">• Cardiac Monitor</div>`,
-                    supportHtml: `• Maintain pulse oximetry and assist with nebulized Albuterol 2.5mg &amp; Ipratropium 0.5mg delivery.`
+                    supportHtml: `• Maintain pulse oximetry and do not assist with medication delivery.`
                   })}
                 </div>
 
@@ -4752,7 +4753,7 @@ function resetZoom() {
                     `,
                     supportHtml: `
                       • Maintain calm environment and blow-by / mist oxygen as tolerated.<br>
-                      • Prepare nebulizer kit, Epinephrine (1mg/ml) 1mg, and 2ml Normal Saline for EMT-I / Paramedic.
+                      • Set out nebulizer kit for EMT-I / Paramedic (do not touch medications).
                     `
                   })}
                 </div>
@@ -4831,7 +4832,7 @@ function resetZoom() {
                   </ul>
                 `,
                 supportHtml: `
-                  • Maintain pre-oxygenation and assisted BVM ventilations with 100% O2.<br>
+                  • Continue pre-oxygenation only if within scope. Otherwise prepare BVM and oxygen for authorized provider.<br>
                   • Ensure suction is hooked up and working, and set out supraglottic airway device, needle cricothyrotomy kit, laryngoscope, ET tubes, and waveform capnography for the Paramedic.
                 `
               })}
@@ -5020,7 +5021,7 @@ function resetZoom() {
                     rightBadge: 'P',
                     stepTitle: 'Intubate',
                     unlockedHtml: `<div style="font-weight:900; font-size:1.05rem; text-align:center;">Intubate</div>`,
-                    supportHtml: `• Assist with tube securing, auscultation, and capnography.`
+                    supportHtml: `• Set out tube securing supplies and capnography for EMT-I / Paramedic (do not apply).`
                   })}
                   <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; margin-top:12px;">
                     <div>Ventilate</div>
@@ -5194,7 +5195,7 @@ function resetZoom() {
                   </ul>
                 `,
                 supportHtml: `
-                  • Attempt to ventilate the patient with BVM and 100% O2.<br>
+                  • Prepare BVM and 100% O2 for authorized provider (do not apply if not within scope).<br>
                   • Assemble equipment for EMT-I / Paramedic: large-gauge angiocath (10–14G), empty syringe, antiseptic cleansing prep, #3 ET tube plastic adapter, Ambu bag (BVM), and stethoscope.
                 `
               })}
@@ -5396,7 +5397,7 @@ function resetZoom() {
                   rightBadge: 'P',
                   stepTitle: 'Utilize Waveform Capnography',
                   unlockedHtml: `<div style="text-align:center; font-weight:700;">Utilize waveform capnography, if available</div>`,
-                  supportHtml: `• Support bag-to-trach ventilation and prepare waveform capnography inline adapter for EMT-I / Paramedic.`
+                  supportHtml: `• Prepare waveform capnography inline adapter for EMT-I / Paramedic (do not apply).`
                 })}
               </div>
 
@@ -5554,7 +5555,7 @@ function resetZoom() {
                   rightBadge: 'P',
                   stepTitle: 'Utilize Waveform Capnography',
                   unlockedHtml: `<div style="text-align:center; font-weight:700;">Utilize waveform capnography, if available</div>`,
-                  supportHtml: `• Maintain 15L O2 to tracheostomy/stoma and suction as needed.`
+                  supportHtml: `• Prepare oxygen and suction equipment for authorized provider (do not apply).`
                 })}
               </div>
 
@@ -5617,7 +5618,7 @@ function resetZoom() {
                         rightBadge: 'P',
                         stepTitle: 'ILS/ALS Insert Appropriately Sized ET Tube into Stoma',
                         unlockedHtml: `<div>• ILS/ALS insert appropriately sized ET tube into stoma</div>`,
-                        supportHtml: `• Assist caregiver with changing trach tube or prepare appropriately sized ET tube for EMT-I / Paramedic.`
+                        supportHtml: `• Set out appropriately sized ET tube for EMT-I / Paramedic (do not change trach tube or apply equipment).`
                       })}
                       <ul style="margin:8px 0 0; padding-left:20px;">
                         <li>Reassess patency</li>
@@ -5920,7 +5921,7 @@ function resetZoom() {
                       rightBadge: 'P',
                       stepTitle: 'Cardiac Monitor',
                       unlockedHtml: `<div style="text-align:center; font-weight:800;">Cardiac Monitor</div>`,
-                      supportHtml: `• Attach pediatric cardiac monitor electrodes.`
+                      supportHtml: `• Set out pediatric cardiac monitor electrodes for EMT-I or Paramedic (do not apply to patient).`
                     })}
                   </div>
                   <div style="border:2px solid var(--box-border); border-top:none; background:var(--box-bg); color:var(--box-text); padding:10px 16px; text-align:center; margin-top:-12px;">
@@ -5964,8 +5965,8 @@ function resetZoom() {
                       </ul>
                     `,
                     supportHtml: `
-                      • Perform blood glucose check and administer IN Naloxone / IN Glucagon / Oral Glucose per BLS scope above.<br>
-                      • Prepare IV/IO Normal Saline at TKO for EMT-I / Paramedic.
+                      • Perform blood glucose check per BLS scope. Do not administer medications outside your scope.<br>
+                      • Set out IV/IO supplies for EMT-I / Paramedic (do not handle fluids or medications).
                     `
                   })}
                 </div>
@@ -6031,7 +6032,7 @@ function resetZoom() {
                         rightBadge: 'P',
                         stepTitle: 'Cardiac Monitor',
                         unlockedHtml: `<div style="text-align:center; font-weight:800;">Cardiac Monitor</div>`,
-                        supportHtml: `• Attach pediatric cardiac monitor electrodes.`
+                        supportHtml: `• Set out pediatric cardiac monitor electrodes for EMT-I or Paramedic (do not apply to patient).`
                       })}
                     </div>
                     <div style="border:2px solid var(--box-border); border-top:none; padding:10px 16px; text-align:center; margin-top:-12px;">
@@ -6069,7 +6070,7 @@ function resetZoom() {
                       &nbsp;&nbsp;<strong>3.</strong> To make <strong>D12.5%</strong> from <strong>D50%</strong> follow steps 1 &amp; 2
                     </div>
                   `,
-                  supportHtml: `• Assist EMT-I / Paramedic with sterile water or normal saline for pediatric Dextrose dilution if needed.`
+                  supportHtml: `• Set out sterile water or normal saline for EMT-I / Paramedic (do not handle or dilute medications).`
                 })}
               </div>
             </div>
