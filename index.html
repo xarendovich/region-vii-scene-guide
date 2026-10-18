@@ -2911,6 +2911,7 @@ function resetZoom() {
               </div>
               ${showInlineMcBtn ? renderMcHoldButton(uid, 'Hold 2s: Medical Control (M)') : ''}
               ${needHigherProviderNote}
+              ${(supportHtml && supportHtml.trim()) ? `<div style="width:100%; margin-top:8px; font-size:0.9rem;">While awaiting Medical Control you can:<br>${supportHtml}</div>` : ''}
             </div>
             <div class="provider-sidebar right bg-m">M</div>
           </div>
@@ -2918,19 +2919,27 @@ function resetZoom() {
       }
 
       // Standard I or P Gated Step (Locked for lower-level provider)
-      const badgesHtml = minLevel === 2
-        ? `<span class="mini-badge bg-i">I</span> <span class="mini-badge bg-p">P</span> <span>EMT-I or Paramedic Required</span>`
-        : `<span class="mini-badge bg-p">P</span> <span>Paramedic Required</span>`;
+      // Show what the unauthorized provider can do to support in the meantime
+      const requiredLabel = minLevel === 2 ? 'EMT-I (I) or Paramedic (P)' : 'Paramedic (P)';
+      const supportContent = (supportHtml && supportHtml.trim())
+        ? supportHtml
+        : `• Continue ongoing assessment and monitoring.<br>
+           • Prepare equipment and supplies the authorized provider may need.<br>
+           • Assist with positioning, oxygen, and patient comfort as trained.<br>
+           • Report any changes in condition immediately.`;
 
       return `
         <div class="gated-box-wrapper">
           <div class="provider-sidebar left ${leftClass}">${leftBadge}</div>
           <div class="locked-wait-notice">
             <div class="locked-wait-header">
-              ⏳ Waiting on Higher-Level Provider: ${badgesHtml}
+              🤝 Support the Authorized Provider
             </div>
-            <div style="font-size:0.88rem; color:var(--box-muted);">
-              This step requires an authorized <strong>${minLevel === 2 ? 'EMT-I (I) or Paramedic (P)' : 'Paramedic (P)'}</strong>.
+            <div style="font-size:0.9rem; margin: 6px 0 8px; color:var(--box-text);">
+              This step is performed by <strong>${requiredLabel}</strong>. While waiting, you can support as follows:
+            </div>
+            <div style="font-size:0.92rem; line-height:1.45; color:var(--box-text);">
+              ${supportContent}
             </div>
           </div>
           <div class="provider-sidebar right ${rightClass}">${rightBadge}</div>
