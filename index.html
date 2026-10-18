@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1174,7 +1177,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-general" class="page active">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>General / Initial Assessment</h2></div>
@@ -1238,7 +1241,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-cardiac" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Cardiac Protocols</h2></div>
@@ -1382,7 +1385,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-trauma" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Trauma Protocols</h2></div>
@@ -1618,7 +1621,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-medical" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Medical Emergencies Path</h2></div>
@@ -1803,7 +1806,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-ob" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>OB / GYN Path</h2></div>
@@ -1867,7 +1870,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-pediatric" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Pediatric Path</h2></div>
@@ -2086,7 +2089,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-special" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Special Situations</h2></div>
@@ -2150,7 +2153,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-procedures" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Procedures</h2></div>
@@ -2265,7 +2268,7 @@ body.protocol-open .back-to-cat-btn {
   <div id="gate-appendices" class="page">
     <div class="back-row">
       <div class="back-row-inner">
-        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Gates</button>
+        <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
       </div>
     </div>
     <div class="card"><h2>Appendices A–E</h2></div>
@@ -18060,7 +18063,7 @@ function goToGating() {
 
 function updateBackButton() {
   const openFlow = document.querySelector('.flowchart.show');
-  const label = openFlow ? '← Back to Category' : '← Back to Gates';
+  const label = openFlow ? '← Back to Category' : '← Back to Protocols';
   document.querySelectorAll('.level-back-btn').forEach(btn => {
     btn.textContent = label;
   });
@@ -18149,7 +18152,7 @@ function saveOffline() {
   haptic(10);
   const msg = document.getElementById('offline-msg');
   if (typeof caches !== 'undefined') {
-    caches.open('region7-guide-v2').then(cache => {
+    caches.open('region7-guide-v3').then(cache => {
       return cache.add(window.location.href);
     }).then(() => {
       if (msg) msg.textContent = 'Saved — available offline';
