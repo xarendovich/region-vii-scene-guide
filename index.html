@@ -1050,28 +1050,20 @@ body.protocol-open .back-to-cat-btn {
 
 .note { font-size: 0.94rem; opacity: 0.9; margin-top: 0.85rem; }
 
-/* Temporary glow on newly revealed text after a choice button is pressed */
+/* Temporary glow only on the specific content a decision button just opened */
 @keyframes textGlowFade {
   0% {
-    text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent), 0 0 24px rgba(88,166,255,0.6);
-    filter: brightness(1.25);
-  }
-  40% {
-    text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent);
-    filter: brightness(1.15);
+    text-shadow: 0 0 6px var(--accent), 0 0 10px var(--accent);
+    filter: brightness(1.2);
   }
   100% {
     text-shadow: none;
     filter: brightness(1);
   }
 }
-.glow-new-text,
-.glow-new-text * {
-  animation: textGlowFade 3.2s ease-out forwards;
-}
-.glow-new-section {
-  animation: textGlowFade 3.2s ease-out forwards;
-  border-radius: 8px;
+.glow-new-bit {
+  animation: textGlowFade 1.2s ease-out forwards;
+  border-radius: 4px;
 }
 
 </style>
@@ -2747,10 +2739,10 @@ function resetZoom() {
       }
       window._justChose = true;
       window._lastChoiceKey = key;
-      // Snapshot existing step cards so we can glow only newly opened ones
+      // Snapshot small content bits so we glow only what is newly opened
       const snapRoot = document.getElementById('flow-' + protoId + '-interactive') || document.getElementById('protocol-render-root');
-      window._preChoiceCards = snapRoot
-        ? Array.from(snapRoot.querySelectorAll('.flow-step-card')).map(el => el.innerText.trim().slice(0, 120))
+      window._preChoiceBits = snapRoot
+        ? Array.from(snapRoot.querySelectorAll('p, li, .flow-step-body > div, .choice-btn-title')).map(el => el.innerText.trim()).filter(t => t.length > 8)
         : [];
       renderCurrentProtocol();
       notifyMobileBridge('choice_update');
@@ -18223,27 +18215,27 @@ function renderCurrentProtocol() {
   const flowInteractive = document.getElementById('flow-' + currentProtocolId + '-interactive');
   if (flowInteractive) flowInteractive.innerHTML = renderedHtml;
 
-  // Glow only the content that a decision-tree choice just opened
+  // Glow only the small bits of content that a decision-tree choice just opened
   if (window._justChose) {
     window._justChose = false;
     const root = document.getElementById('flow-' + currentProtocolId + '-interactive') || document.getElementById('protocol-render-root');
     if (root) {
-      const pre = window._preChoiceCards || [];
-      const cards = Array.from(root.querySelectorAll('.flow-step-card'));
-      const newCards = cards.filter(el => {
-        const sig = el.innerText.trim().slice(0, 120);
-        return sig && !pre.includes(sig);
+      const pre = new Set(window._preChoiceBits || []);
+      const bits = Array.from(root.querySelectorAll('p, li, .flow-step-body > div'));
+      const newBits = bits.filter(el => {
+        const t = el.innerText.trim();
+        return t.length > 8 && !pre.has(t) && !el.closest('.choice-btn');
       });
-      // Fallback: if no new card detected, glow the last card (most recently opened)
-      const targets = newCards.length ? newCards : (cards.length ? [cards[cards.length - 1]] : []);
+      // Limit to the first few new bits so it never glows the whole page
+      const targets = newBits.slice(0, 4);
       targets.forEach(el => {
-        el.classList.remove('glow-new-section');
+        el.classList.remove('glow-new-bit');
         void el.offsetWidth;
-        el.classList.add('glow-new-section');
-        setTimeout(() => el.classList.remove('glow-new-section'), 3300);
+        el.classList.add('glow-new-bit');
+        setTimeout(() => el.classList.remove('glow-new-bit'), 1300);
       });
     }
-    window._preChoiceCards = null;
+    window._preChoiceBits = null;
   }
 
   // Hide reset button when protocol has no resettable path state
