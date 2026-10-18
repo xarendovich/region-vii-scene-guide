@@ -24,7 +24,7 @@
   --box-hdr-text: #f8fafc;
   --box-text: #f0f6fc;
   --box-muted: #cbd5e1;
-  --box-border: #64748b;
+  --box-border: #475569;
 
   --box-warn-bg: #2e2105;
   --box-warn-text: #fef08a;
@@ -62,7 +62,7 @@
   --box-hdr-text: #0d1117;
   --box-text: #0d1117;
   --box-muted: #1f2937;
-  --box-border: #0d1117;
+  --box-border: #334155;
 
   --box-warn-bg: #fffbeb;
   --box-warn-text: #451a03;
@@ -165,7 +165,7 @@ header {
   align-items: center;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
   gap: 0.5rem;
 }
@@ -207,7 +207,7 @@ h2 {
   padding: 0.55rem 0.85rem;
   margin: 0 0 0.65rem 0;
   background: var(--card);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 10px;
   font-size: 1.05rem;
   font-weight: 800;
@@ -216,7 +216,7 @@ h2 {
 
 .card {
   background: var(--card);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.15rem;
   margin-bottom: 0.85rem;
@@ -295,7 +295,7 @@ body.protocol-open {
   z-index: 35;
   background: var(--bg);
   padding: 0.45rem 0.6rem calc(0.55rem + env(safe-area-inset-bottom));
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -350,7 +350,7 @@ body.protocol-open {
 
 .theme-toggle {
   background: var(--card);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   color: var(--text);
   padding: 0.4rem 0.65rem;
   border-radius: 10px;
@@ -377,7 +377,7 @@ body:not(.landing) .back-row { display: block !important; }
   z-index: 30;
   background: var(--bg);
   padding: 0.45rem 0.75rem;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
   margin: 0;
 }
@@ -476,7 +476,7 @@ body.protocol-open .back-to-cat-btn {
 .protocol-sheet {
   background: var(--box-bg);
   color: var(--box-text);
-  border: 2px solid var(--box-border);
+  border: 1px solid var(--box-border);
   border-radius: 12px;
   padding: 18px 16px 24px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
@@ -503,7 +503,7 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .smo-title-banner {
-  border: 3px solid var(--box-border);
+  border: 1px solid var(--box-border);
   background: var(--box-sub-bg);
   color: var(--box-text);
   padding: 10px 14px;
@@ -533,7 +533,7 @@ body.protocol-open .back-to-cat-btn {
   border-radius: 10px;
   margin-bottom: 16px;
   font-size: 0.96rem;
-  border: 2px solid var(--box-border);
+  border: 1px solid var(--box-border);
   background: var(--box-sub-bg);
   color: var(--box-text);
 }
@@ -581,7 +581,7 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .flow-step-card {
-  border: 2px solid var(--box-border);
+  border: 1px solid var(--box-border);
   background: var(--box-bg);
   color: var(--box-text);
   margin-bottom: 16px;
@@ -592,7 +592,7 @@ body.protocol-open .back-to-cat-btn {
 
 .flow-step-header {
   background: var(--box-hdr-bg);
-  border-bottom: 2px solid var(--box-border);
+  border-bottom: 1px solid var(--box-border);
   padding: 8px 14px;
   font-size: 0.85rem;
   font-weight: 800;
@@ -613,7 +613,7 @@ body.protocol-open .back-to-cat-btn {
 .gated-box-wrapper {
   display: grid;
   grid-template-columns: 30px 1fr 30px;
-  border: 2px solid var(--box-border);
+  border: 1px solid var(--box-border);
   margin: 12px 0;
   background: var(--box-bg);
   color: var(--box-text);
@@ -634,8 +634,18 @@ body.protocol-open .back-to-cat-btn {
   user-select: none;
 }
 
-.provider-sidebar.left { border-right: 2px solid #0d1117; }
-.provider-sidebar.right { border-left: 2px solid #0d1117; }
+.provider-sidebar.left { border-right: 1px solid rgba(0,0,0,0.25); }
+.provider-sidebar.right { border-left: 1px solid rgba(0,0,0,0.25); }
+
+/* Dull the long horizontal I / P bars so they are less distracting when unlocked */
+.provider-sidebar.bg-i {
+  background-color: #a16207 !important; /* muted amber */
+  color: #fef3c7 !important;
+}
+.provider-sidebar.bg-p {
+  background-color: #1e3a5f !important; /* muted navy */
+  color: #dbeafe !important;
+}
 
 .gated-box-inner {
   padding: 14px 14px;
@@ -670,7 +680,7 @@ body.protocol-open .back-to-cat-btn {
   height: 24px;
   font-weight: 900;
   font-size: 0.85rem;
-  border: 2px solid #0d1117;
+  border: 1px solid rgba(0,0,0,0.4);
   border-radius: 4px;
   line-height: 1;
   flex-shrink: 0;
@@ -680,7 +690,7 @@ body.protocol-open .back-to-cat-btn {
 .decision-prompt {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 2px dashed var(--box-border);
+  border-top: 1px solid var(--box-border);
 }
 
 .decision-label {
