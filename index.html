@@ -1069,6 +1069,10 @@ body.protocol-open .back-to-cat-btn {
 .glow-new-text * {
   animation: textGlowFade 3.2s ease-out forwards;
 }
+.glow-new-section {
+  animation: textGlowFade 3.2s ease-out forwards;
+  border-radius: 8px;
+}
 
 </style>
 </head>
@@ -2742,6 +2746,12 @@ function resetZoom() {
         pathState['75'].patency = null;
       }
       window._justChose = true;
+      window._lastChoiceKey = key;
+      // Snapshot existing step cards so we can glow only newly opened ones
+      const snapRoot = document.getElementById('flow-' + protoId + '-interactive') || document.getElementById('protocol-render-root');
+      window._preChoiceCards = snapRoot
+        ? Array.from(snapRoot.querySelectorAll('.flow-step-card')).map(el => el.innerText.trim().slice(0, 120))
+        : [];
       renderCurrentProtocol();
       notifyMobileBridge('choice_update');
     }
@@ -18213,17 +18223,27 @@ function renderCurrentProtocol() {
   const flowInteractive = document.getElementById('flow-' + currentProtocolId + '-interactive');
   if (flowInteractive) flowInteractive.innerHTML = renderedHtml;
 
-  // Apply temporary glow to newly revealed content after a choice
+  // Glow only the content that a decision-tree choice just opened
   if (window._justChose) {
     window._justChose = false;
-    const containers = document.querySelectorAll('#flow-' + currentProtocolId + '-interactive, #protocol-render-root');
-    containers.forEach(el => {
-      el.classList.remove('glow-new-text');
-      // Force reflow so animation restarts
-      void el.offsetWidth;
-      el.classList.add('glow-new-text');
-      setTimeout(() => el.classList.remove('glow-new-text'), 3300);
-    });
+    const root = document.getElementById('flow-' + currentProtocolId + '-interactive') || document.getElementById('protocol-render-root');
+    if (root) {
+      const pre = window._preChoiceCards || [];
+      const cards = Array.from(root.querySelectorAll('.flow-step-card'));
+      const newCards = cards.filter(el => {
+        const sig = el.innerText.trim().slice(0, 120);
+        return sig && !pre.includes(sig);
+      });
+      // Fallback: if no new card detected, glow the last card (most recently opened)
+      const targets = newCards.length ? newCards : (cards.length ? [cards[cards.length - 1]] : []);
+      targets.forEach(el => {
+        el.classList.remove('glow-new-section');
+        void el.offsetWidth;
+        el.classList.add('glow-new-section');
+        setTimeout(() => el.classList.remove('glow-new-section'), 3300);
+      });
+    }
+    window._preChoiceCards = null;
   }
 
   // Hide reset button when protocol has no resettable path state
