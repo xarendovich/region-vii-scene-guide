@@ -1062,7 +1062,7 @@ body.protocol-open .back-to-cat-btn {
   }
 }
 .glow-new-bit {
-  animation: textGlowFade 1.2s ease-out forwards;
+  animation: textGlowFade 1.5s ease-out forwards;
   border-radius: 4px;
 }
 
@@ -18228,11 +18228,15 @@ function renderCurrentProtocol() {
       });
       // Limit to the first few new bits so it never glows the whole page
       const targets = newBits.slice(0, 4);
-      targets.forEach(el => {
+      targets.forEach((el, idx) => {
         el.classList.remove('glow-new-bit');
         void el.offsetWidth;
         el.classList.add('glow-new-bit');
-        setTimeout(() => el.classList.remove('glow-new-bit'), 1300);
+        setTimeout(() => el.classList.remove('glow-new-bit'), 1600);
+        // Center the screen on the first glowing section
+        if (idx === 0 && el.scrollIntoView) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        }
       });
     }
     window._preChoiceBits = null;
