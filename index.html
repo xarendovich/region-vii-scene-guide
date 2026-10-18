@@ -18017,7 +18017,8 @@ function renderCurrentProtocol() {
       const label = btn.querySelector('.label')?.textContent || ('Protocol ' + currentProtocolId);
       const sub = btn.querySelector('.sub')?.textContent || ('Protocol ' + currentProtocolId);
       bar.innerHTML = `<span>${label}</span><span class="sub">${sub}</span>`;
-      bar.style.display = currentProtocolId === '1' && document.body.classList.contains('landing') ? 'none' : 'flex';
+      // Keep only the in-sheet title header; do not show the second title bar
+      bar.style.display = 'none';
     }
   }
 }
