@@ -1049,6 +1049,27 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .note { font-size: 0.94rem; opacity: 0.9; margin-top: 0.85rem; }
+
+/* Temporary glow on newly revealed text after a choice button is pressed */
+@keyframes textGlowFade {
+  0% {
+    text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent), 0 0 24px rgba(88,166,255,0.6);
+    filter: brightness(1.25);
+  }
+  40% {
+    text-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent);
+    filter: brightness(1.15);
+  }
+  100% {
+    text-shadow: none;
+    filter: brightness(1);
+  }
+}
+.glow-new-text,
+.glow-new-text * {
+  animation: textGlowFade 3.2s ease-out forwards;
+}
+
 </style>
 </head>
 <body data-theme="dark" class="landing">
@@ -2720,6 +2741,7 @@ function resetZoom() {
       if (protoId === '75' && key === 'effort') {
         pathState['75'].patency = null;
       }
+      window._justChose = true;
       renderCurrentProtocol();
       notifyMobileBridge('choice_update');
     }
@@ -18180,6 +18202,19 @@ function renderCurrentProtocol() {
   if (root) root.innerHTML = renderedHtml;
   const flowInteractive = document.getElementById('flow-' + currentProtocolId + '-interactive');
   if (flowInteractive) flowInteractive.innerHTML = renderedHtml;
+
+  // Apply temporary glow to newly revealed content after a choice
+  if (window._justChose) {
+    window._justChose = false;
+    const containers = document.querySelectorAll('#flow-' + currentProtocolId + '-interactive, #protocol-render-root');
+    containers.forEach(el => {
+      el.classList.remove('glow-new-text');
+      // Force reflow so animation restarts
+      void el.offsetWidth;
+      el.classList.add('glow-new-text');
+      setTimeout(() => el.classList.remove('glow-new-text'), 3300);
+    });
+  }
 
   // Hide reset button when protocol has no resettable path state
   const hasReset = protocolHasResettableState(currentProtocolId);
