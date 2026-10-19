@@ -17990,11 +17990,10 @@ function renderCurrentProtocol() {
     }
   });
 
-  // Hide bottom Medical Control button when protocol has no MC
+  // Keep the bottom Medical Control button always available
   const mBtn = document.getElementById('role-m-btn');
   if (mBtn) {
-    const showMc = PROTOCOLS_WITH_MC.has(String(currentProtocolId));
-    mBtn.style.display = showMc ? '' : 'none';
+    mBtn.style.display = '';
   }
 
   // Ensure the corresponding flow-X is visible when navigated via selectProtocol / openXref
