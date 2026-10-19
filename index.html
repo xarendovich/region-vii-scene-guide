@@ -2540,28 +2540,81 @@ function playRecheckAlarm() {
   } catch (_) {}
 }
 
+let timerEndsAt = null;
+let timerAlarmPlayed = false;
+
+function formatTimer(ms) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${s.toString().padStart(2,'0')}`;
+}
+
+function ensureFloatTimer() {
+  let el = document.getElementById('float-timer');
+  if (el) return el;
+  el = document.createElement('button');
+  el.id = 'float-timer';
+  el.type = 'button';
+  el.setAttribute('aria-live', 'polite');
+  el.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:80;min-height:44px;padding:8px 14px;border-radius:999px;border:2px solid #58a6ff;background:#1e293b;color:#f0f6fc;font-weight:800;font-size:1rem;box-shadow:0 4px 12px rgba(0,0,0,0.35);display:none;';
+  el.onclick = () => { if (typeof selectProtocol === 'function') selectProtocol('1'); };
+  document.body.appendChild(el);
+  return el;
+}
+
+function paintTimer() {
+  if (!timerEndsAt) return;
+  const left = timerEndsAt - Date.now();
+  const display = document.getElementById('timer-display');
+  const floater = ensureFloatTimer();
+  if (left <= 0) {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
+    if (display) display.textContent = 'Time’s up — recheck vitals';
+    floater.style.display = 'block';
+    floater.textContent = 'Recheck vitals';
+    if (!timerAlarmPlayed) {
+      timerAlarmPlayed = true;
+      haptic(50);
+      playRecheckAlarm();
+    }
+    try { sessionStorage.removeItem('vitalsTimerEndsAt'); } catch (_) {}
+    return;
+  }
+  const text = formatTimer(left);
+  if (display) display.textContent = text;
+  floater.style.display = 'block';
+  floater.textContent = 'Vitals timer ' + text;
+}
+
 function startTimer(minutes) {
   haptic(10);
   ensureTimerAudio();
+  timerEndsAt = Date.now() + minutes * 60 * 1000;
+  timerAlarmPlayed = false;
+  try { sessionStorage.setItem('vitalsTimerEndsAt', String(timerEndsAt)); } catch (_) {}
   if (timerInterval) clearInterval(timerInterval);
-  let remaining = minutes * 60;
-  function update() {
-    const m = Math.floor(remaining / 60);
-    const s = remaining % 60;
-    const display = document.getElementById('timer-display');
-    if (display) display.textContent = `${m}:${s.toString().padStart(2,'0')}`;
-    if (remaining <= 0) {
-      clearInterval(timerInterval);
-      if (display) display.textContent = 'Time’s up — recheck vitals';
-      haptic(50);
-      playRecheckAlarm();
-      return;
-    }
-    remaining--;
-  }
-  update();
-  timerInterval = setInterval(update, 1000);
+  paintTimer();
+  timerInterval = setInterval(paintTimer, 1000);
 }
+
+function resumeTimer() {
+  try {
+    const saved = sessionStorage.getItem('vitalsTimerEndsAt');
+    if (saved) timerEndsAt = Number(saved);
+  } catch (_) {}
+  if (!timerEndsAt) return;
+  if (timerInterval) clearInterval(timerInterval);
+  paintTimer();
+  if (timerEndsAt > Date.now()) timerInterval = setInterval(paintTimer, 1000);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') resumeTimer();
+});
+window.addEventListener('pageshow', resumeTimer);
+window.addEventListener('load', resumeTimer);
 
 function resetZoom() {
   try {
