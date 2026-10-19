@@ -1116,16 +1116,34 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .transport-banner {
-  border: 2px solid var(--accent);
-  background: var(--box-hdr-bg);
-  color: var(--box-hdr-text);
+  border: none;
+  border-left: 6px solid #0284c7;
+  background: repeating-linear-gradient(90deg, rgba(2,132,199,0.08) 0 8px, rgba(2,132,199,0.16) 8px 9px), rgba(2,132,199,0.1);
+  color: var(--box-text);
+  font-weight: 800;
+  font-size: 1rem;
+  text-align: left;
+  padding: 12px 14px 12px 16px;
+  letter-spacing: 0.04em;
+  margin: 14px 0;
+  border-radius: 0 4px 4px 0;
+  box-shadow: none;
+  cursor: default;
+}
+.transport-banner::before {
+  content: '→ ';
   font-weight: 900;
-  font-size: 1.1rem;
-  text-align: center;
-  padding: 12px;
-  letter-spacing: 0.05em;
-  margin: 12px 0;
-  border-radius: 8px;
+}
+.transport-banner::after {
+  content: '  ·  outcome: transport to hospital';
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  opacity: 0.8;
+}
+[data-theme="light"] .transport-banner {
+  background: repeating-linear-gradient(90deg, rgba(2,132,199,0.06) 0 8px, rgba(2,132,199,0.12) 8px 9px), #e0f2fe;
+  color: #0c4a6e;
 }
 
 .pain-scale-box {
