@@ -2557,7 +2557,8 @@ function ensureFloatTimer() {
   el.id = 'float-timer';
   el.type = 'button';
   el.setAttribute('aria-live', 'polite');
-  el.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:80;min-height:44px;padding:8px 14px;border-radius:999px;border:2px solid #58a6ff;background:#1e293b;color:#f0f6fc;font-weight:800;font-size:1rem;box-shadow:0 4px 12px rgba(0,0,0,0.35);display:none;';
+  el.setAttribute('aria-label', 'Vitals countdown timer');
+  el.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;min-height:48px;width:100%;padding:10px 16px;border:none;border-bottom:3px solid #58a6ff;background:#0f172a;color:#f8fafc;font-weight:900;font-size:1.15rem;letter-spacing:0.03em;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,0.4);display:none;';
   el.onclick = () => { if (typeof selectProtocol === 'function') selectProtocol('1'); };
   document.body.appendChild(el);
   return el;
@@ -2574,6 +2575,7 @@ function paintTimer() {
     if (display) display.textContent = 'Time’s up — recheck vitals';
     floater.style.display = 'block';
     floater.textContent = 'Recheck vitals';
+    document.body.style.paddingTop = '52px';
     if (!timerAlarmPlayed) {
       timerAlarmPlayed = true;
       haptic(50);
@@ -2585,7 +2587,8 @@ function paintTimer() {
   const text = formatTimer(left);
   if (display) display.textContent = text;
   floater.style.display = 'block';
-  floater.textContent = 'Vitals timer ' + text;
+  floater.textContent = 'Vitals countdown  ' + text;
+  document.body.style.paddingTop = '52px';
 }
 
 function startTimer(minutes) {
