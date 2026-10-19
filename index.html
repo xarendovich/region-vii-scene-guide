@@ -3168,6 +3168,10 @@ function resetZoom() {
             </div>
           </div>
 
+          <div style="margin:0 0 16px;">
+            <button type="button" class="gate-btn" style="min-height:48px; width:100%; margin:0; padding:0.85rem 1rem; font-size:1.05rem; text-align:center; font-weight:800;" onclick="goToGating()">ALL PROTOCOLS</button>
+          </div>
+
           <div class="active-gate-banner">
             ${getProviderBannerText()}
             <button class="reset-flow-btn" onclick="resetPath('1')">↺ Reset Walkthrough</button>
@@ -3285,9 +3289,6 @@ function resetZoom() {
                 <p style="margin:6px 0;">
                   <strong>7.</strong> Contact hospital as soon as patient’s condition permits. Transmit assessment information and await orders. If no radio contact can be established or patient’s condition requires immediate treatment, refer to appropriate protocol <span class="gray-diamond" title="Enter from or exit to another protocol"></span> and begin intervention immediately.
                 </p>
-                <div style="margin:8px 0;">
-                  <button type="button" class="gate-btn" style="min-height:56px; margin:0; padding:0.85rem 1rem; font-size:1.05rem; text-align:center; font-weight:800;" onclick="goToGating()">ALL PROTOCOLS</button>
-                </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0 12px;">
                   <button class="xref-btn" style="width:100%; min-height:52px; justify-content:center; text-align:center;" onclick="selectProtocol('2')"><span class="gray-diamond"></span> Protocol #2: Radio Report</button>
                   <button class="xref-btn" style="width:100%; min-height:52px; justify-content:center; text-align:center;" onclick="selectProtocol('3')"><span class="gray-diamond"></span> Protocol #3: Adult Respiratory Distress</button>
