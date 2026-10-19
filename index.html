@@ -18115,6 +18115,7 @@ function renderCurrentProtocol() {
     const pdfOriginal = flowEl ? flowEl.querySelector(':scope > .smo-diagram-details') : null;
     const header = flowInteractive.querySelector('.smo-sheet-header');
     if (pdfOriginal && header && header.parentNode) {
+      pdfOriginal.style.display = '';
       const pdfClone = pdfOriginal.cloneNode(true);
       const summary = pdfClone.querySelector('summary');
       if (summary) {
