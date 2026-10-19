@@ -2339,8 +2339,55 @@ function haptic(ms = 20) {
 }
 
 let timerInterval = null;
+let timerAudioCtx = null;
+
+function ensureTimerAudio() {
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!timerAudioCtx) timerAudioCtx = new Ctx();
+    if (timerAudioCtx.state === 'suspended') timerAudioCtx.resume();
+    return timerAudioCtx;
+  } catch (_) {
+    return null;
+  }
+}
+
+function playRecheckAlarm() {
+  const ctx = ensureTimerAudio();
+  if (ctx) {
+    const beep = (start, freq) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.35, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.36);
+    };
+    const t = ctx.currentTime;
+    beep(t, 880);
+    beep(t + 0.45, 880);
+    beep(t + 0.9, 1100);
+  }
+  try {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance('Recheck vitals');
+      utter.rate = 0.95;
+      utter.lang = 'en-US';
+      window.speechSynthesis.speak(utter);
+    }
+  } catch (_) {}
+}
+
 function startTimer(minutes) {
   haptic(10);
+  ensureTimerAudio();
   if (timerInterval) clearInterval(timerInterval);
   let remaining = minutes * 60;
   function update() {
@@ -2352,6 +2399,7 @@ function startTimer(minutes) {
       clearInterval(timerInterval);
       if (display) display.textContent = 'Time’s up — recheck vitals';
       haptic(50);
+      playRecheckAlarm();
       return;
     }
     remaining--;
