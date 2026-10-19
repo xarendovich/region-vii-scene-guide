@@ -442,21 +442,46 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .smo-diagram-details {
-  margin-top: 1rem;
-  background: var(--box-sub-bg);
-  border: 2px solid var(--box-border);
-  border-radius: 10px;
-  padding: 0.5rem 0.75rem;
+  margin: 12px 0 16px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .smo-diagram-summary {
-  min-height: var(--touch-min);
+  min-height: 48px;
+  min-width: 48px;
   display: flex;
   align-items: center;
-  font-weight: 800;
-  font-size: 1.0rem;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
   cursor: pointer;
-  color: var(--accent);
+  text-align: center;
+  list-style: none;
+  color: #0d1117;
+  background: #f0f6fc;
+  border: 2px solid #0969da;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.smo-diagram-summary::-webkit-details-marker { display: none; }
+.smo-diagram-summary:focus,
+.smo-diagram-summary:focus-visible {
+  outline: 3px solid #0969da;
+  outline-offset: 3px;
+}
+[data-theme="dark"] .smo-diagram-summary {
+  color: #f0f6fc;
+  background: #1f2937;
+  border-color: #58a6ff;
+}
+[data-theme="dark"] .smo-diagram-summary:focus,
+[data-theme="dark"] .smo-diagram-summary:focus-visible {
+  outline-color: #58a6ff;
 }
 
 .smo-diagram-details img {
@@ -18084,13 +18109,27 @@ function renderCurrentProtocol() {
   const flowInteractive = document.getElementById('flow-' + currentProtocolId + '-interactive');
   if (flowInteractive) flowInteractive.innerHTML = renderedHtml;
 
-  // Move the reset / back / protocol-chain banner below the PDF button
+  // Move the PDF flowchart button under the title; keep the reset banner at the bottom
   if (flowInteractive) {
-    const banner = flowInteractive.querySelector('.active-gate-banner');
     const flowEl = document.getElementById('flow-' + currentProtocolId);
-    const pdfDetails = flowEl ? flowEl.querySelector('.smo-diagram-details') : null;
-    if (banner && pdfDetails && pdfDetails.parentNode) {
-      pdfDetails.parentNode.insertBefore(banner, pdfDetails.nextSibling);
+    const pdfOriginal = flowEl ? flowEl.querySelector(':scope > .smo-diagram-details') : null;
+    const header = flowInteractive.querySelector('.smo-sheet-header');
+    if (pdfOriginal && header && header.parentNode) {
+      const pdfClone = pdfOriginal.cloneNode(true);
+      const summary = pdfClone.querySelector('summary');
+      if (summary) {
+        summary.setAttribute('role', 'button');
+        summary.setAttribute('aria-label', summary.textContent.trim() || 'View original flowchart');
+      }
+      header.parentNode.insertBefore(pdfClone, header.nextSibling);
+      pdfOriginal.style.display = 'none';
+    }
+    const banner = flowInteractive.querySelector('.active-gate-banner');
+    const sheet = flowInteractive.querySelector('.protocol-sheet');
+    const endMark = sheet ? sheet.querySelector('.end-of-care') : null;
+    if (banner && sheet) {
+      if (endMark) sheet.insertBefore(banner, endMark);
+      else sheet.appendChild(banner);
     }
   }
 
