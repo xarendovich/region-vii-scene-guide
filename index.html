@@ -18126,9 +18126,11 @@ function renderCurrentProtocol() {
     }
     const banner = flowInteractive.querySelector('.active-gate-banner');
     const sheet = flowInteractive.querySelector('.protocol-sheet');
+    const footer = sheet ? sheet.querySelector('.smo-footer') : null;
     const endMark = sheet ? sheet.querySelector('.end-of-care') : null;
     if (banner && sheet) {
-      if (endMark) sheet.insertBefore(banner, endMark);
+      if (footer) footer.insertAdjacentElement('afterend', banner);
+      else if (endMark) endMark.insertAdjacentElement('afterend', banner);
       else sheet.appendChild(banner);
     }
   }
