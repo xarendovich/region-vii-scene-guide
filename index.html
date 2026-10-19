@@ -3157,21 +3157,13 @@ function resetZoom() {
                   <strong>7.</strong> Contact hospital as soon as patient’s condition permits. Transmit assessment information and await orders. If no radio contact can be established or patient’s condition requires immediate treatment, refer to appropriate protocol <span class="gray-diamond" title="Enter from or exit to another protocol"></span> and begin intervention immediately.
                 </p>
                 <div style="margin:8px 0;">
-                  <button type="button" class="gate-btn" style="min-height:56px; margin:0; padding:0.85rem 1rem; font-size:1.05rem; text-align:center; font-weight:800;" onclick="goToGating()">Open Protocol Breakdown</button>
+                  <button type="button" class="gate-btn" style="min-height:56px; margin:0; padding:0.85rem 1rem; font-size:1.05rem; text-align:center; font-weight:800;" onclick="goToGating()">ALL PROTOCOLS</button>
                 </div>
-                <div style="margin:8px 0 12px 18px;">
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="selectProtocol('2')">
-                    <span class="gray-diamond"></span> Go to Protocol #2: Radio Report
-                  </button></div>
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="selectProtocol('3')">
-                    <span class="gray-diamond"></span> Go to Protocol #3: Adult Respiratory Distress
-                  </button></div>
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="selectProtocol('4')">
-                    <span class="gray-diamond"></span> Go to Protocol #4: Airway Obstruction
-                  </button></div>
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="selectProtocol('5')">
-                    <span class="gray-diamond"></span> Go to Protocol #5: Adult Pain Control
-                  </button></div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 12px;">
+                  <button class="xref-btn" onclick="selectProtocol('2')"><span class="gray-diamond"></span> Protocol #2: Radio Report</button>
+                  <button class="xref-btn" onclick="selectProtocol('3')"><span class="gray-diamond"></span> Protocol #3: Adult Respiratory Distress</button>
+                  <button class="xref-btn" onclick="selectProtocol('4')"><span class="gray-diamond"></span> Protocol #4: Airway Obstruction</button>
+                  <button class="xref-btn" onclick="selectProtocol('5')"><span class="gray-diamond"></span> Protocol #5: Adult Pain Control</button>
                 </div>
 
                 <!-- Remaining Steps 8, 9 & Note highlighted in Red Border Format after Diamond referral -->
