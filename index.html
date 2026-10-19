@@ -658,6 +658,19 @@ body.protocol-open .back-to-cat-btn {
   justify-content: center;
 }
 
+
+.edge-instructions {
+  border: none;
+  background: transparent;
+  margin: 0 -16px 16px;
+  padding: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+.edge-instructions > div {
+  padding: 4px 8px;
+}
+
 .flow-step-card {
   border: 1px solid var(--box-border);
   background: var(--box-bg);
@@ -5037,8 +5050,8 @@ function resetZoom() {
           </div>
 
           <!-- BOX 1 (P ONLY): INDICATIONS & PREPARATION -->
-          <div class="flow-step-card">
-            <div class="flow-step-body">
+          <div class="edge-instructions">
+            <div>
               ${renderGatedBlock({
                 minLevel: 3,
                 leftBadge: 'P',
@@ -5069,8 +5082,8 @@ function resetZoom() {
           </div>
 
           <!-- BOX 2 (P ONLY): ADULTS VS PEDIATRICS SEDATION & ANALGESIA -->
-          <div class="flow-step-card">
-            <div class="flow-step-body">
+          <div class="edge-instructions">
+            <div>
               ${renderGatedDecisionPrompt({
                 minLevel: 3,
                 label: '',
@@ -5135,8 +5148,8 @@ function resetZoom() {
             </div>
           </div>
 
-          <div class="flow-step-card">
-            <div class="flow-step-body">
+          <div class="edge-instructions">
+            <div>
               ${renderGatedBlock({
                 minLevel: 3,
                 leftBadge: 'P',
@@ -17276,8 +17289,8 @@ function resetZoom() {
             <button class="reset-flow-btn" onclick="resetPath('81')">↺ Reset Protocol</button>
           </div>
 
-          <div class="flow-step-card">
-            <div class="flow-step-body" style="line-height:1.55;">
+          <div class="edge-instructions">
+            <div style="line-height:1.55;">
               ${renderGatedBlock({
                 minLevel: 3,
                 leftBadge: 'P',
@@ -17357,8 +17370,8 @@ function resetZoom() {
             <button class="reset-flow-btn" onclick="resetPath('82')">↺ Reset Protocol</button>
           </div>
 
-          <div class="flow-step-card">
-            <div class="flow-step-body" style="line-height:1.55;">
+          <div class="edge-instructions">
+            <div style="line-height:1.55;">
               ${renderGatedBlock({
                 minLevel: 3,
                 leftBadge: 'P',
@@ -17413,8 +17426,8 @@ function resetZoom() {
             <button class="reset-flow-btn" onclick="resetPath('83')">↺ Reset Protocol</button>
           </div>
 
-          <div class="flow-step-card">
-            <div class="flow-step-body" style="line-height:1.55;">
+          <div class="edge-instructions">
+            <div style="line-height:1.55;">
               ${renderGatedBlock({
                 minLevel: 2,
                 leftBadge: 'I',
@@ -17435,7 +17448,7 @@ function resetZoom() {
                 supportHtml: ``
               })}
 
-              <div style="border:2px solid var(--box-border); padding:10px 14px; margin-top:12px;">
+              <div style="padding:10px 14px; margin-top:12px;">
                 <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong><br>
                 For pediatric patients, preferred site is second intercostal space in the mid-clavicular line.<br>
                 For adults, use 14-gauge needle at least 1.5 inches in length.
