@@ -2957,19 +2957,28 @@ function resetZoom() {
 
     // Helper: Render a Pediatric Redirect Banner right below an Adult Protocol Title in smaller letters
     function renderPedsRedirectTop(targetProtoId, targetTitle, secondProtoId = null, secondTitle = null) {
+      if (secondProtoId) {
+        return `
+          <div>
+            <div class="peds-top-redirect" style="display:flex; flex-direction:column; align-items:stretch; gap:8px; width:100%;">
+              <span>👶 For a pediatric patient</span>
+              <button type="button" class="xref-btn" style="width:100%; margin:0;" onclick="openXref('${targetProtoId}')">
+                <span class="gray-diamond" style="width:9px;height:9px;"></span> Protocol #${targetProtoId}: ${targetTitle}
+              </button>
+              <button type="button" class="xref-btn" style="width:100%; margin:0;" onclick="openXref('${secondProtoId}')">
+                <span class="gray-diamond" style="width:9px;height:9px;"></span> Protocol #${secondProtoId}: ${secondTitle || ('Protocol #' + secondProtoId)}
+              </button>
+            </div>
+          </div>
+        `;
+      }
       return `
         <div>
           <div class="peds-top-redirect">
             <span>👶 For a pediatric patient, refer to</span>
             <button type="button" class="xref-btn" onclick="openXref('${targetProtoId}')">
-              <span class="gray-diamond" style="width:9px;height:9px;"></span> Go to Protocol #${targetProtoId}
+              <span class="gray-diamond" style="width:9px;height:9px;"></span> ${targetTitle || ('Protocol #' + targetProtoId)}
             </button>
-            ${secondProtoId ? `
-              <span>or refer to</span>
-              <button type="button" class="xref-btn" onclick="openXref('${secondProtoId}')">
-                <span class="gray-diamond" style="width:9px;height:9px;"></span> ${secondTitle || ('Go to Protocol #' + secondProtoId)}
-              </button>
-            ` : ''}
           </div>
         </div>
       `;
@@ -9552,7 +9561,7 @@ function resetZoom() {
               ADULT VENTRICULAR FIBRILLATION
               <span class="smo-title-sub">PULSELESS VENTRICULAR TACHYCARDIA</span>
             </div>
-            ${renderPedsRedirectTop('64', 'PEDIATRIC TACHYCARDIA PROTOCOLS #64 / #65', '65', 'Go to Protocol #65')}
+            ${renderPedsRedirectTop('64', 'Pediatric Tachycardia with Poor Perfusion', '65', 'Pediatric Tachycardia with Adequate Perfusion')}
           </div>
 
           <div class="active-gate-banner">
@@ -9683,7 +9692,7 @@ function resetZoom() {
               ADULT TACHYCARDIAS
               <span class="smo-title-sub">(WITH PULSE)</span>
             </div>
-            ${renderPedsRedirectTop('64', 'PEDIATRIC TACHYCARDIA PROTOCOLS #64 / #65', '65', 'Go to Protocol #65')}
+            ${renderPedsRedirectTop('64', 'Pediatric Tachycardia with Poor Perfusion', '65', 'Pediatric Tachycardia with Adequate Perfusion')}
           </div>
 
           <div class="active-gate-banner">
