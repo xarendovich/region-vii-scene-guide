@@ -1207,6 +1207,52 @@ body.protocol-open .back-to-cat-btn {
 }
 
 
+
+.comment-board {
+  margin: 18px 0 8px;
+  padding: 14px;
+  border: 1px solid var(--box-border);
+  border-radius: 10px;
+  background: var(--box-bg);
+}
+.comment-board h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.comment-board p.hint { margin: 0 0 10px; color: var(--box-muted); font-size: 0.9rem; }
+.comment-board input, .comment-board textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--box-border);
+  background: var(--box-sub-bg);
+  color: var(--box-text);
+  font: inherit;
+  min-height: 44px;
+}
+.comment-board textarea { min-height: 90px; resize: vertical; }
+.comment-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.comment-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--box-sub-bg);
+}
+.comment-item .meta { font-size: 0.85rem; color: var(--box-muted); margin-bottom: 4px; }
+.comment-item.resolved { opacity: 0.65; }
+.review-page { padding-bottom: 6rem; }
+.review-row {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--box-border);
+  border-radius: 10px;
+  background: var(--box-bg);
+}
+.review-row input[type="checkbox"] { width: 22px; height: 22px; margin-top: 4px; }
+.review-row.resolved { opacity: 0.6; }
+
 .end-of-care {
   display: flex;
   align-items: center;
@@ -1306,6 +1352,9 @@ body.protocol-open .back-to-cat-btn {
   <div id="home" class="page">
     <div class="card">
       <h2 style="text-align:center; font-weight:800;">Emergency Management<br>Quick Guide</h2>
+      <div style="text-align:center; margin: 8px 0 14px;">
+        <button type="button" class="gate-btn" style="display:inline-block; width:auto; min-height:48px;" onclick="openCommentReview()">Comment review</button>
+      </div>
       <p style="text-align:center; margin:0;">Tap a category path below. All 93 Protocols &amp; 5 Appendices are fully connected with zero dead ends.</p>
     </div>
     <button type="button" class="gate-btn" onclick="showPage('gate-general')"><span class="label">General Protocols</span><span class="sub"><span>1 Initial Medical Care</span><span>2 Radio Report</span><span>3 Adult Respiratory Distress</span><span>4 Airway Obstruction</span><span>5 Adult Pain Control</span></span></button>
@@ -2466,6 +2515,18 @@ body.protocol-open .back-to-cat-btn {
   </div>
 
   <!-- Hidden compatibility root for automated state verification -->
+  
+  <div id="comment-review" class="page review-page" style="display:none;">
+    <h2 style="margin:0 0 8px;">Protocol comments</h2>
+    <p style="margin:0 0 12px; color:var(--box-muted);">Check a box when you have resolved that comment.</p>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button type="button" class="gate-btn" style="width:auto; min-height:44px;" onclick="renderCommentReview(false)">Open</button>
+      <button type="button" class="gate-btn" style="width:auto; min-height:44px;" onclick="renderCommentReview(true)">Resolved</button>
+      <button type="button" class="gate-btn" style="width:auto; min-height:44px;" onclick="goToGating()">Back</button>
+    </div>
+    <div id="comment-review-list"></div>
+  </div>
+
   <div id="protocol-render-root" style="display:none;"></div>
   <div id="xref-modal" style="display:none;"><div id="modal-proto-title"></div><div id="modal-proto-body"></div></div>
 </div>
@@ -18248,6 +18309,139 @@ function syncRoleButtonsUI() {
     const txt = medicalControlActive ? '✓ M Control' : 'M Control';
     mLbl.textContent = txt;
     mLbl.setAttribute('data-orig', txt);
+  }
+}
+
+
+const COMMENT_API = 'https://crudcrud.com/api/ad49ed22712446579f79c6004946afb9/comments';
+
+function commentEscape(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+}
+function commentWhen(iso) {
+  try { return new Date(iso).toLocaleString(); } catch (_) { return iso || ''; }
+}
+async function loadComments() {
+  const res = await fetch(COMMENT_API);
+  if (!res.ok) throw new Error('load failed');
+  return await res.json();
+}
+async function postComment(entry) {
+  const res = await fetch(COMMENT_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(entry)
+  });
+  if (!res.ok) throw new Error('post failed');
+  return await res.json();
+}
+async function resolveComment(item, resolved) {
+  const id = item._id;
+  const body = {
+    protocolId: item.protocolId,
+    protocolTitle: item.protocolTitle,
+    name: item.name,
+    text: item.text,
+    createdAt: item.createdAt,
+    resolved: resolved,
+    resolvedAt: resolved ? new Date().toISOString() : null
+  };
+  const res = await fetch(COMMENT_API + '/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error('update failed');
+}
+
+function mountCommentBoard(root) {
+  if (!root) return;
+  const sheet = root.querySelector('.protocol-sheet') || root;
+  const old = sheet.querySelector('.comment-board');
+  if (old) old.remove();
+  const titleEl = sheet.querySelector('.smo-title-banner');
+  const title = titleEl ? titleEl.innerText.replace(/\s+/g, ' ').trim() : ('Protocol ' + currentProtocolId);
+  const board = document.createElement('div');
+  board.className = 'comment-board';
+  board.innerHTML = `
+    <h3>Comments</h3>
+    <p class="hint">Leave a note for this protocol. Other people can read and add comments here.</p>
+    <input id="comment-name" type="text" maxlength="60" placeholder="Your name" autocomplete="name">
+    <textarea id="comment-text" maxlength="1000" placeholder="Comment"></textarea>
+    <button type="button" class="gate-btn" id="comment-post" style="min-height:48px;">Post</button>
+    <div class="comment-list" id="comment-list"><div class="hint">Loading comments…</div></div>
+  `;
+  sheet.appendChild(board);
+  const list = board.querySelector('#comment-list');
+  const renderList = (items) => {
+    const mine = items.filter(c => String(c.protocolId) === String(currentProtocolId) && !c.resolved);
+    if (!mine.length) { list.innerHTML = '<div class="hint">No comments yet.</div>'; return; }
+    list.innerHTML = mine.map(c => `
+      <div class="comment-item">
+        <div class="meta"><strong>${commentEscape(c.name || 'Anonymous')}</strong> · ${commentEscape(commentWhen(c.createdAt))}</div>
+        <div>${commentEscape(c.text)}</div>
+      </div>
+    `).join('');
+  };
+  loadComments().then(renderList).catch(() => { list.innerHTML = '<div class="hint">Comments could not be loaded.</div>'; });
+  board.querySelector('#comment-post').onclick = async () => {
+    const name = board.querySelector('#comment-name').value.trim();
+    const text = board.querySelector('#comment-text').value.trim();
+    if (!name || !text) { list.insertAdjacentHTML('afterbegin', '<div class="hint">Enter a name and a comment.</div>'); return; }
+    try {
+      await postComment({
+        protocolId: String(currentProtocolId),
+        protocolTitle: title,
+        name, text,
+        createdAt: new Date().toISOString(),
+        resolved: false,
+        resolvedAt: null
+      });
+      board.querySelector('#comment-text').value = '';
+      renderList(await loadComments());
+    } catch (_) {
+      list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not post. Try again.</div>');
+    }
+  };
+}
+
+function openCommentReview() {
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = ''; });
+  const page = document.getElementById('comment-review');
+  if (page) { page.style.display = 'block'; page.classList.add('active'); }
+  renderCommentReview(false);
+  if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
+}
+async function renderCommentReview(showResolved) {
+  const list = document.getElementById('comment-review-list');
+  if (!list) return;
+  list.innerHTML = '<div class="hint">Loading…</div>';
+  try {
+    const items = await loadComments();
+    const rows = items
+      .filter(c => Boolean(c.resolved) === Boolean(showResolved))
+      .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+    if (!rows.length) { list.innerHTML = '<div class="hint">No comments.</div>'; return; }
+    list.innerHTML = rows.map(c => `
+      <div class="review-row ${c.resolved ? 'resolved' : ''}">
+        <input type="checkbox" ${c.resolved ? 'checked' : ''} aria-label="Resolved" data-id="${commentEscape(c._id)}">
+        <div>
+          <div><strong>Protocol ${commentEscape(c.protocolId)}</strong> — ${commentEscape(c.protocolTitle || '')}</div>
+          <div class="meta" style="color:var(--box-muted); font-size:0.88rem;">${commentEscape(c.name || 'Anonymous')} · ${commentEscape(commentWhen(c.createdAt))}</div>
+          <div>${commentEscape(c.text)}</div>
+        </div>
+      </div>
+    `).join('');
+    list.querySelectorAll('input[type="checkbox"]').forEach(box => {
+      box.onchange = async () => {
+        const item = items.find(x => x._id === box.dataset.id);
+        if (!item) return;
+        try { await resolveComment(item, box.checked); renderCommentReview(showResolved); }
+        catch (_) { box.checked = !box.checked; }
+      };
+    });
+  } catch (_) {
+    list.innerHTML = '<div class="hint">Could not load comments.</div>';
   }
 }
 
