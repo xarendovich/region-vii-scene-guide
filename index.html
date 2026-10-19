@@ -18221,6 +18221,25 @@ function renderCurrentProtocol() {
       header.parentNode.insertBefore(pdfClone, header.nextSibling);
       pdfOriginal.style.display = 'none';
     }
+    // Move the prehospital-provider note under the PDF button (after any pediatric box in the header)
+    const noteLabel = Array.from(flowInteractive.querySelectorAll('strong, div, span')).find(el =>
+      /^NOTE TO PREHOSPITAL PROVIDERS:?$/i.test((el.textContent || '').trim())
+    );
+    if (noteLabel) {
+      const bordered = noteLabel.closest('[style*="border"]');
+      const card = noteLabel.closest('.flow-step-card, .edge-instructions');
+      let noteBox = bordered || card || noteLabel.parentElement;
+      if (card && bordered && card.contains(bordered) && card !== bordered) {
+        const onlyNote = card.textContent.trim().startsWith('NOTE TO PREHOSPITAL');
+        noteBox = onlyNote ? card : bordered;
+      }
+      const anchor = (pdfOriginal && header && header.nextElementSibling && header.nextElementSibling.classList.contains('smo-diagram-details'))
+        ? header.nextElementSibling
+        : header;
+      if (noteBox && anchor && anchor.parentNode && noteBox !== anchor) {
+        anchor.parentNode.insertBefore(noteBox, anchor.nextSibling);
+      }
+    }
     const banner = flowInteractive.querySelector('.active-gate-banner');
     const sheet = flowInteractive.querySelector('.protocol-sheet');
     const footer = sheet ? sheet.querySelector('.smo-footer') : null;
