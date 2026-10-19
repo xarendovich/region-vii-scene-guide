@@ -476,6 +476,17 @@ body.protocol-open .back-to-cat-btn {
 .bg-p { background-color: var(--para-p-bg) !important; color: var(--para-p-text) !important; }
 .bg-m { background-color: var(--mc-m-bg) !important; color: var(--mc-m-text) !important; }
 
+
+.appc-table th, .appc-table td {
+  padding: 6px 4px;
+  word-break: break-word;
+  border-bottom: 1px solid var(--box-border);
+}
+.appc-table th:first-child, .appc-table td:first-child { width: 46%; text-align: left; }
+.appc-table th:nth-child(2), .appc-table td:nth-child(2),
+.appc-table th:nth-child(3), .appc-table td:nth-child(3),
+.appc-table th:nth-child(4), .appc-table td:nth-child(4) { width: 18%; text-align: center; }
+
 .protocol-sheet {
   background: var(--box-bg);
   color: var(--box-text);
@@ -17697,8 +17708,7 @@ function resetZoom() {
             <button class="reset-flow-btn" onclick="resetPath('AppC')">↺ Reset Appendix</button>
           </div>
 
-          <div style="margin:0 -16px; overflow-x:auto;">
-              <table style="width:100%; border-collapse:collapse; font-size:0.92rem;">
+          <table class="appc-table" style="width:100%; border-collapse:collapse; table-layout:fixed; font-size:0.9rem; margin:0;">
                 <thead>
                   <tr style="background:var(--box-sub-bg); color:var(--box-text);">
                     <th style="padding:6px; text-align:left;">DRUG NAME</th>
@@ -17738,7 +17748,6 @@ function resetZoom() {
                   <tr><td style="padding:5px;">0.9% SODIUM CHLORIDE (NORMAL SALINE)</td><td style="text-align:center;">X</td><td style="text-align:center;">IV/IO</td><td style="text-align:center;">IV/IO</td></tr>
                 </tbody>
               </table>
-          </div>
 
                     <div class="end-of-care"><span>**End of Care**</span></div>
           <div class="smo-footer">
