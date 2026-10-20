@@ -1154,6 +1154,8 @@ body.protocol-open .back-to-cat-btn {
 }
 
 .transport-banner {
+  position: relative;
+  overflow: hidden;
   border: none;
   background:
     repeating-conic-gradient(#1f2937 0% 25%, #f3f4f6 0% 50%) 0 0 / 16px 16px;
@@ -1166,8 +1168,25 @@ body.protocol-open .back-to-cat-btn {
   box-shadow: none;
   cursor: default;
 }
+.transport-banner::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255,255,255,0.28) 8deg,
+    transparent 22deg,
+    transparent 360deg
+  );
+  animation: transport-light 5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
 .transport-banner::before {
   content: 'Transport to hospital';
+  position: relative;
+  z-index: 1;
   display: block;
   background: var(--box-bg);
   color: var(--box-text);
@@ -1177,6 +1196,9 @@ body.protocol-open .back-to-cat-btn {
   letter-spacing: 0.04em;
   padding: 14px 16px;
   border-radius: 3px;
+}
+@keyframes transport-light {
+  to { transform: rotate(360deg); }
 }
 [data-theme="light"] .transport-banner {
   background: repeating-conic-gradient(#111827 0% 25%, #ffffff 0% 50%) 0 0 / 16px 16px;
