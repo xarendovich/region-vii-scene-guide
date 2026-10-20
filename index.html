@@ -1298,6 +1298,25 @@ body.protocol-open .back-to-cat-btn {
 .review-row input[type="checkbox"] { width: 22px; height: 22px; margin-top: 4px; }
 .review-row.resolved { opacity: 0.6; }
 
+
+/* Bold text reads as small caps */
+strong, b,
+h1, h2, h3,
+button,
+.gate-btn, .gate-btn .label,
+.choice-btn, .choice-btn-title,
+.xref-btn, .refer-to-label,
+.smo-title-banner, .smo-proto-num, .smo-cat-label,
+.header-gates-btn, .back-btn,
+.transport-banner, .transport-banner::before,
+[style*="font-weight:700"], [style*="font-weight: 700"],
+[style*="font-weight:800"], [style*="font-weight: 800"],
+[style*="font-weight:900"], [style*="font-weight: 900"],
+[style*="font-weight:bold"] {
+  font-variant: small-caps;
+  font-feature-settings: "smcp";
+}
+
 .end-of-care {
   display: flex;
   align-items: center;
