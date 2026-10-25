@@ -18542,6 +18542,12 @@ setInterval(() => {
 }, 20000);
 async function resolveComment(item, resolved) {
   const id = item._id;
+  const resolvedAt = resolved ? new Date().toISOString() : null;
+  if (item._local || String(id).startsWith('local-')) {
+    const next = localComments().map(c => c._id === id ? Object.assign({}, c, { resolved, resolvedAt }) : c);
+    saveLocalComments(next);
+    return;
+  }
   const body = {
     protocolId: item.protocolId,
     protocolTitle: item.protocolTitle,
@@ -18549,7 +18555,7 @@ async function resolveComment(item, resolved) {
     text: item.text,
     createdAt: item.createdAt,
     resolved: resolved,
-    resolvedAt: resolved ? new Date().toISOString() : null
+    resolvedAt: resolvedAt
   };
   const res = await fetch(COMMENT_API + '/' + id, {
     method: 'PUT',
@@ -18654,10 +18660,19 @@ async function renderCommentReview(showResolved) {
     `).join('');
     list.querySelectorAll('input[type="checkbox"]').forEach(box => {
       box.onchange = async () => {
-        const item = items.find(x => x._id === box.dataset.id);
-        if (!item) return;
-        try { await resolveComment(item, box.checked); renderCommentReview(showResolved); }
-        catch (_) { box.checked = !box.checked; }
+        const item = items.find(x => String(x._id) === String(box.dataset.id));
+        if (!item || box.disabled) return;
+        box.disabled = true;
+        const want = box.checked;
+        try {
+          await resolveComment(item, want);
+          item.resolved = want;
+          renderCommentReview(showResolved);
+        } catch (_) {
+          box.checked = !want;
+          box.disabled = false;
+          list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not update that comment. Try again.</div>');
+        }
       };
     });
   } catch (_) {
