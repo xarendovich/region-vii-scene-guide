@@ -18479,16 +18479,33 @@ function localComments() {
 function saveLocalComments(list) {
   try { localStorage.setItem('r7-comments', JSON.stringify(list)); } catch (_) {}
 }
+function resolvedMemory() {
+  try { return JSON.parse(sessionStorage.getItem('r7-resolved') || '{}'); } catch (_) { return {}; }
+}
+function rememberResolved(id, resolved) {
+  const mem = resolvedMemory();
+  mem[String(id)] = Boolean(resolved);
+  try { sessionStorage.setItem('r7-resolved', JSON.stringify(mem)); } catch (_) {}
+}
+function applyResolvedMemory(list) {
+  const mem = resolvedMemory();
+  return list.map(c => {
+    if (Object.prototype.hasOwnProperty.call(mem, String(c._id))) {
+      return Object.assign({}, c, { resolved: mem[String(c._id)] });
+    }
+    return c;
+  });
+}
 async function loadComments() {
   const local = localComments();
   try {
-    const res = await fetch(COMMENT_API);
+    const res = await fetch(COMMENT_API + '?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('load failed');
     const remote = await res.json();
     const seen = new Set(remote.map(c => c._id));
-    return remote.concat(local.filter(c => c._local && !seen.has(c._id)));
+    return applyResolvedMemory(remote.concat(local.filter(c => c._local && !seen.has(c._id))));
   } catch (_) {
-    return local;
+    return applyResolvedMemory(local);
   }
 }
 async function sendEntry(entry) {
@@ -18543,6 +18560,7 @@ setInterval(() => {
 async function resolveComment(item, resolved) {
   const id = item._id;
   const resolvedAt = resolved ? new Date().toISOString() : null;
+  rememberResolved(id, resolved);
   if (item._local || String(id).startsWith('local-')) {
     const next = localComments().map(c => c._id === id ? Object.assign({}, c, { resolved, resolvedAt }) : c);
     saveLocalComments(next);
@@ -18666,8 +18684,9 @@ async function renderCommentReview(showResolved) {
         const want = box.checked;
         try {
           await resolveComment(item, want);
-          item.resolved = want;
-          renderCommentReview(showResolved);
+          const row = box.closest('.review-row');
+          if (row) row.remove();
+          if (!list.querySelector('.review-row')) list.innerHTML = '<div class="hint">No comments.</div>';
         } catch (_) {
           box.checked = !want;
           box.disabled = false;
