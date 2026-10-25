@@ -18685,8 +18685,9 @@ async function renderCommentReview(showResolved) {
         try {
           await resolveComment(item, want);
           const row = box.closest('.review-row');
-          if (row) row.remove();
-          if (!list.querySelector('.review-row')) list.innerHTML = '<div class="hint">No comments.</div>';
+          if (row) row.classList.toggle('resolved', want);
+          box.checked = want;
+          box.disabled = false;
         } catch (_) {
           box.checked = !want;
           box.disabled = false;
