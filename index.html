@@ -18537,6 +18537,9 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') flushPendingComments();
 });
 window.addEventListener('load', () => { flushPendingComments(); });
+setInterval(() => {
+  if (navigator.onLine && localComments().some(c => c._local)) flushPendingComments();
+}, 20000);
 async function resolveComment(item, resolved) {
   const id = item._id;
   const body = {
