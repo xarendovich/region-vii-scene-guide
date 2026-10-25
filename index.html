@@ -18465,7 +18465,7 @@ function syncRoleButtonsUI() {
 }
 
 
-const COMMENT_API = 'https://crudcrud.com/api/ad49ed22712446579f79c6004946afb9/comments';
+const COMMENT_API = 'https://crudcrud.com/api/d10577a9873e4ddca9c4f301fe9bbd1c/comments';
 
 function commentEscape(s) {
   return String(s || '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
@@ -18473,19 +18473,38 @@ function commentEscape(s) {
 function commentWhen(iso) {
   try { return new Date(iso).toLocaleString(); } catch (_) { return iso || ''; }
 }
+function localComments() {
+  try { return JSON.parse(localStorage.getItem('r7-comments') || '[]'); } catch (_) { return []; }
+}
+function saveLocalComments(list) {
+  try { localStorage.setItem('r7-comments', JSON.stringify(list)); } catch (_) {}
+}
 async function loadComments() {
-  const res = await fetch(COMMENT_API);
-  if (!res.ok) throw new Error('load failed');
-  return await res.json();
+  const local = localComments();
+  try {
+    const res = await fetch(COMMENT_API);
+    if (!res.ok) throw new Error('load failed');
+    const remote = await res.json();
+    const seen = new Set(remote.map(c => c._id));
+    return remote.concat(local.filter(c => c._local && !seen.has(c._id)));
+  } catch (_) {
+    return local;
+  }
 }
 async function postComment(entry) {
-  const res = await fetch(COMMENT_API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(entry)
-  });
-  if (!res.ok) throw new Error('post failed');
-  return await res.json();
+  try {
+    const res = await fetch(COMMENT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+    if (!res.ok) throw new Error('post failed');
+    return await res.json();
+  } catch (_) {
+    const saved = Object.assign({ _id: 'local-' + Date.now(), _local: true }, entry);
+    saveLocalComments(localComments().concat(saved));
+    return saved;
+  }
 }
 async function resolveComment(item, resolved) {
   const id = item._id;
