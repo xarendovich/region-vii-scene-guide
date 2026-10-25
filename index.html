@@ -18589,10 +18589,19 @@ function mountCommentBoard(root) {
     `).join('');
   };
   loadComments().then(renderList).catch(() => { list.innerHTML = '<div class="hint">Comments could not be loaded.</div>'; });
-  board.querySelector('#comment-post').onclick = async () => {
+  const postBtn = board.querySelector('#comment-post');
+  let posting = false;
+  postBtn.onclick = async () => {
+    if (posting) return;
     const name = board.querySelector('#comment-name').value.trim();
     const text = board.querySelector('#comment-text').value.trim();
     if (!name || !text) { list.insertAdjacentHTML('afterbegin', '<div class="hint">Enter a name and a comment.</div>'); return; }
+    const stamp = String(currentProtocolId) + '|' + name + '|' + text;
+    const now = Date.now();
+    if (window._lastCommentStamp === stamp && now - (window._lastCommentAt || 0) < 8000) return;
+    posting = true;
+    postBtn.disabled = true;
+    postBtn.textContent = 'Posting…';
     try {
       await postComment({
         protocolId: String(currentProtocolId),
@@ -18602,10 +18611,16 @@ function mountCommentBoard(root) {
         resolved: false,
         resolvedAt: null
       });
+      window._lastCommentStamp = stamp;
+      window._lastCommentAt = Date.now();
       board.querySelector('#comment-text').value = '';
       renderList(await loadComments());
     } catch (_) {
       list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not post. Try again.</div>');
+    } finally {
+      posting = false;
+      postBtn.disabled = false;
+      postBtn.textContent = 'Post';
     }
   };
 }
