@@ -18491,21 +18491,52 @@ async function loadComments() {
     return local;
   }
 }
+async function sendEntry(entry) {
+  const res = await fetch(COMMENT_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(entry)
+  });
+  if (!res.ok) throw new Error('post failed');
+  return await res.json();
+}
 async function postComment(entry) {
+  const pending = Object.assign({ _id: 'local-' + Date.now(), _local: true }, entry);
+  saveLocalComments(localComments().concat(pending));
   try {
-    const res = await fetch(COMMENT_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(entry)
-    });
-    if (!res.ok) throw new Error('post failed');
-    return await res.json();
-  } catch (_) {
-    const saved = Object.assign({ _id: 'local-' + Date.now(), _local: true }, entry);
-    saveLocalComments(localComments().concat(saved));
+    const saved = await sendEntry(entry);
+    saveLocalComments(localComments().filter(c => c._id !== pending._id));
     return saved;
+  } catch (_) {
+    return pending;
   }
 }
+async function flushPendingComments() {
+  const pending = localComments().filter(c => c._local);
+  if (!pending.length || !navigator.onLine) return;
+  for (const item of pending) {
+    const entry = {
+      protocolId: item.protocolId,
+      protocolTitle: item.protocolTitle,
+      name: item.name,
+      text: item.text,
+      createdAt: item.createdAt,
+      resolved: item.resolved,
+      resolvedAt: item.resolvedAt || null
+    };
+    try {
+      await sendEntry(entry);
+      saveLocalComments(localComments().filter(c => c._id !== item._id));
+    } catch (_) {
+      break;
+    }
+  }
+}
+window.addEventListener('online', () => { flushPendingComments(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') flushPendingComments();
+});
+window.addEventListener('load', () => { flushPendingComments(); });
 async function resolveComment(item, resolved) {
   const id = item._id;
   const body = {
@@ -18549,7 +18580,7 @@ function mountCommentBoard(root) {
     if (!mine.length) { list.innerHTML = '<div class="hint">No comments yet.</div>'; return; }
     list.innerHTML = mine.map(c => `
       <div class="comment-item">
-        <div class="meta"><strong>${commentEscape(c.name || 'Anonymous')}</strong> · ${commentEscape(commentWhen(c.createdAt))}</div>
+        <div class="meta"><strong>${commentEscape(c.name || 'Anonymous')}</strong> · ${commentEscape(commentWhen(c.createdAt))}${c._local ? ' · waiting to send' : ''}</div>
         <div>${commentEscape(c.text)}</div>
       </div>
     `).join('');
