@@ -18465,7 +18465,7 @@ function syncRoleButtonsUI() {
 }
 
 
-const COMMENT_API = 'https://crudcrud.com/api/d10577a9873e4ddca9c4f301fe9bbd1c/comments';
+const COMMENT_API = 'https://crudcrud.com/api/d2465c7a033948ea963ca1f981fcde00/comments';
 
 function commentEscape(s) {
   return String(s || '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
@@ -18554,9 +18554,7 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') flushPendingComments();
 });
 window.addEventListener('load', () => { flushPendingComments(); });
-setInterval(() => {
-  if (navigator.onLine && localComments().some(c => c._local)) flushPendingComments();
-}, 20000);
+
 async function resolveComment(item, resolved) {
   const id = item._id;
   const resolvedAt = resolved ? new Date().toISOString() : null;
