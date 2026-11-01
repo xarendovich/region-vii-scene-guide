@@ -3141,6 +3141,7 @@ function resetZoom() {
       }
       previousProtocolId = navHistoryStack.length > 0 ? navHistoryStack[navHistoryStack.length - 1] : null;
       currentProtocolId = targetStr;
+      recordProtocolView(targetStr);
       document.querySelectorAll('.proto-tab-btn').forEach(b => b.classList.remove('active'));
       const activeTab = document.getElementById('tab-' + currentProtocolId);
       if (activeTab) activeTab.classList.add('active');
@@ -18911,6 +18912,55 @@ function applyPdfOnlyMode(flowInteractive) {
     e.preventDefault();
   }, { passive: false });
 })();
+
+
+function todayKey() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function loadMetrics() {
+  try { return JSON.parse(localStorage.getItem('r7-metrics') || '{}'); } catch (_) { return {}; }
+}
+function saveMetrics(data) {
+  try { localStorage.setItem('r7-metrics', JSON.stringify(data)); } catch (_) {}
+}
+let lastMetric = { id: '', at: 0 };
+function recordProtocolView(protoId) {
+  const id = String(protoId || '').replace(/^flow-/, '');
+  if (!id) return;
+  const now = Date.now();
+  if (lastMetric.id === id && now - lastMetric.at < 2000) return;
+  lastMetric = { id, at: now };
+  const data = loadMetrics();
+  const day = todayKey();
+  if (!data[day]) data[day] = {};
+  data[day][id] = (data[day][id] || 0) + 1;
+  saveMetrics(data);
+}
+function openMetrics() {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  let page = document.getElementById('metrics-page');
+  if (!page) {
+    page = document.createElement('div');
+    page.id = 'metrics-page';
+    page.className = 'page review-page';
+    page.innerHTML = '<h2 style="text-align:center;">Protocol views</h2><p class="hint" style="text-align:center;">Counts on this phone only. A temporary site has no server to combine every phone.</p><div id="metrics-list"></div><button type="button" class="gate-btn" onclick="showPage(\'home\')">Back to home</button>';
+    document.body.appendChild(page);
+  }
+  page.style.display = '';
+  const data = loadMetrics();
+  const day = todayKey();
+  const today = data[day] || {};
+  const totals = {};
+  Object.values(data).forEach(dayMap => {
+    Object.entries(dayMap).forEach(([id, n]) => { totals[id] = (totals[id] || 0) + n; });
+  });
+  const ids = Object.keys(totals).sort((a, b) => (totals[b] - totals[a]) || String(a).localeCompare(String(b)));
+  const list = document.getElementById('metrics-list');
+  if (!ids.length) { list.innerHTML = '<div class="hint">No protocol pages opened yet.</div>'; return; }
+  list.innerHTML = '<div class="review-row"><div><strong>Protocol</strong></div><div><strong>Today</strong></div><div><strong>All days</strong></div></div>' +
+    ids.map(id => `<div class="review-row"><div>Protocol ${id}</div><div>${today[id] || 0}</div><div>${totals[id]}</div></div>`).join('');
+}
 
 function renderCurrentProtocol() {
   syncRoleButtonsUI();
