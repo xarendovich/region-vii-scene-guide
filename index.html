@@ -18874,12 +18874,27 @@ function applyPdfOnlyMode(flowInteractive) {
     const img = pdf.querySelector('img');
     if (img) img.style.display = 'block';
   }
+  const links = Array.from(sheet.querySelectorAll('button.xref-btn, a.xref-btn'));
   Array.from(sheet.children).forEach(el => {
-    const keep = el.classList.contains('smo-sheet-header') || el.classList.contains('smo-diagram-details');
+    const keep = el.classList.contains('smo-sheet-header') || el.classList.contains('smo-diagram-details') || el.classList.contains('pdf-only-links');
     if (!keep) el.style.display = 'none';
   });
   sheet.querySelectorAll('.peds-top-redirect, .comment-board, .active-gate-banner').forEach(el => {
     el.style.display = 'none';
+  });
+  if (!links.length) return;
+  let stack = sheet.querySelector('.pdf-only-links');
+  if (!stack) {
+    stack = document.createElement('div');
+    stack.className = 'pdf-only-links';
+    stack.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin:14px 0 8px;';
+    if (pdf && pdf.parentNode) pdf.parentNode.insertBefore(stack, pdf.nextSibling);
+    else sheet.appendChild(stack);
+  }
+  links.forEach(btn => {
+    btn.style.display = '';
+    btn.style.width = '100%';
+    stack.appendChild(btn);
   });
 }
 
