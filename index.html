@@ -18921,6 +18921,30 @@ function renderCurrentProtocol() {
       }
       header.parentNode.insertBefore(pdfClone, header.nextSibling);
       pdfOriginal.style.display = 'none';
+      pdfClone.open = true;
+    }
+    if (!flowInteractive.querySelector('.smo-diagram-details')) {
+      const sheet = flowInteractive.querySelector('.protocol-sheet') || flowInteractive;
+      const header = sheet.querySelector('.smo-sheet-header');
+      const page = document.createElement('details');
+      page.className = 'smo-diagram-details';
+      page.open = true;
+      const summary = document.createElement('summary');
+      summary.className = 'smo-diagram-summary';
+      summary.textContent = 'View page';
+      const body = document.createElement('div');
+      body.className = 'embedded-page';
+      page.appendChild(summary);
+      page.appendChild(body);
+      const anchor = header || sheet.firstElementChild;
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(page, anchor.nextSibling);
+      else sheet.appendChild(page);
+      Array.from(sheet.children).forEach(el => {
+        if (el === header || el === page || el.classList.contains('smo-sheet-header')) return;
+        body.appendChild(el);
+      });
+    } else {
+      flowInteractive.querySelectorAll('.smo-diagram-details').forEach(d => { d.open = true; });
     }
     // Move the prehospital-provider note under the PDF button (after any pediatric box in the header)
     const noteLabel = Array.from(flowInteractive.querySelectorAll('strong, div, span')).find(el =>
