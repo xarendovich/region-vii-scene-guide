@@ -19203,6 +19203,7 @@ function toggleFlow(flowId) {
     const bar = document.getElementById('protocol-bar');
     if (bar) bar.style.display = 'none';
   } else {
+    recordProtocolView(protoId);
     if (page) {
       page.querySelectorAll(':scope > .gate-btn').forEach(b => b.style.display = 'none');
     }
