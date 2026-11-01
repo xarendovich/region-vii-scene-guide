@@ -325,18 +325,48 @@ body.protocol-open {
   align-items: center;
   justify-content: center;
   background: #111827;
-  color: #f8fafc;
-  border: none;
   border-top: 3px solid #fca5a5;
-  font-weight: 900;
-  font-size: 1.15rem;
-  letter-spacing: 0.03em;
-  padding: 0.6rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+  padding: 0.55rem 0.8rem calc(0.65rem + env(safe-area-inset-bottom));
   box-shadow: 0 -6px 16px rgba(0,0,0,0.45);
+  touch-action: none;
 }
 body:not(.pdf-locked) .bottom-lock-overlay { display: none; }
-.bottom-lock-btn { display: none; }
-body:not(.pdf-locked) .bottom-lock-btn { display: inline-flex; }
+.slide-track {
+  position: relative;
+  width: min(420px, 100%);
+  height: 52px;
+  border-radius: 999px;
+  background: #1f2937;
+  border: 2px solid #fca5a5;
+  overflow: hidden;
+}
+.slide-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f8fafc;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+.slide-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: #f8fafc;
+  color: #111827;
+  font-weight: 900;
+  font-size: 1.2rem;
+  touch-action: none;
+}
+.tap-lock-btn { display: none; }
+body:not(.pdf-locked) .tap-lock-btn { display: inline-flex; }
 
 .bottom-controls {
   position: fixed;
@@ -1464,10 +1494,14 @@ button,
   <div id="role-placeholder" class="role-placeholder" style="display:none;"></div>
 
   <!-- FIXED BOTTOM PROVIDER ROLE CONTROLS & THEME TOGGLE (WCAG AAA, GLOVE READY) -->
-  <button type="button" id="bottom-lock-overlay" class="bottom-lock-overlay" onclick="togglePdfLock()">Locked — tap to unlock</button>
+  <div id="bottom-lock-overlay" class="bottom-lock-overlay">
+    <div class="slide-track" id="slide-track">
+      <span class="slide-label">Slide to unlock</span>
+      <button type="button" class="slide-knob" id="slide-knob" aria-label="Slide to unlock">›</button>
+    </div>
+  </div>
   <div id="bottom-controls" class="bottom-controls">
     <div class="role-group" id="role-group" role="group" aria-label="Provider Level and Medical Control Selector">
-      <button type="button" class="role-btn bottom-lock-btn" onclick="togglePdfLock()">Lock</button>
       <button type="button" class="role-btn role-b active" data-role="B" id="gate-btn-1" onclick="selectRole('B')">B EMT</button>
       <button type="button" class="role-btn role-i" data-role="I" id="gate-btn-2" onclick="selectRole('I')">I EMT-I</button>
       <button type="button" class="role-btn role-p" data-role="P" id="gate-btn-3" onclick="selectRole('P')">P Paramedic</button>
@@ -1486,6 +1520,7 @@ button,
         <span id="bottom-mc-lbl" data-orig="M Control" style="position:relative; z-index:1;">M Control</span>
       </button>
     </div>
+    <button type="button" class="theme-toggle tap-lock-btn" onclick="togglePdfLock()" aria-label="Lock protocol pages">Lock</button>
     <button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark or light theme">☾</button>
   </div>
 
@@ -18760,6 +18795,51 @@ try {
   pdfOnlyLocked = saved === null ? true : saved === '1';
 } catch (_) {}
 
+
+function setupSlideUnlock() {
+  const track = document.getElementById('slide-track');
+  const knob = document.getElementById('slide-knob');
+  if (!track || !knob || knob.dataset.ready) return;
+  knob.dataset.ready = '1';
+  let startX = 0;
+  let dragging = false;
+  const max = () => Math.max(0, track.clientWidth - knob.offsetWidth - 6);
+  const setX = (x) => { knob.style.transform = 'translateX(' + x + 'px)'; };
+  const finish = (x) => {
+    if (x > max() * 0.72) {
+      setX(max());
+      togglePdfLock();
+      setTimeout(() => setX(0), 250);
+    } else {
+      setX(0);
+    }
+  };
+  const down = (e) => {
+    dragging = true;
+    startX = (e.touches ? e.touches[0].clientX : e.clientX) - (parseFloat(knob.style.transform.replace(/[^\d.-]/g, '')) || 0);
+    knob.setPointerCapture && e.pointerId != null && knob.setPointerCapture(e.pointerId);
+  };
+  const move = (e) => {
+    if (!dragging) return;
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
+    setX(Math.min(max(), Math.max(0, x)));
+    if (e.cancelable) e.preventDefault();
+  };
+  const up = () => {
+    if (!dragging) return;
+    dragging = false;
+    const x = parseFloat(knob.style.transform.replace(/[^\d.-]/g, '')) || 0;
+    finish(x);
+  };
+  knob.addEventListener('pointerdown', down);
+  knob.addEventListener('pointermove', move);
+  knob.addEventListener('pointerup', up);
+  knob.addEventListener('pointercancel', up);
+  knob.addEventListener('touchstart', down, { passive: true });
+  knob.addEventListener('touchmove', move, { passive: false });
+  knob.addEventListener('touchend', up);
+}
+
 function updateLockSwitch() {
   document.body.classList.toggle('pdf-locked', pdfOnlyLocked);
   const btn = document.getElementById('pdf-lock-btn');
@@ -19151,6 +19231,7 @@ function initAllProtocols() {
 }
 
 updateLockSwitch();
+setupSlideUnlock();
 initAllProtocols();
 </script>
 </body>
