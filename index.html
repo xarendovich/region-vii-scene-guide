@@ -1339,6 +1339,34 @@ button,
   font-feature-settings: "smcp";
 }
 
+
+.lock-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--box-border);
+  border-radius: 12px;
+  background: var(--box-bg);
+}
+.lock-switch .lock-label { font-weight: 800; font-size: 1.05rem; }
+.lock-switch button {
+  min-height: 48px;
+  min-width: 140px;
+  border-radius: 999px;
+  border: 2px solid #58a6ff;
+  background: #1e293b;
+  color: #f8fafc;
+  font-weight: 800;
+  font-size: 1rem;
+}
+.lock-switch button.locked {
+  background: #7f1d1d;
+  border-color: #fca5a5;
+}
+
 .end-of-care {
   display: flex;
   align-items: center;
@@ -18698,6 +18726,51 @@ async function renderCommentReview(showResolved) {
   }
 }
 
+
+let pdfOnlyLocked = false;
+try { pdfOnlyLocked = localStorage.getItem('r7-pdf-lock') === '1'; } catch (_) {}
+
+function updateLockSwitch() {
+  const btn = document.getElementById('pdf-lock-btn');
+  const label = document.getElementById('pdf-lock-label');
+  const hint = document.getElementById('pdf-lock-hint');
+  if (!btn) return;
+  btn.classList.toggle('locked', pdfOnlyLocked);
+  btn.setAttribute('aria-pressed', pdfOnlyLocked ? 'true' : 'false');
+  btn.textContent = pdfOnlyLocked ? 'Locked' : 'Unlocked';
+  if (label) label.textContent = pdfOnlyLocked ? 'Locked' : 'Unlocked';
+  if (hint) hint.textContent = pdfOnlyLocked ? 'Protocol pages show the PDF only' : 'Full protocol pages';
+}
+
+function togglePdfLock() {
+  pdfOnlyLocked = !pdfOnlyLocked;
+  try { localStorage.setItem('r7-pdf-lock', pdfOnlyLocked ? '1' : '0'); } catch (_) {}
+  updateLockSwitch();
+  if (typeof renderCurrentProtocol === 'function' && typeof currentProtocolId !== 'undefined' && currentProtocolId) {
+    renderCurrentProtocol();
+  }
+}
+
+function applyPdfOnlyMode(flowInteractive) {
+  if (!flowInteractive || !pdfOnlyLocked) return;
+  const sheet = flowInteractive.querySelector('.protocol-sheet') || flowInteractive;
+  const pdf = sheet.querySelector('.smo-diagram-details');
+  if (pdf) {
+    pdf.open = true;
+    const summary = pdf.querySelector('summary');
+    if (summary) summary.style.display = 'none';
+    const img = pdf.querySelector('img');
+    if (img) img.style.display = 'block';
+  }
+  Array.from(sheet.children).forEach(el => {
+    const keep = el.classList.contains('smo-sheet-header') || el.classList.contains('smo-diagram-details');
+    if (!keep) el.style.display = 'none';
+  });
+  sheet.querySelectorAll('.peds-top-redirect, .comment-board, .active-gate-banner').forEach(el => {
+    el.style.display = 'none';
+  });
+}
+
 function renderCurrentProtocol() {
   syncRoleButtonsUI();
   const renderedHtml = getProtocolRenderHtml(currentProtocolId);
@@ -19044,6 +19117,7 @@ function initAllProtocols() {
   updateBackButton();
 }
 
+updateLockSwitch();
 initAllProtocols();
 </script>
 </body>
