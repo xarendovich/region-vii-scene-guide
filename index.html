@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18898,6 +18898,20 @@ function applyPdfOnlyMode(flowInteractive) {
   });
 }
 
+
+(function () {
+  let lastTap = 0;
+  document.addEventListener('touchend', function (e) {
+    const btn = e.target.closest('button, summary, .gate-btn, .xref-btn, .choice-btn');
+    if (!btn || btn.disabled || btn.id === 'slide-knob' || btn.closest('#bottom-lock-overlay')) return;
+    const now = Date.now();
+    if (now - lastTap < 400) { e.preventDefault(); return; }
+    lastTap = now;
+    btn.click();
+    e.preventDefault();
+  }, { passive: false });
+})();
+
 function renderCurrentProtocol() {
   syncRoleButtonsUI();
   const renderedHtml = getProtocolRenderHtml(currentProtocolId);
@@ -18929,9 +18943,11 @@ function renderCurrentProtocol() {
       const page = document.createElement('details');
       page.className = 'smo-diagram-details';
       page.open = true;
+      page.setAttribute('open', '');
       const summary = document.createElement('summary');
       summary.className = 'smo-diagram-summary';
-      summary.textContent = 'View page';
+      summary.textContent = 'Appendix page';
+      summary.style.display = 'none';
       const body = document.createElement('div');
       body.className = 'embedded-page';
       page.appendChild(summary);
