@@ -447,7 +447,25 @@ body:not(.pdf-locked) .tap-lock-btn { display: inline-flex; }
 }
 
 /* Fixed Back Button Row (Docked directly above Bottom Role Controls) */
-body.landing .back-row { display: none !important; }
+body.landing 
+.global-back-btn {
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(68px + env(safe-area-inset-bottom));
+  z-index: 45;
+  display: none;
+  min-height: 48px;
+  border-radius: 12px;
+  border: 2px solid #58a6ff;
+  background: #1e293b;
+  color: #f8fafc;
+  font-weight: 800;
+  font-size: 1rem;
+}
+body.protocol-open .global-back-btn { display: flex; align-items: center; justify-content: center; }
+
+.back-row { display: none !important; }
 body:not(.landing) .back-row { display: block !important; }
 
 .back-row {
@@ -3142,6 +3160,7 @@ function resetZoom() {
       previousProtocolId = navHistoryStack.length > 0 ? navHistoryStack[navHistoryStack.length - 1] : null;
       currentProtocolId = targetStr;
       recordProtocolView(targetStr);
+      showProtocolPage(targetStr);
       document.querySelectorAll('.proto-tab-btn').forEach(b => b.classList.remove('active'));
       const activeTab = document.getElementById('tab-' + currentProtocolId);
       if (activeTab) activeTab.classList.add('active');
@@ -19150,6 +19169,21 @@ function showPage(id) {
 function goToGating() {
   haptic(10);
   showPage('home');
+}
+
+
+function showProtocolPage(protoId) {
+  const flow = document.getElementById('flow-' + protoId);
+  if (!flow) return;
+  const page = flow.closest('.page');
+  document.querySelectorAll('.page').forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
+  if (page) { page.style.display = ''; page.classList.add('active'); }
+  document.querySelectorAll('.flowchart.show').forEach(f => f.classList.remove('show'));
+  flow.classList.add('show');
+  if (page) page.querySelectorAll(':scope > .gate-btn').forEach(b => b.style.display = 'none');
+  document.body.classList.add('protocol-open');
+  document.body.classList.remove('landing');
+  updateBackButton();
 }
 
 function updateBackButton() {
