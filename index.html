@@ -1543,7 +1543,7 @@ button,
   </div>
 
   <!-- HOME CATEGORY GATES -->
-  <div id="home" class="page">
+  <div id="home" class="page active">
     <div class="card">
       <h2 style="text-align:center; font-weight:800;">Emergency Management<br>Quick Guide</h2>
       <div style="text-align:center; margin: 8px 0 14px;">
@@ -1564,7 +1564,7 @@ button,
   </div>
 
   <!-- CATEGORY GATE PAGES & FLOWCHARTS -->
-  <div id="gate-general" class="page active">
+  <div id="gate-general" class="page">
     <div class="back-row">
       <div class="back-row-inner">
         <button type="button" class="back-btn level-back-btn" onclick="closeCurrentFlow()">← Back to Protocols</button>
@@ -19354,17 +19354,12 @@ function initAllProtocols() {
   setProviderGate(1);
   if (document.body && document.body.classList) {
     document.body.classList.add('landing');
-    document.body.classList.add('protocol-open');
+    document.body.classList.remove('protocol-open');
   }
-  const gen = document.getElementById('gate-general');
-  if (gen && gen.classList) {
-    gen.classList.add('active');
-    if (gen.querySelectorAll) {
-      gen.querySelectorAll(':scope > .gate-btn').forEach(b => b.style.display = 'none');
-    }
-  }
-  const f1 = document.getElementById('flow-1');
-  if (f1 && f1.classList) f1.classList.add('show');
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+  document.querySelectorAll('.flowchart.show').forEach(f => f.classList.remove('show'));
+  const home = document.getElementById('home');
+  if (home) { home.classList.add('active'); home.style.display = ''; }
   const bar = document.getElementById('protocol-bar');
   if (bar) bar.style.display = 'none';
   updateBackButton();
