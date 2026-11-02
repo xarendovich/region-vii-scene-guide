@@ -18919,18 +18919,6 @@ function applyPdfOnlyMode(flowInteractive) {
 }
 
 
-(function () {
-  let lastTap = 0;
-  document.addEventListener('touchend', function (e) {
-    const btn = e.target.closest('button, summary, .gate-btn, .xref-btn, .choice-btn');
-    if (!btn || btn.disabled || btn.id === 'slide-knob' || btn.closest('#bottom-lock-overlay')) return;
-    const now = Date.now();
-    if (now - lastTap < 400) { e.preventDefault(); return; }
-    lastTap = now;
-    btn.click();
-    e.preventDefault();
-  }, { passive: false });
-})();
 
 
 function todayKey() {
@@ -19142,6 +19130,16 @@ function selectRole(role) {
   else if (role === 'M') setMedicalControlGate(!medicalControlActive);
 }
 
+
+let pageChangedAt = 0;
+function markPageChange() { pageChangedAt = Date.now(); }
+document.addEventListener('click', function (e) {
+  if (Date.now() - pageChangedAt < 450) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);
+
 function showPage(id) {
   haptic(15);
   resetZoom();
@@ -19157,11 +19155,12 @@ function showPage(id) {
   if (ph) ph.style.display = 'none';
   document.querySelectorAll('.gate-btn').forEach(b => b.style.display = '');
   document.querySelectorAll('.flowchart.show').forEach(f => f.classList.remove('show'));
-  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = ''; });
+  markPageChange();
+  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
   const el = document.getElementById(id);
   if (el) {
     el.classList.add('active');
-    el.style.display = '';
+    el.style.display = 'block';
     if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
   }
   updateBackButton();
