@@ -11704,6 +11704,7 @@ function resetZoom() {
                   <div>• Carotid pulses</div>
                   <div style="padding-left:14px;">If absent: CPR, minimize scene time</div>
                   <div>• Tracheal deviation</div>
+                  <div>• JVD (Refer to Chest Trauma Protocol #31)</div>
                 </div>
                 <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('25')"><span class="gray-diamond"></span> Protocol #25: Traumatic Cardiopulmonary Arrest</button></div>
                 <div class="refer-to-row"><button class="xref-btn" onclick="openXref('31')"><span class="gray-diamond"></span> Protocol #31: Chest Trauma</button></div>
@@ -12101,8 +12102,61 @@ function resetZoom() {
 
               <div style="border:2px solid var(--box-border); padding:10px 14px; margin-top:14px;">
                 <strong style="text-decoration:underline;">NOTE TO PREHOSPITAL PROVIDERS:</strong><br>
-                1. If IV/IO attempt is unsuccessful,  as soon as possible.</p>
-              <div class="transport-banner">TRANSPORT</div>
+                1. If IV/IO attempt is unsuccessful, refer to <strong>APPROPRIATE DYSRHYTHMIA PROTOCOL</strong>.<br>
+                <strong>Reminder: Defibrillation does not require an IV.</strong><br>
+                <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:6px;" onclick="openXref('11')">
+                  <span class="gray-diamond"></span> Protocol #11: Adult VF / Pulseless VT
+                </button><button class="xref-btn" style="margin-top:6px;" onclick="openXref('14')">
+                  <span class="gray-diamond"></span> Protocol #14: Adult PEA / Asystole
+                </button></div>
+                2. Consider bilateral chest decompression in Blunt Trauma.
+              </div>
+            </div>
+          </div>
+
+                    <div class="end-of-care"><span>**End of Care**</span></div>
+          <div class="smo-footer">
+            <span>Region 7 Standing Medical Orders — Protocol 25 (Page 32 of PDF)</span>
+            <span>Revised: 12/01/24 &nbsp;|&nbsp; Effective: 05/01/98</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // PROTOCOL 26 RENDERER (Page 33 — ACCELERATED TRANSPORT "CODE 26")
+    // Text copied from the Region 7 SMO scan, revised 12/01/24. All levels + Medical Control.
+    // =========================================================================
+    function renderProtocol26() {
+      return `
+        <div class="protocol-sheet">
+          <div class="smo-sheet-header">
+            <div class="smo-cat-label" style="color:#c00000;">TRAUMA</div>
+            <div class="smo-proto-num">Protocol 26</div>
+            <div class="smo-title-banner" style="border-color:#c00000;">
+              ACCELERATED TRANSPORT
+              <span class="smo-title-sub">“CODE 26”</span>
+            </div>
+          </div>
+
+          <div class="active-gate-banner">
+            ${getProviderBannerText()}
+          </div>
+
+          <div class="flow-step-card">
+            <div class="flow-step-body">
+              <div style="border:2px solid var(--box-border); padding:12px 16px; line-height:1.6;">
+                <p style="margin:0 0 10px;"><strong>Certain situations require treatment within minutes.</strong></p>
+                <p style="margin:0 0 10px;"><strong>These situations occur when a problem is discovered in the primary survey that cannot be rapidly resolved by field intervention.</strong></p>
+                <p style="margin:0 0 10px;"><strong>Only airway and spinal motion restriction (as indicated) should be managed prior to transport.</strong></p>
+                <p style="margin:0 0 10px;"><strong>Further efforts at stabilization should be performed enroute and should not delay transport.</strong></p>
+                <p style="margin:0 0 10px;"><strong>If circumstances demand hospital care for patient stability, rapid transport is indicated.</strong></p>
+                <p style="margin:0 0 10px;"><strong>Each case will be unique and compelling reasons must be documented.</strong></p>
+                <p style="margin:0 0 10px;"><strong>Notify the receiving hospital of the situation so that preparations can be made.</strong></p>
+                <p style="margin:0 0 10px;"><strong>Primary resuscitative measures must be initiated.</strong></p>
+                <p style="margin:0;"><strong>Establish contact with <span style="color:#c00000;">Medical Control</span> as soon as possible.</strong></p>
+              </div>
+              <div class="transport-banner">ACCELERATED TRANSPORT</div>
             </div>
           </div>
 
@@ -12278,7 +12332,9 @@ function resetZoom() {
                     <strong>MORPHINE SULFATE</strong> (if available) in <strong>5mg increments IV/IO/IM</strong><br>
                     May repeat every 5 minutes as needed until improvement. Max total dose 10mg<br>
                     As needed for pain<br>
-                    (May <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
+                    (May refer to appropriate <strong>ADULT PAIN CONTROL PROTOCOL #5</strong>)<br>
+                    (Do not administer if respiratory depression, bradycardia or hypotension SBP &lt;90)
+                    <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:6px;" onclick="openXref('5')">
                       <span class="gray-diamond"></span> Protocol #5: Adult Pain Control
                     </button></div>
                   </div>
@@ -13864,16 +13920,18 @@ function resetZoom() {
                     minLevel: 2,
                     leftBadge: 'I',
                     rightBadge: 'P',
-                    stepTitle: 'Cardiac Monitor, Pulse Oximetry & Capnography',
+                    stepTitle: 'Cardiac Monitor',
                     unlockedHtml: `
                       <div style="text-align:center;">
-                        Cardiac Monitor<br>
-                        Monitor via pulse oximetry and capnography<br>
-                        (if available) and Reassess
+                        Cardiac Monitor
                       </div>
                     `,
                     supportHtml: ``
                   })}
+                  <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
+                    Monitor via pulse oximetry and capnography<br>
+                    (if available) and Reassess
+                  </div>
 
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                     For severe wheezing, administer continuous<br>
@@ -14446,8 +14504,8 @@ function resetZoom() {
                         Increase <strong>OXYGEN</strong> to 100%.
                       </div>
                       ${renderGatedBlock({
-                        minLevel: 3,
-                        leftBadge: 'P',
+                        minLevel: 2,
+                        leftBadge: 'I',
                         rightBadge: 'P',
                         stepTitle: 'Intubate and Use Positive Pressure Ventilations',
                         unlockedHtml: `
@@ -16162,12 +16220,25 @@ function resetZoom() {
                                 minLevel: 2,
                                 leftBadge: 'I',
                                 rightBadge: 'P',
-                                stepTitle: 'Intubate, Chest Compressions 3:1 & 100% O2',
+                                stepTitle: 'Intubate',
                                 unlockedHtml: `
                                   <div>
                                     <div>•Intubate</div>
-                                    <div>•Administer chest compressions for 60 seconds, ratio of 3:1 compressions to ventilations</div>
-                                    <div>•Ventilate with 100% oxygen</div>
+                                  </div>
+                                `,
+                                supportHtml: ``
+                              })}
+                              <div style="border:2px solid var(--box-border); padding:12px 16px; margin:10px 0;">
+                                <div>•Administer chest compressions for 60 seconds, ratio of 3:1 compressions to ventilations</div>
+                                <div>•Ventilate with 100% oxygen</div>
+                              </div>
+                              ${renderGatedBlock({
+                                minLevel: 2,
+                                leftBadge: 'I',
+                                rightBadge: 'P',
+                                stepTitle: 'Consider IV/IO',
+                                unlockedHtml: `
+                                  <div>
                                     <div>•Consider IV/IO</div>
                                   </div>
                                 `,
