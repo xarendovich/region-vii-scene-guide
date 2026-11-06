@@ -4800,7 +4800,7 @@ function resetZoom() {
 
                 <!-- Step-Level Medical Control (M) Box: Furosemide 20-40mg IV -->
                 ${renderGatedBlock({
-                  minLevel: 1,
+                  minLevel: 3,
                   requiresMc: true,
                   showInlineMcBtn: true,
                   leftBadge: 'M',
@@ -4910,7 +4910,7 @@ function resetZoom() {
 
               <!-- MEDICAL CONTROL (M) BOX 2: MAGNESIUM SULFATE 2g IVPB -->
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: false,
                 leftBadge: 'M',
@@ -5541,9 +5541,6 @@ function resetZoom() {
                         - <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:6px;" onclick="openXref('85')">
                           <span class="gray-diamond"></span> Protocol #85: Adult Airway
                         </button></div>
-                        <div class="refer-to-row"><button class="xref-btn" style="margin-top:6px; margin-left:6px;" onclick="openXref('84a')">
-                          <span class="gray-diamond"></span> Protocol #84a: Post Intubation Sedation
-                        </button></div>
                       </li>
                       <li>- Contact <strong style="color:#c00000;">Medical Control</strong></li>
                     </ul>
@@ -5555,9 +5552,6 @@ function resetZoom() {
                 <div style="margin-top:8px;">
                   <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('85')">
                     <span class="gray-diamond"></span> Protocol #85: Adult Airway
-                  </button></div>
-                  <div class="refer-to-row"><button class="xref-btn" onclick="openXref('84a')">
-                    <span class="gray-diamond"></span> Protocol #84a: Post Intubation Sedation
                   </button></div>
                 </div>
               ` : ''}
@@ -5944,7 +5938,7 @@ function resetZoom() {
               </div>
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 2,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -6936,7 +6930,7 @@ function resetZoom() {
                       <td style="border:1.5px solid var(--box-border); padding:8px;">Size</td>
                       <td style="border:1.5px solid var(--box-border); padding:8px;">Child/adolescent &gt; 20kg</td>
                       <td style="border:1.5px solid var(--box-border); padding:8px;">Toddler 11-20kg</td>
-                      <td style="border:1.5px solid var(--box-border); padding:8px;">Infant <u>&lt;</u>10kg</td>
+                      <td style="border:1.5px solid var(--box-border); padding:8px;">Infant &le;10kg</td>
                     </tr>
                     <tr>
                       <td style="border:1.5px solid var(--box-border); padding:8px;">Airway</td>
@@ -7630,12 +7624,7 @@ function resetZoom() {
                           supportHtml: ``
                         })}
 
-                        ${renderGatedBlock({
-                          minLevel: 2,
-                          leftBadge: 'I',
-                          rightBadge: 'P',
-                          stepTitle: 'Identify and treat possible causes:',
-                          unlockedHtml: `
+                        <div style="border:2px solid var(--box-border); padding:12px 16px; margin:10px 0;">
                             <div>
                               <div style="font-weight:800; text-decoration:underline; margin-bottom:6px;">Identify and treat possible causes:</div>
                               <div style="font-family:monospace; font-size:0.88rem; line-height:1.5;">
@@ -7652,9 +7641,7 @@ function resetZoom() {
                                 <div>Trauma -------------------- Follow appropriate protocol</div>
                               </div>
                             </div>
-                          `,
-                          supportHtml: ``
-                        })}
+                        </div>
 
                         <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; font-weight:800; margin-top:12px;">
                           Support CABs<br>
@@ -8042,12 +8029,7 @@ function resetZoom() {
                         supportHtml: ``
                       })}
 
-                      ${renderGatedBlock({
-                        minLevel: 2,
-                        leftBadge: 'I',
-                        rightBadge: 'P',
-                        stepTitle: 'Identify and treat possible causes:',
-                        unlockedHtml: `
+                      <div style="border:2px solid var(--box-border); padding:12px 16px; margin:10px 0;">
                           <div>
                             <div style="font-weight:800; text-decoration:underline; margin-bottom:6px;">Identify and treat possible causes:</div>
                             <div style="font-family:monospace; font-size:0.88rem; line-height:1.5;">
@@ -8064,9 +8046,7 @@ function resetZoom() {
                               <div>Trauma -------------------- Follow appropriate protocol</div>
                             </div>
                           </div>
-                        `,
-                        supportHtml: ``
-                      })}
+                        </div>
 
                       <div style="border:2px solid var(--box-border); padding:14px 18px; text-align:center; font-weight:800; margin-top:12px;">
                         Support CABs<br>
@@ -8354,7 +8334,7 @@ function resetZoom() {
                   <div style="font-weight:900; text-decoration:underline; margin-bottom:6px;">Pediatric Shock Vital Signs:</div>
                   <div><strong>0 – 5 mos of age:</strong> Sys BP &lt; 60 mmHg</div>
                   <div><strong>6 mos – 5 yrs:</strong> Sys BP &lt; 70 mmHg, HR &lt; 70</div>
-                  <div><strong>&gt; 6yrs:</strong> Sys BP &lt; 80 mmHg, HR &lt; 60</div>
+                  <div><strong>&ge; 6yrs:</strong> Sys BP &lt; 80 mmHg, HR &lt; 60</div>
                 </div>
                 <div style="border:2px solid var(--box-border); padding:12px 16px; display:flex; align-items:center; justify-content:center; text-align:center; font-weight:800;">
                   <div>
@@ -8528,7 +8508,7 @@ function resetZoom() {
           <div class="flow-step-card">
             <div class="flow-step-body">
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 2,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -8633,7 +8613,7 @@ function resetZoom() {
                     <div class="choice-btn-criteria">Reassess Respiratory Effort</div>
                   </button>
                   <button class="choice-btn ${st.glucose === 'low' ? 'selected-choice' : ''}" onclick="updateChoice('71', 'glucose', 'low')">
-                    <div class="choice-btn-title"><span>Glucose &lt;60mg/dl or unknown</span><span>➔</span></div>
+                    <div class="choice-btn-title"><span>Glucose &le;60mg/dl or unknown</span><span>➔</span></div>
                     <div class="choice-btn-criteria">Consider ORAL GLUCOSE to gums if venous access unavailable and patient is awake and can tolerate PO intake OR GLUCAGON 0.03mg/kg IN Max total dose 1mg</div>
                   </button>
                 </div>
@@ -8847,13 +8827,6 @@ function resetZoom() {
                   <div style="font-weight:800;">86-93.2 F(30-34 C):</div>
                   <div>Conscious<br>OR<br>altered sensorium with shivering</div>
                 </div>
-                <div style="border:2px solid var(--box-border); padding:12px 16px; margin-bottom:12px;">
-                  <div style="font-weight:800; text-decoration:underline; margin-bottom:4px;">Rewarm patient:</div>
-                  •Place patient in a warm environment.<br>
-                  •Remove wet clothing.<br>
-                  •Apply hot packs wrapped in towels to axilla, groin, neck, thorax.<br>
-                  •Wrap patient in blankets.
-                </div>
                 <div style="border:2px solid var(--box-border); border-bottom:none; padding:10px 16px; text-align:center; font-weight:800;">
                   OXYGEN 12-15 L/mask
                 </div>
@@ -8873,6 +8846,13 @@ function resetZoom() {
                     `,
                     supportHtml: ``
                   })}
+                </div>
+                <div style="border:2px solid var(--box-border); padding:12px 16px; margin:12px 0;">
+                  <div style="font-weight:800; text-decoration:underline; margin-bottom:4px;">Rewarm patient:</div>
+                  •Place patient in a warm environment.<br>
+                  •Remove wet clothing.<br>
+                  •Apply hot packs wrapped in towels to axilla, groin, neck, thorax.<br>
+                  •Wrap patient in blankets.
                 </div>
                 <div class="transport-banner">TRANSPORT</div>
               </div>
@@ -8896,13 +8876,6 @@ function resetZoom() {
                   CANNOT BE CONFIRMED<br>
                   FROM THE FIELD ON<br>
                   THESE PATIENTS
-                </div>
-                <div style="border:2px solid var(--box-border); padding:12px 16px; margin-bottom:12px;">
-                  <div style="font-weight:800; text-decoration:underline; margin-bottom:4px;">Rewarm patient:</div>
-                  •Place patient in a warm environment.<br>
-                  •Remove wet clothing.<br>
-                  •Apply hot packs wrapped in towels to axilla, groin, neck, thorax.<br>
-                  •Wrap patient in blankets.
                 </div>
                 <div style="border:2px solid var(--box-border); border-bottom:none; padding:10px 16px; text-align:center; font-weight:800;">
                   OXYGEN 100%<br>
@@ -8953,7 +8926,7 @@ function resetZoom() {
           <div class="flow-step-card">
             <div class="flow-step-body">
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -9285,9 +9258,9 @@ function resetZoom() {
                 </div>
                 <div style="border:2px solid var(--box-border); border-bottom:none; padding:12px 16px; text-align:center;">
                   <div style="font-weight:800;">Begin Continuous CPR Compressions</div>
-                  <div style="font-weight:800;">Push Hard (&gt; 2 inches) Push Fast (100-120/min)</div>
+                  <div style="font-weight:800;">Push Hard (&ge; 2 inches) Push Fast (100-120/min)</div>
                   <div>Change Compressors every 2 minutes</div>
-                  <div>(Limit changes/pulse checks &lt; 5 seconds)</div>
+                  <div>(Limit changes/pulse checks &le; 5 seconds)</div>
                 </div>
                 <div style="border:2px solid var(--box-border); padding:10px 16px; text-align:center; font-weight:800;">
                   AED (if available)
@@ -9533,9 +9506,9 @@ function resetZoom() {
                 </div>
                 <div style="border:2px solid var(--box-border); border-bottom:none; padding:12px 16px; text-align:center;">
                   <div style="font-weight:800;">Begin Continuous CPR Compressions</div>
-                  <div style="font-weight:800;">Push Hard (&gt; 2 inches) Push Fast (100-120/min)</div>
+                  <div style="font-weight:800;">Push Hard (&ge; 2 inches) Push Fast (100-120/min)</div>
                   <div>Change Compressors every 2 minutes</div>
-                  <div>(Limit changes/pulse checks &lt; 5 seconds)</div>
+                  <div>(Limit changes/pulse checks &le; 5 seconds)</div>
                 </div>
                 <div style="border:2px solid var(--box-border); border-bottom:none; padding:12px 16px; text-align:center;">
                   <div style="font-weight:800;">First Arriving BLS/ILS/ALS Responder</div>
@@ -10636,7 +10609,7 @@ function resetZoom() {
           <div class="flow-step-card">
             <div class="flow-step-body">
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -10783,7 +10756,7 @@ function resetZoom() {
               </div>
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 2,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -10904,7 +10877,8 @@ function resetZoom() {
                   Max total dose 324mg
                 </div>
                 <div style="border:2px solid var(--box-border); padding:14px 16px; text-align:center;">
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
+                  <div style="font-weight:800;">Refer to appropriate protocol <span class="gray-diamond"></span></div>
+                  <div class="refer-to-row"><span class="refer-to-label">For example</span><button class="xref-btn" style="margin-top:8px;" onclick="openXref('10')">
                     <span class="gray-diamond"></span> Protocol #10: Adult Cardiogenic Shock
                   </button></div>
                 </div>
@@ -11470,7 +11444,7 @@ function resetZoom() {
                     <div style="margin-top:6px;"><strong>Age 10-64 years</strong></div>
                     <div>• SBP &lt; 90mmHg OR</div>
                     <div>• HR &gt; SBP</div>
-                    <div style="margin-top:6px;"><strong>Age &gt; 65 years</strong></div>
+                    <div style="margin-top:6px;"><strong>Age &ge; 65 years</strong></div>
                     <div>• SBP &lt; 110 mmHg OR</div>
                     <div>• HR &gt; SBP</div>
                   </div>
@@ -11505,7 +11479,7 @@ function resetZoom() {
                   <div style="border:1.5px solid var(--box-border); padding:10px;">
                     <div style="font-weight:800; text-align:center; border-bottom:1.5px solid #000; padding-bottom:4px; margin-bottom:8px;">EMS Judgment</div>
                     <div>Consider risk factors, including:</div>
-                    <div>• Low-level falls in young children (age &lt; 5 years) or older adults (age &gt; 65 years) with significant head impact</div>
+                    <div>• Low-level falls in young children (age &le; 5 years) or older adults (age &ge; 65 years) with significant head impact</div>
                     <div>• Anticoagulant use</div>
                     <div>• Suspicion of child abuse</div>
                     <div>• Special, high-resource healthcare needs</div>
@@ -11757,7 +11731,7 @@ function resetZoom() {
               <div style="padding-left:16px; margin-bottom:8px;">If no radio contact can be established or patient’s condition requires immediate treatment, refer to the appropriate protocol and begin intervention immediately.</div>
               <div style="margin-bottom:4px;">9. Recheck vitals and other pertinent signs and symptoms at least every 15 minutes and record, noting times.</div>
               <div style="padding-left:16px; margin-bottom:8px;">If unstable vital signs / sustained hypotension (SBP <90 on two separate readings 5 minutes apart), vital signs should be taken and recorded every 5 minutes.</div>
-              <div style="margin-bottom:4px;">10. All patients who, in the judgment of prehospital personnel, would benefit from care at a Trauma Center should be transported accordingly.</div>
+              <div style="margin-bottom:4px;">10. All patients who, in the judgment of prehospital personnel, would benefit from care derived from a Trauma Center, should be transported accordingly.</div>
               <div style="padding-left:16px;">If unable to ventilate, transport to the nearest hospital.</div>
               <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('19')"><span class="gray-diamond"></span> Protocol #19: Field Triage Protocols</button></div>
 
@@ -11842,7 +11816,7 @@ function resetZoom() {
                 unlockedHtml: `
                   <div style="text-align:center;">
                     <strong>2 large bore IV/IO NS bolus</strong><br>
-                    to keep MAP &gt;60 or SBP &gt;90. Max volume 1000 ml.<br>
+                    to keep MAP &ge;60 or SBP &ge;90. Max volume 1000 ml.<br>
                     IV is to be attempted enroute after transportation has begun<br>
                     as long as it does not delay transportation to the nearest Trauma Center.
                   </div>
@@ -11857,7 +11831,7 @@ function resetZoom() {
                 stepTitle: 'TRANEXAMIC ACID (TXA)',
                 unlockedHtml: `
                   <div style="text-align:center;">
-                    <strong>For SBP &lt;70</strong><br>
+                    <strong>For SBP &le;70</strong><br>
                     Consider <strong>TRANEXAMIC ACID (TXA) 1g in 100ml IVPB</strong> over<br>
                     10 minutes (if available) if less than 3 hours from time of injury.
                   </div>
@@ -12090,7 +12064,7 @@ function resetZoom() {
                     stepTitle: '2 large bore IV/IO NS bolus',
                     unlockedHtml: `
                       <div style="text-align:center;">
-                        <strong>2 large bore IV/IO NS bolus</strong> to keep MAP &gt;60 or SBP &gt;90. Max 1000 ml.<br>
+                        <strong>2 large bore IV/IO NS bolus</strong> to keep MAP &ge;60 or SBP &ge;90. Max 1000 ml.<br>
                         IV is to be attempted enroute after transportation has begun<br>
                         as long as it does not delay transportation to the nearest Trauma Center.
                       </div>
@@ -12668,7 +12642,6 @@ function resetZoom() {
                   </div>
                   <div style="border:2px solid var(--box-border); padding:12px 16px; text-align:center; margin-bottom:10px;">
                     <div style="font-weight:700; margin-bottom:6px;">Burn Wound Care -<br>Moderate to Critical Burn</div>
-                    <div>No cooling necessary</div>
                     <div>Wear sterile gloves and mask until burn wounds are covered.</div>
                     <div>Remove clothing, jewelry, etc. Do not pull away clothing that is stuck to burn wound.</div>
                     <div>Cover burn wound with sterile dressing. <strong>DO NOT BREAK BLISTERS. DO NOT APPLY CREAMS, OINTMENTS OR ANTIDOTES TO BURNS.</strong></div>
@@ -12731,6 +12704,9 @@ function resetZoom() {
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                     <strong>Burn Wound Care</strong><br>
                     Assess for entry and exit wounds and neurovascular status of affected parts.
+                  </div>
+                  <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
+                    No cooling necessary
                   </div>
                   <div style="border:2px solid var(--box-border); padding:10px; text-align:center; margin-bottom:10px;">
                     Cover with dry, sterile dressings
@@ -13109,7 +13085,7 @@ function resetZoom() {
                 unlockedHtml: `
                   <div style="text-align:center;">
                     <strong>2 large bore IV/IO NS bolus</strong><br>
-                    to keep MAP &gt;60 or SBP &gt;90. Max volume 1000 ml.<br>
+                    to keep MAP &ge;60 or SBP &ge;90. Max volume 1000 ml.<br>
                     IV is to be attempted enroute after transportation has begun<br>
                     as long as it does not delay transportation to the nearest Trauma Center.
                   </div>
@@ -13962,7 +13938,7 @@ function resetZoom() {
               ` : ''}
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 2,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -14310,7 +14286,7 @@ function resetZoom() {
               <div class="transport-banner">TRANSPORT</div>
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -14410,7 +14386,7 @@ function resetZoom() {
                       <div style="text-align:center;">
                         <strong>IV NS rapid rate</strong><br>
                         If B/P &lt;90, <strong>IV NS bolus</strong><br>
-                        to keep MAP &gt;60 or SBP &gt;90<br>
+                        to keep MAP &ge;60 or SBP &ge;90<br>
                         Max volume 1000 ml.<br>
                         Establish second IV.
                       </div>
@@ -14673,7 +14649,7 @@ function resetZoom() {
               ` : ''}
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -15531,7 +15507,7 @@ function resetZoom() {
                   <div>•Heart Rate &gt; 90/minute</div>
                   <div>•Respiratory Rate &gt; 20</div>
                   <div>•GCS &lt; 15</div>
-                  <div>•Temperature &gt; 100.4°F or &lt; 96.0°F</div>
+                  <div>•Temperature &ge; 100.4°F or &lt; 96.0°F</div>
                 </div>
                 <div style="border:2px solid var(--box-border); padding:10px; text-align:center;">
                   <div style="font-weight:800; text-decoration:underline; margin-bottom:4px;">Pediatric SIRS Criteria</div>
@@ -15887,8 +15863,8 @@ function resetZoom() {
                 minLevel: 2,
                 leftBadge: 'I',
                 rightBadge: 'P',
-                stepTitle: 'IV NS bolus to keep MAP >60 or SBP >90',
-                unlockedHtml: `<div style="text-align:center; font-weight:700;">IV NS bolus to keep MAP &gt;60 or SBP &gt;90. Max 1000 ml</div>`,
+                stepTitle: 'IV NS bolus to keep MAP ≥60 or SBP ≥90',
+                unlockedHtml: `<div style="text-align:center; font-weight:700;">IV NS bolus to keep MAP &ge;60 or SBP &ge;90. Max 1000 ml</div>`,
                 supportHtml: ``
               })}
 
@@ -15933,7 +15909,7 @@ function resetZoom() {
               </div>
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -16383,11 +16359,11 @@ function resetZoom() {
                 minLevel: 2,
                 leftBadge: 'I',
                 rightBadge: 'P',
-                stepTitle: 'IV NS bolus to keep MAP >60 or SBP >90 Max 1000ml',
+                stepTitle: 'IV NS bolus to keep MAP ≥60 or SBP ≥90 Max 1000ml',
                 unlockedHtml: `
                   <div style="text-align:center;">
                     and give <strong>IV NS bolus</strong><br>
-                    to keep MAP &gt;60 or SBP &gt;90<br>
+                    to keep MAP &ge;60 or SBP &ge;90<br>
                     Max 1000ml
                   </div>
                 `,
@@ -16663,7 +16639,7 @@ function resetZoom() {
                     <div class="choice-btn-title"><span>Glucose &gt;60</span><span>➔</span></div>
                   </button>
                   <button class="choice-btn ${st.glucose === 'low' ? 'selected-choice' : ''}" onclick="updateChoice('70', 'glucose', 'low')">
-                    <div class="choice-btn-title"><span>Glucose &lt;60 or unknown</span><span>➔</span></div>
+                    <div class="choice-btn-title"><span>Glucose &le;60 or unknown</span><span>➔</span></div>
                   </button>
                 </div>
               </div>
@@ -16986,7 +16962,7 @@ function resetZoom() {
                   <div class="decision-prompt">
                     <div class="choice-btn-grid">
                       <button class="choice-btn ${st.bp === 'gt100' ? 'selected-choice' : ''}" onclick="updateChoice('73', 'bp', 'gt100')">
-                        <div class="choice-btn-title"><span>Systolic BP &gt; 100</span><span>➔</span></div>
+                        <div class="choice-btn-title"><span>Systolic BP &ge; 100</span><span>➔</span></div>
                       </button>
                       <button class="choice-btn ${st.bp === 'hypo' ? 'selected-choice' : ''}" onclick="updateChoice('73', 'bp', 'hypo')">
                         <div class="choice-btn-title"><span>Hypoperfusion* or Presence of Nausea/Vomiting</span><span>➔</span></div>
@@ -17586,7 +17562,7 @@ function resetZoom() {
               </div>
 
               ${renderGatedBlock({
-                minLevel: 1,
+                minLevel: 3,
                 requiresMc: true,
                 showInlineMcBtn: true,
                 leftBadge: 'M',
@@ -17675,7 +17651,8 @@ function resetZoom() {
               ${st.deny === 'yes' ? `
                 <div style="border:2px solid var(--box-border); padding:14px; text-align:center; font-weight:800; margin-top:12px;">
                   DENY REFUSAL<br>
-                  <div class="refer-to-row"><span class="refer-to-label">Refer to</span><button class="xref-btn" onclick="openXref('79')"><span class="gray-diamond"></span> Protocol #79: Adult Restraints &amp; Behavioral</button></div>
+                  Refer to APPROPRIATE PROTOCOL <span class="gray-diamond"></span>
+                  <div class="refer-to-row"><span class="refer-to-label">For example</span><button class="xref-btn" onclick="openXref('79')"><span class="gray-diamond"></span> Protocol #79: Adult Restraints &amp; Behavioral</button></div>
                   </div>
                 </div>
                 <div class="transport-banner">TRANSPORT</div>
@@ -18155,12 +18132,10 @@ function resetZoom() {
     // APPENDIX A RENDERER (Pages 106–107 — WEIGHT CONVERSION TABLE: POUNDS TO KILOGRAMS)
     // =========================================================================
     function renderProtocolAppA() {
-      // Clean pounds-to-kilograms table (2.2 lbs = 1 kg)
-      const rows = [];
-      for (let lbs = 1; lbs <= 480; lbs++) {
-        const kg = Math.round((lbs / 2.2) * 10) / 10;
-        rows.push(`<tr><td>${lbs}</td><td>${kg}</td></tr>`);
-      }
+      // Pounds-to-kilograms table, values copied from the official Region 7 SMO Appendix A (rev. 12/01/24).
+      // Entry i is the kg value for (i + 1) lbs. Not recalculated, so it matches the printed chart exactly.
+      const APP_A_KG = '0.5 0.9 1.4 1.8 2.3 2.7 3.2 3.6 4.1 4.5 5 5.4 5.9 6.4 6.8 7.3 7.7 8.2 8.6 9.1 9.5 10 10.5 10.9 11.4 11.8 12.3 12.7 13.2 13.6 14.1 14.5 15 15.5 15.9 16.4 16.8 17.3 17.7 18.2 18.6 19.1 19.5 20 20.5 20.9 21.5 21.8 22.3 22.7 23.2 23.6 24.1 24.5 25 25.5 25.9 26.4 26.8 27.3 27.7 28.2 28.6 29.1 29.5 30 30.5 30.9 31.4 31.8 32.3 32.7 33.2 33.6 34.1 34.5 35 35.5 35.9 36.4 36.8 37.3 37.7 38.2 38.6 39.1 39.5 40 40.5 40.9 41.4 41.8 42.3 42.7 43.2 43.6 44.1 44.5 45 45.5 45.9 46.4 46.8 47.3 47.7 48.2 48.6 49.1 49.5 50 50.5 50.9 51.4 51.8 52.3 52.7 53.2 53.6 54.1 54.5 55 55.5 55.9 56.4 56.8 57.3 57.7 58.2 58.6 59.1 59.5 60 60.5 60.9 61.4 61.8 62.3 62.7 63.2 63.6 64.1 64.5 65 65.5 65.9 66.4 66.8 67.3 67.7 68.2 68.6 69.1 69.5 70 70.5 70.9 71.4 71.8 72.3 72.7 73.2 73.6 74.1 74.5 75 75.5 75.9 76.4 76.8 77.3 77.7 78.2 78.6 79.1 79.5 80 80.5 80.9 81.4 81.8 82.3 82.7 83.2 83.6 84.1 84.5 85 85.5 85.9 86.4 86.8 87.3 87.7 88.2 88.6 89.1 89.5 90 90.5 90.9 91.4 91.8 92.3 92.7 93.2 93.6 94.1 94.5 95 95.5 95.9 96.4 96.8 97.3 97.7 98.2 98.6 99.1 99.5 100 100.5 100.9 101.4 101.8 102.3 102.7 103.2 103.6 104.1 104.5 105 105.5 105.9 106.4 106.8 107.3 107.7 108.2 108.6 109.1 109.5 110 110.5 110.9 111.4 111.8 112.3 112.7 113.2 113.6 114.1 114.5 115 115.5 115.9 116.4 116.8 117.3 117.7 118.2 118.6 119.1 119.5 120 120.5 120.9 121.4 121.8 122.3 122.7 122.9 123.3 123.8 124.2 124.7 125.1 125.6 126 126.5 127 127.4 127.9 128.3 128.8 129.2 129.7 130.1 130.6 131 131.5 131.9 132.4 132.9 133.3 133.8 134.2 134.7 135.1 135.6 136 136.5 136.9 137.4 137.8 138.3 138.7 139.2 139.7 140.1 140.6 141 141.5 141.9 142.4 142.8 143.3 143.7 144.2 144.6 145.1 145.6 146 146.5 146.9 147.4 147.8 148.3 148.7 149.2 149.6 150.1 150.5 151 151.4 151.9 152.4 152.8 153.3 153.7 154.2 154.6 155.1 155.5 156 156.4 156.9 157.9 157.8 158.3 158.7 159.2 159.6 160.1 160.5 161 161.4 161.9 162.3 162.8 163.2 163.7 164.2 164.6 165.1 165.5 166 166.4 166.9 167.3 167.8 168.2 168.7 169.1 169.6 170 170.5 171 171.4 171.9 172.3 172.8 173.2 173.7 174.1 174.6 175 175.5 175.9 176.4 176.9 177.3 177.8 178.2 178.8 179.1 179.6 180 180.5 180.9 181.4 181.8 182.3 182.7 183.2 183.7 184.1 184.6 185 185.5 185.9 186.4 186.8 187.3 187.7 188.2 188.6 189.1 189.6 190 190.5 190.9 191.4 191.8 192.3 192.7 193.2 193.6 194.1 194.5 195.0 195.4 195.9 196.4 196.8 197.3 197.7 198.2 198.6 199.1 199.5 200 200.4 200.9 201.3 201.8 202.3 202.7 203.2 203.6 204.1 204.5 205 205.4 205.9 206.3 206.8 207.2 207.7 208.1 208.6 209.1 209.5 210 210.4 210.9 211.3 211.8 212.2 212.7 213.1 213.6 214 214.5 215 215.4 215.9 216.3 216.8 217.2 217.7'.split(' ');
+      const rows = APP_A_KG.map((kg, i) => `<tr><td>${i + 1}</td><td>${kg}</td></tr>`);
       const tableHtml = `
         <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
           <table class="weight-table">
@@ -18209,13 +18184,10 @@ function resetZoom() {
     // APPENDIX B RENDERER (Page 108 — PEDIATRIC FLUID WEIGHT BASED CHART)
     // =========================================================================
     function renderProtocolAppB() {
-      // Pediatric fluid chart: 20 ml/kg bolus
-      const rows = [];
-      for (let lbs = 1; lbs <= 60; lbs++) {
-        const kg = Math.round((lbs / 2.2) * 10) / 10;
-        const ns = Math.round(kg * 20);
-        rows.push(`<tr><td>${lbs}</td><td>${kg}</td><td>${ns}</td></tr>`);
-      }
+      // Pediatric fluid chart (20 ml/kg bolus), values copied from the official Region 7 SMO Appendix B
+      // (rev. 12/01/24). Entry i is "kg/NS ml" for (i + 1) lbs. Not recalculated, so it matches the printed chart.
+      const APP_B = '0.5/9 0.9/18 1.4/27 1.8/36 2.3/45 2.7/55 3.2/64 3.6/73 4.1/82 4.5/91 5.0/100 5.5/109 5.9/118 6.4/127 6.8/136 7.3/145 7.7/155 8.2/164 8.6/173 9.1/182 9.5/191 10.0/200 10.5/209 10.9/218 11.4/227 11.8/236 12.3/245 12.7/255 13.2/264 13.6/273 14.1/282 14.5/291 15.0/300 15.5/309 15.9/318 16.4/327 16.8/336 17.3/345 17.7/355 18.2/364 18.6/373 19.1/382 19.5/391 20.0/400 20.5/409 20.9/418 21.4/427 21.8/436 22.3/445 22.7/455 23.2/464 23.6/473 24.1/482 24.5/491 25.0/500 25.5/509 25.9/518 26.4/527 26.8/536 27.3/545'.split(' ');
+      const rows = APP_B.map((v, i) => { const [kg, ns] = v.split('/'); return `<tr><td>${i + 1}</td><td>${kg}</td><td>${ns}</td></tr>`; });
       const tableHtml = `
         <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
           <table class="weight-table">
