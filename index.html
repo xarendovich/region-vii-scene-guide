@@ -2712,7 +2712,7 @@ button,
   
   <div id="comment-review" class="page review-page" style="display:none;">
     <h2 style="margin:0 0 8px;">Protocol comments</h2>
-    <p style="margin:0 0 12px; color:var(--box-muted);">Check a box when you have resolved that comment.</p>
+    <p style="margin:0 0 12px; color:var(--box-muted);">Owner only. Tick <strong>Show on page</strong> to let everyone see a comment. Tick <strong>Resolved</strong> when you have dealt with it.</p>
     <div style="display:flex; gap:8px; margin-bottom:12px;">
       <button type="button" class="gate-btn" style="width:auto; min-height:44px;" onclick="renderCommentReview(false)">Open</button>
       <button type="button" class="gate-btn" style="width:auto; min-height:44px;" onclick="renderCommentReview(true)">Resolved</button>
@@ -18575,120 +18575,101 @@ function syncRoleButtonsUI() {
 }
 
 
-const COMMENT_API = 'https://crudcrud.com/api/d2465c7a033948ea963ca1f981fcde00/comments';
+// ---------- Comments ----------
+// Comments go to the page's own comment server (see comments-server/README.md).
+// Anyone can leave a comment. Only the page owner, with the admin key, can read all of them,
+// approve them for the page, resolve them or delete them. Approved comments show under each protocol.
+// Leave COMMENT_SERVER empty to switch comments off.
+const COMMENT_SERVER = '';
+const COMMENT_QUEUE_KEY = 'r7-comments';  // comments written while offline, waiting to send (this device only)
+const ADMIN_KEY_SLOT = 'r7-admin-key';    // the owner's review key, forgotten when this tab closes
 
 function commentEscape(s) {
-  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function commentWhen(iso) {
   try { return new Date(iso).toLocaleString(); } catch (_) { return iso || ''; }
 }
-function localComments() {
-  try { return JSON.parse(localStorage.getItem('r7-comments') || '[]'); } catch (_) { return []; }
-}
-function saveLocalComments(list) {
-  try { localStorage.setItem('r7-comments', JSON.stringify(list)); } catch (_) {}
-}
-function resolvedMemory() {
-  try { return JSON.parse(sessionStorage.getItem('r7-resolved') || '{}'); } catch (_) { return {}; }
-}
-function rememberResolved(id, resolved) {
-  const mem = resolvedMemory();
-  mem[String(id)] = Boolean(resolved);
-  try { sessionStorage.setItem('r7-resolved', JSON.stringify(mem)); } catch (_) {}
-}
-function applyResolvedMemory(list) {
-  const mem = resolvedMemory();
-  return list.map(c => {
-    if (Object.prototype.hasOwnProperty.call(mem, String(c._id))) {
-      return Object.assign({}, c, { resolved: mem[String(c._id)] });
-    }
-    return c;
-  });
-}
-async function loadComments() {
-  const local = localComments();
-  try {
-    const res = await fetch(COMMENT_API + '?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error('load failed');
-    const remote = await res.json();
-    const seen = new Set(remote.map(c => c._id));
-    return applyResolvedMemory(remote.concat(local.filter(c => c._local && !seen.has(c._id))));
-  } catch (_) {
-    return applyResolvedMemory(local);
-  }
-}
-async function sendEntry(entry) {
-  const res = await fetch(COMMENT_API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(entry)
-  });
-  if (!res.ok) throw new Error('post failed');
-  return await res.json();
-}
-async function postComment(entry) {
-  const pending = Object.assign({ _id: 'local-' + Date.now(), _local: true }, entry);
-  saveLocalComments(localComments().concat(pending));
-  try {
-    const saved = await sendEntry(entry);
-    saveLocalComments(localComments().filter(c => c._id !== pending._id));
-    return saved;
-  } catch (_) {
-    return pending;
-  }
-}
-async function flushPendingComments() {
-  const pending = localComments().filter(c => c._local);
-  if (!pending.length || !navigator.onLine) return;
-  for (const item of pending) {
-    const entry = {
-      protocolId: item.protocolId,
-      protocolTitle: item.protocolTitle,
-      name: item.name,
-      text: item.text,
-      createdAt: item.createdAt,
-      resolved: item.resolved,
-      resolvedAt: item.resolvedAt || null
-    };
-    try {
-      await sendEntry(entry);
-      saveLocalComments(localComments().filter(c => c._id !== item._id));
-    } catch (_) {
-      break;
-    }
-  }
-}
-window.addEventListener('online', () => { flushPendingComments(); });
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') flushPendingComments();
-});
-window.addEventListener('load', () => { flushPendingComments(); });
+function commentsOn() { return Boolean(COMMENT_SERVER); }
+function commentUrl(path) { return COMMENT_SERVER.replace(/\/+$/, '') + path; }
 
-async function resolveComment(item, resolved) {
-  const id = item._id;
-  const resolvedAt = resolved ? new Date().toISOString() : null;
-  rememberResolved(id, resolved);
-  if (item._local || String(id).startsWith('local-')) {
-    const next = localComments().map(c => c._id === id ? Object.assign({}, c, { resolved, resolvedAt }) : c);
-    saveLocalComments(next);
-    return;
+// Older versions of this page kept every comment on the device and sent them to a public test site.
+// Keep only the ones that were never sent, in the new shape, and forget the rest.
+function queuedComments() {
+  let list = [];
+  try { list = JSON.parse(localStorage.getItem(COMMENT_QUEUE_KEY) || '[]'); } catch (_) { list = []; }
+  if (!Array.isArray(list)) return [];
+  return list
+    .filter(c => c && (c.queued || c._local) && c.protocolId && c.name && c.text)
+    .map(c => ({
+      queueId: String(c.queueId || c._id || ('q-' + Date.now() + '-' + Math.random().toString(36).slice(2))),
+      queued: true,
+      protocolId: String(c.protocolId),
+      protocolTitle: String(c.protocolTitle || ''),
+      name: String(c.name),
+      text: String(c.text),
+      createdAt: c.createdAt || new Date().toISOString()
+    }));
+}
+function saveQueuedComments(list) {
+  try {
+    if (list.length) localStorage.setItem(COMMENT_QUEUE_KEY, JSON.stringify(list));
+    else localStorage.removeItem(COMMENT_QUEUE_KEY);
+  } catch (_) {}
+}
+try { sessionStorage.removeItem('r7-resolved'); } catch (_) {}
+saveQueuedComments(queuedComments());
+
+// Sends one comment. Returns 'shown', 'waiting', 'retry' (try again later) or 'refused' (will never work).
+async function sendComment(entry, honeypot) {
+  let res;
+  try {
+    res = await fetch(commentUrl('/api/comments'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        protocolId: entry.protocolId,
+        protocolTitle: entry.protocolTitle,
+        name: entry.name,
+        text: entry.text,
+        website: honeypot || ''
+      })
+    });
+  } catch (_) {
+    return { result: 'retry' };
   }
-  const body = {
-    protocolId: item.protocolId,
-    protocolTitle: item.protocolTitle,
-    name: item.name,
-    text: item.text,
-    createdAt: item.createdAt,
-    resolved: resolved,
-    resolvedAt: resolvedAt
-  };
-  const res = await fetch(COMMENT_API + '/' + id, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if (!res.ok) throw new Error('update failed');
+  let data = {};
+  try { data = await res.json(); } catch (_) {}
+  if (res.ok) return { result: data.status === 'shown' ? 'shown' : 'waiting' };
+  if (res.status === 429 || res.status >= 500) return { result: 'retry', message: data.error };
+  return { result: 'refused', message: data.error };
+}
+
+let flushingComments = false;
+async function flushQueuedComments() {
+  if (flushingComments || !commentsOn() || !navigator.onLine) return;
+  flushingComments = true;
+  try {
+    for (const item of queuedComments()) {
+      const out = await sendComment(item);
+      if (out.result === 'retry') break;
+      saveQueuedComments(queuedComments().filter(c => c.queueId !== item.queueId));
+    }
+  } finally {
+    flushingComments = false;
+  }
+}
+window.addEventListener('online', () => { flushQueuedComments(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') flushQueuedComments();
+});
+window.addEventListener('load', () => { flushQueuedComments(); });
+
+async function loadPublicComments(protocolId) {
+  const res = await fetch(commentUrl('/api/comments?protocol=' + encodeURIComponent(protocolId)), { cache: 'no-store' });
+  if (!res.ok) throw new Error('load failed');
+  const data = await res.json();
+  return Array.isArray(data.items) ? data.items : [];
 }
 
 function mountCommentBoard(root) {
@@ -18698,63 +18679,102 @@ function mountCommentBoard(root) {
   if (old) old.remove();
   const titleEl = sheet.querySelector('.smo-title-banner');
   const title = titleEl ? titleEl.innerText.replace(/\s+/g, ' ').trim() : ('Protocol ' + currentProtocolId);
+  const protocolId = String(currentProtocolId);
   const board = document.createElement('div');
   board.className = 'comment-board';
+  if (!commentsOn()) {
+    board.innerHTML = '<h3>Comments</h3><p class="hint">Comments are switched off for now.</p>';
+    sheet.appendChild(board);
+    return;
+  }
   board.innerHTML = `
     <h3>Comments</h3>
-    <p class="hint">Leave a note for this protocol. Other people can read and add comments here.</p>
+    <p class="hint">Leave a note for this protocol. The page owner reads every comment. Comments the owner approves show here for everyone.</p>
     <input id="comment-name" type="text" maxlength="60" placeholder="Your name" autocomplete="name">
     <textarea id="comment-text" maxlength="1000" placeholder="Comment"></textarea>
+    <input id="comment-website" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
     <button type="button" class="gate-btn" id="comment-post" style="min-height:48px;">Post</button>
+    <div class="hint" id="comment-note" role="status" style="margin-top:8px;"></div>
     <div class="comment-list" id="comment-list"><div class="hint">Loading comments…</div></div>
   `;
   sheet.appendChild(board);
   const list = board.querySelector('#comment-list');
+  const note = board.querySelector('#comment-note');
   const renderList = (items) => {
-    const mine = items.filter(c => String(c.protocolId) === String(currentProtocolId) && !c.resolved);
-    if (!mine.length) { list.innerHTML = '<div class="hint">No comments yet.</div>'; return; }
-    list.innerHTML = mine.map(c => `
+    const waiting = queuedComments().filter(c => c.protocolId === protocolId);
+    const all = waiting.concat(items);
+    if (!all.length) { list.innerHTML = '<div class="hint">No comments yet.</div>'; return; }
+    list.innerHTML = all.map(c => `
       <div class="comment-item">
-        <div class="meta"><strong>${commentEscape(c.name || 'Anonymous')}</strong> · ${commentEscape(commentWhen(c.createdAt))}${c._local ? ' · waiting to send' : ''}</div>
-        <div>${commentEscape(c.text)}</div>
+        <div class="meta"><strong>${commentEscape(c.name || 'Anonymous')}</strong> · ${commentEscape(commentWhen(c.createdAt))}${c.queued ? ' · waiting to send' : ''}</div>
+        <div style="white-space:pre-wrap;">${commentEscape(c.text)}</div>
       </div>
     `).join('');
   };
-  loadComments().then(renderList).catch(() => { list.innerHTML = '<div class="hint">Comments could not be loaded.</div>'; });
+  const refresh = () => loadPublicComments(protocolId).then(renderList).catch(() => {
+    renderList([]);
+    note.textContent = 'Comments could not be loaded right now.';
+  });
+  refresh();
   const postBtn = board.querySelector('#comment-post');
   let posting = false;
   postBtn.onclick = async () => {
     if (posting) return;
     const name = board.querySelector('#comment-name').value.trim();
     const text = board.querySelector('#comment-text').value.trim();
-    if (!name || !text) { list.insertAdjacentHTML('afterbegin', '<div class="hint">Enter a name and a comment.</div>'); return; }
-    const stamp = String(currentProtocolId) + '|' + name + '|' + text;
-    const now = Date.now();
-    if (window._lastCommentStamp === stamp && now - (window._lastCommentAt || 0) < 8000) return;
+    const honeypot = board.querySelector('#comment-website').value;
+    if (!name || !text) { note.textContent = 'Enter a name and a comment.'; return; }
+    const stamp = protocolId + '|' + name + '|' + text;
+    if (window._lastCommentStamp === stamp && Date.now() - (window._lastCommentAt || 0) < 8000) return;
     posting = true;
     postBtn.disabled = true;
     postBtn.textContent = 'Posting…';
+    note.textContent = '';
+    const entry = { protocolId, protocolTitle: title, name, text, createdAt: new Date().toISOString() };
     try {
-      await postComment({
-        protocolId: String(currentProtocolId),
-        protocolTitle: title,
-        name, text,
-        createdAt: new Date().toISOString(),
-        resolved: false,
-        resolvedAt: null
-      });
+      const out = await sendComment(entry, honeypot);
+      if (out.result === 'refused') {
+        note.textContent = 'That comment was not accepted' + (out.message ? ': ' + out.message : '') + '.';
+        return;
+      }
+      if (out.result === 'retry') {
+        const queueId = 'q-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+        saveQueuedComments(queuedComments().concat(Object.assign({ queueId, queued: true }, entry)));
+        note.textContent = 'No connection to the comment server. Your comment is saved on this device and will send later.';
+      } else if (out.result === 'shown') {
+        note.textContent = 'Thanks. Your comment is posted.';
+      } else {
+        note.textContent = 'Thanks. Your comment was sent and will show here once the page owner approves it.';
+      }
       window._lastCommentStamp = stamp;
       window._lastCommentAt = Date.now();
       board.querySelector('#comment-text').value = '';
-      renderList(await loadComments());
-    } catch (_) {
-      list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not post. Try again.</div>');
+      await refresh();
     } finally {
       posting = false;
       postBtn.disabled = false;
       postBtn.textContent = 'Post';
     }
   };
+}
+
+// ---------- Comment review (page owner only) ----------
+function adminKey() {
+  try { return sessionStorage.getItem(ADMIN_KEY_SLOT) || ''; } catch (_) { return ''; }
+}
+function setAdminKey(k) {
+  try { if (k) sessionStorage.setItem(ADMIN_KEY_SLOT, k); else sessionStorage.removeItem(ADMIN_KEY_SLOT); } catch (_) {}
+}
+async function adminCall(path, method, body) {
+  const res = await fetch(commentUrl(path), {
+    method: method || 'GET',
+    cache: 'no-store',
+    headers: Object.assign({ Authorization: 'Bearer ' + adminKey() }, body ? { 'Content-Type': 'application/json' } : {}),
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (res.status === 401) { setAdminKey(''); throw new Error('locked'); }
+  if (!res.ok) throw new Error('failed');
+  return res.json();
 }
 
 function openCommentReview() {
@@ -18764,48 +18784,97 @@ function openCommentReview() {
   renderCommentReview(false);
   if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
 }
+
+function renderReviewUnlock(list, message) {
+  list.innerHTML = `
+    <div class="comment-board">
+      <h3>Owner sign-in</h3>
+      <p class="hint">Only the page owner can review comments. Enter your admin key. It is forgotten when you close this tab.</p>
+      ${message ? '<p class="hint" role="alert">' + commentEscape(message) + '</p>' : ''}
+      <input id="review-key" type="password" autocomplete="current-password" placeholder="Admin key">
+      <button type="button" class="gate-btn" id="review-unlock" style="min-height:48px;">Unlock</button>
+    </div>
+  `;
+  const input = list.querySelector('#review-key');
+  const go = () => {
+    const k = input.value.trim();
+    if (!k) return;
+    setAdminKey(k);
+    renderCommentReview(false);
+  };
+  list.querySelector('#review-unlock').onclick = go;
+  input.onkeydown = (e) => { if (e.key === 'Enter') go(); };
+}
+
 async function renderCommentReview(showResolved) {
   const list = document.getElementById('comment-review-list');
   if (!list) return;
+  if (!commentsOn()) { list.innerHTML = '<div class="hint">Comments are switched off for now.</div>'; return; }
+  if (!adminKey()) { renderReviewUnlock(list, ''); return; }
   list.innerHTML = '<div class="hint">Loading…</div>';
+  let items;
   try {
-    const items = await loadComments();
-    const rows = items
-      .filter(c => Boolean(c.resolved) === Boolean(showResolved))
-      .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
-    if (!rows.length) { list.innerHTML = '<div class="hint">No comments.</div>'; return; }
-    list.innerHTML = rows.map(c => `
-      <div class="review-row ${c.resolved ? 'resolved' : ''}">
-        <input type="checkbox" ${c.resolved ? 'checked' : ''} aria-label="Resolved" data-id="${commentEscape(c._id)}">
+    items = (await adminCall('/api/admin/comments?resolved=' + (showResolved ? '1' : '0'))).items || [];
+  } catch (err) {
+    if (err.message === 'locked') renderReviewUnlock(list, 'That key did not work. Try again.');
+    else list.innerHTML = '<div class="hint">Could not load comments.</div>';
+    return;
+  }
+  const lockBtn = '<button type="button" class="gate-btn" id="review-lock" style="width:auto; min-height:44px; margin-bottom:12px;">Lock review</button>';
+  if (!items.length) {
+    list.innerHTML = lockBtn + '<div class="hint">No comments.</div>';
+  } else {
+    list.innerHTML = lockBtn + items.map(c => `
+      <div class="review-row ${c.resolved ? 'resolved' : ''}" data-id="${commentEscape(c.id)}" style="grid-template-columns:1fr;">
         <div>
           <div><strong>Protocol ${commentEscape(c.protocolId)}</strong> — ${commentEscape(c.protocolTitle || '')}</div>
-          <div class="meta" style="color:var(--box-muted); font-size:0.88rem;">${commentEscape(c.name || 'Anonymous')} · ${commentEscape(commentWhen(c.createdAt))}</div>
-          <div>${commentEscape(c.text)}</div>
+          <div class="meta" style="color:var(--box-muted); font-size:0.88rem;">${commentEscape(c.name || 'Anonymous')} · ${commentEscape(commentWhen(c.createdAt))}${c.approved ? ' · showing on the page' : ' · not on the page yet'}</div>
+          <div style="white-space:pre-wrap;">${commentEscape(c.text)}</div>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:8px; align-items:center;">
+            <label style="display:flex; gap:6px; align-items:center;"><input type="checkbox" data-field="approved" ${c.approved ? 'checked' : ''}> Show on page</label>
+            <label style="display:flex; gap:6px; align-items:center;"><input type="checkbox" data-field="resolved" ${c.resolved ? 'checked' : ''}> Resolved</label>
+            <button type="button" class="gate-btn" data-action="delete" style="width:auto; min-height:40px;">Delete</button>
+          </div>
         </div>
       </div>
     `).join('');
-    list.querySelectorAll('input[type="checkbox"]').forEach(box => {
+  }
+  list.querySelector('#review-lock').onclick = () => { setAdminKey(''); renderReviewUnlock(list, ''); };
+  const fail = (err) => {
+    if (err && err.message === 'locked') { renderReviewUnlock(list, 'Your key stopped working. Enter it again.'); return; }
+    list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not update that comment. Try again.</div>');
+  };
+  list.querySelectorAll('.review-row').forEach(row => {
+    const id = row.dataset.id;
+    row.querySelectorAll('input[type="checkbox"]').forEach(box => {
       box.onchange = async () => {
-        const item = items.find(x => String(x._id) === String(box.dataset.id));
-        if (!item || box.disabled) return;
+        if (box.disabled) return;
         box.disabled = true;
         const want = box.checked;
         try {
-          await resolveComment(item, want);
-          const row = box.closest('.review-row');
-          if (row) row.classList.toggle('resolved', want);
-          box.checked = want;
-          box.disabled = false;
-        } catch (_) {
+          await adminCall('/api/admin/comments/' + encodeURIComponent(id), 'PATCH', { [box.dataset.field]: want });
+          if (box.dataset.field === 'resolved') row.classList.toggle('resolved', want);
+        } catch (err) {
           box.checked = !want;
+          fail(err);
+        } finally {
           box.disabled = false;
-          list.insertAdjacentHTML('afterbegin', '<div class="hint">Could not update that comment. Try again.</div>');
         }
       };
     });
-  } catch (_) {
-    list.innerHTML = '<div class="hint">Could not load comments.</div>';
-  }
+    const del = row.querySelector('[data-action="delete"]');
+    del.onclick = async () => {
+      if (!window.confirm('Delete this comment for good?')) return;
+      del.disabled = true;
+      try {
+        await adminCall('/api/admin/comments/' + encodeURIComponent(id), 'DELETE');
+        row.remove();
+      } catch (err) {
+        del.disabled = false;
+        fail(err);
+      }
+    };
+  });
 }
 
 

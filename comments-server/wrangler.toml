@@ -1,0 +1,15 @@
+name = "region7-comments"
+main = "src/worker.js"
+compatibility_date = "2025-06-01"
+
+[vars]
+# The web address of the scene guide page. Add more, separated by commas, if it lives in more than one place.
+ALLOWED_ORIGINS = "https://xarendovich.github.io"
+# "false" = new comments wait for your approval before other people see them. "true" = they show straight away.
+AUTO_APPROVE = "false"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "region7-comments"
+# Paste the database_id that `npx wrangler d1 create region7-comments` prints here.
+database_id = "REPLACE_WITH_DATABASE_ID"
